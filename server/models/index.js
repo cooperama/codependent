@@ -20,4 +20,5 @@ module.exports = {
   Codegory: require("./Codegory"),
   Comment: require("./Comment"),
   Room: require("./Room"),
+  Post: require("./Post"),
 };

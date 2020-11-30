@@ -21,6 +21,7 @@ app.use(cors(corsOptions));
 // app.use("/api/v1/codegories", routes.codegories);
 // app.use("/api/v1/rooms", routes.rooms);
 // app.use("/api/v1/comments", routes.comments);
+// app.use("/api/v1/posts", routes.posts);
 
 app.get("/", (req, res) => {
   res.send("co[de]pendent lol");
