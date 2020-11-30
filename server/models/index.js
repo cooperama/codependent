@@ -19,6 +19,5 @@ module.exports = {
   User: require("./User"),
   Codegory: require("./Codegory"),
   Comment: require("./Comment"),
-  Room: require("./Room"),
   Post: require("./Post"),
 };

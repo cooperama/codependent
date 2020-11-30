@@ -19,7 +19,6 @@ app.use(cors(corsOptions));
 // set up routes
 // app.use("/api/v1/users", routes.users);
 // app.use("/api/v1/codegories", routes.codegories);
-// app.use("/api/v1/rooms", routes.rooms);
 // app.use("/api/v1/comments", routes.comments);
 // app.use("/api/v1/posts", routes.posts);
 

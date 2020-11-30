@@ -7,6 +7,10 @@ const PostSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -15,10 +19,18 @@ const PostSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Codegory",
     },
-    room: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Room",
-    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    tags: [
+      {
+        type: String,
+      },
+    ],
+    likes: Number,
   },
   { timestamps: true }
 );
