@@ -17,6 +17,8 @@ const CommentSchema = mongoose.Schema(
         ref: "Comment",
       },
     ],
+    // Stretch goal...
+    likes: Number,
     // Not sure if I need these???!!!??? Since they point to the Comment themselves
     parentPost: {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +28,6 @@ const CommentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
     },
-    likes: Number,
   },
   { timestamps: true }
 );

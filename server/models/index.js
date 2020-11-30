@@ -16,8 +16,12 @@ mongoose
   .catch((err) => console.log("MongoDB connection error: ", err));
 
 module.exports = {
+  // MVP
   User: require("./User"),
   Codegory: require("./Codegory"),
   Comment: require("./Comment"),
   Post: require("./Post"),
+  // Stretchy
+  Availability: require("./Availability"),
+  Paired: require("./Paired"),
 };

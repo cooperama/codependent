@@ -15,23 +15,24 @@ const PostSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    // Do I need to reference the codegory here???? IDTS... i don't think so
-    codegory: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Codegory",
-    },
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",
       },
     ],
+    // Stretch goals....
     tags: [
       {
         type: String,
       },
     ],
     likes: Number,
+    // Do I need to reference the codegory here???? IDTS... i don't think so
+    codegory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Codegory",
+    },
   },
   { timestamps: true }
 );
