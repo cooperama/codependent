@@ -11,16 +11,17 @@ const CommentSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    parentPost: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
-    },
     replies: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Comment",
       },
     ],
+    // Not sure if I need these???!!!??? Since they point to the Comment themselves
+    parentPost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
     parentComment: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
