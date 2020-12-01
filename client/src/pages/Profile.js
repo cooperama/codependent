@@ -6,10 +6,7 @@ export default function Profile() {
   const [user, setUser] = useState();
   const params = useParams();
   useEffect(() => {
-    console.log(params);
-    console.log(params.id);
     UserModel.getUser(params.id).then((data) => {
-      console.log(data);
       setUser(data.user);
     });
   }, []);

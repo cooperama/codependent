@@ -4,8 +4,7 @@ const db = require("../models");
 const login = (req, res) => {
   req.session.username = req.body.username;
   req.session.logged = true;
-  console.log("in users ctrl login", req.session);
-
+  console.log("session on login: ", req.session);
   db.User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       res.json({ error: "Unable to get data" });
@@ -21,12 +20,6 @@ const login = (req, res) => {
       }
     });
   });
-  // .then((foundUser) => {
-  // })
-  // .catch((err) => {
-  //   console.log("Error in users.login: ", err);
-  //   res.json({ error: "Unable to get data" });
-  // });
 };
 
 const signup = (req, res) => {
@@ -60,6 +53,7 @@ const signup = (req, res) => {
     });
   });
 };
+
 const allUsers = (req, res) => {
   db.User.find({})
     .then((foundUsers) => {

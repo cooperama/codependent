@@ -22,10 +22,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email, username, password };
-    // console.log(username);
     UserModel.login(user).then((data) => {
-      console.log(data.user);
-      // console.log(data.user[0]._id);
       history.push(`/myprofile/${data.user._id}`);
     });
   };
