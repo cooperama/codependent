@@ -24,8 +24,8 @@ export default function Login() {
     const user = { email, username, password };
     // console.log(username);
     UserModel.login(user).then((data) => {
-      // console.log(data);
-      history.push(`/myprofile/${data.user._id}`);
+      console.log(data.user[0]._id);
+      // history.push(`/myprofile/${data.user[0]._id}`);
     });
   };
   return (
