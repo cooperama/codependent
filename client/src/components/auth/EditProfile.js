@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import UserModel from "../../models/user";
+import React, { useState, useEffect } from "react";
 
-export default function Signup() {
+export default function EditProfile() {
+  const [user, setUser] = useState();
   const [username, setUsername] = useState({});
   const [email, setEmail] = useState({});
   const [fullname, setFullname] = useState({});
   const [password, setPassword] = useState({});
   const [password2, setPassword2] = useState({});
-  // const [match, setMatch] = useState();
-
+  const [password3, setPassword3] = useState({});
+  useEffect(() => {
+    // set state ~ query for user
+  }, []);
   const handleUsernameChange = (e) => {
     setUsername({ username: e.target.value });
   };
@@ -23,33 +25,14 @@ export default function Signup() {
   };
   const handlePassword2Change = (e) => {
     setPassword2({ password2: e.target.value });
-    // if (password !== password2) {
-    //   setMatch(false);
-    // } else {
-    //   setMatch(true);
-    // }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newUser = {
-      username,
-      email,
-      fullname,
-      password,
-    };
-    // create user in db
-    UserModel.create(newUser).then((data) => {
-      console.log(data);
-    });
+  const handlePassword3Change = (e) => {
+    setPassword3({ password3: e.target.value });
   };
-  // const renderWarning = () => {
-  //   return <div>Passwords Must Match</div>;
-  // };
   return (
     <div>
-      <p>Signup</p>
-      {/* {match === false && renderWarning()} */}
-      <form onSubmit={handleSubmit} className="signup-form">
+      <p>Edit Profile</p>
+      <form className="edit-profile-form">
         <div className="form-group">
           <label htmlFor="username">username</label>
           <input
@@ -78,7 +61,7 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">current password</label>
           <input
             onChange={handlePasswordChange}
             type="password"
@@ -87,12 +70,21 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password2">confirm password</label>
+          <label htmlFor="password2">new password</label>
           <input
             onChange={handlePassword2Change}
             type="password"
             name="password2"
             id="password2"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password3">confirm password</label>
+          <input
+            onChange={handlePassword3Change}
+            type="password"
+            name="password3"
+            id="password3"
           />
         </div>
         <input type="submit" value="sign up" />

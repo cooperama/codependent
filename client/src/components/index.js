@@ -6,6 +6,7 @@ import Comment from "./Comment";
 // Auth Components
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
+import EditProfile from "./auth/EditProfile";
 
 // Calendar Components
 import AllUsersAvail from "./calendar/AllUsersAvail";
@@ -21,7 +22,6 @@ import AddComment from "./forms/AddComment";
 import AddPost from "./forms/AddPost";
 import EditComment from "./forms/EditComment";
 import EditPost from "./forms/EditPost";
-import EditProfile from "./forms/EditProfile";
 
 export {
   Navbar,
