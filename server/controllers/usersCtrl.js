@@ -6,14 +6,27 @@ const login = (req, res) => {
   req.session.logged = true;
   console.log("in users ctrl login", req.session);
 
-  db.User.find({ email: req.body.email })
-    .then((foundUser) => {
-      res.json({ user: foundUser });
-    })
-    .catch((err) => {
-      console.log("Error in users.login: ", err);
+  db.User.findOne({ email: req.body.email }, (err, user) => {
+    if (err) {
       res.json({ error: "Unable to get data" });
+      return console.log(err);
+    }
+    if (!user) return console.log("no user found");
+
+    bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+      if (err) return console.log("error with passwords");
+      if (isMatch) {
+        req.session.currentUser = user._id;
+        res.json({ user: user });
+      }
     });
+  });
+  // .then((foundUser) => {
+  // })
+  // .catch((err) => {
+  //   console.log("Error in users.login: ", err);
+  //   res.json({ error: "Unable to get data" });
+  // });
 };
 
 const signup = (req, res) => {
@@ -64,7 +77,7 @@ const getUser = (req, res) => {
   }
   console.log(req.params);
   console.log("sessions? ", req.session);
-  db.User.findById(req.params._id)
+  db.User.findById(req.params.id)
     .populate("available")
     .then((foundUser) => {
       res.json({ user: foundUser });
@@ -97,8 +110,17 @@ const deleteUser = (req, res) => {
     });
 };
 
+const logout = (req, res) => {
+  if (req.session.currentUser) {
+    req.session.destroy((err) => {
+      if (err) return console.log("error destroying session");
+    });
+  }
+};
+
 module.exports = {
   login,
+  logout,
   signup,
   allUsers,
   getUser,

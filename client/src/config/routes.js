@@ -18,7 +18,7 @@ const routes = (
     <Route exact path="/findbuddy" component={FindBuddy} />
     <Route exact path="/codegories" component={Codegories} />
     <Route path="/codegories/:id" component={Codegory} />
-    <Route path="/myprofile" component={Profile} />
+    <Route path="/myprofile/:id" component={Profile} />
     {/* // need :id param for this???? */}
   </Switch>
 );

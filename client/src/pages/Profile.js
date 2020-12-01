@@ -10,11 +10,21 @@ export default function Profile() {
     console.log(params.id);
     UserModel.getUser(params.id).then((data) => {
       console.log(data);
+      setUser(data.user);
     });
   }, []);
+  const renderUserInfo = () => {
+    return (
+      <div>
+        <p>{user.username}</p>
+        <p>{user.email}</p>
+      </div>
+    );
+  };
   return (
     <div className="page-container">
       <p>Profile</p>
+      {user && renderUserInfo()}
     </div>
   );
 }
