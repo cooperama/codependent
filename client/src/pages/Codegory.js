@@ -1,20 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import CodegoryModel from "../models/codegory";
+
+import { Post, AddPost } from "../components";
 
 export default function Codegory() {
-  // query CodegoryModel for selected one, populate the posts... comments... Is it possible to populate a field of a populated field?
-  // Get id from params
-  // !!!!! YES
-  // User.
-  // findOne({ name: 'Val' }).
-  // populate({
-  //   path: 'friends',
-  //   // Get friends of friends - populate the 'friends' array for every friend
-  //   populate: { path: 'friends' }
-  // });
+  const [codegory, setCodegory] = useState({});
+  const [nerdRoom, setNerdRoom] = useState(false);
+  const params = useParams();
+  // make api call for Codegory using id from params
+  useEffect(() => {
+    const codeId = params.id;
+    CodegoryModel.getCodegory(codeId).then((data) => {
+      console.log(data);
+      setCodegory(data.codegory);
+      // If this codegory is the Nerd Room, render differently... maybe?
+      if (data.codegory.topic === "Nerd Room") {
+        setNerdRoom(true);
+      }
+    });
+  }, []);
+
+  const renderPosts = () => {
+    return codegory.posts.map((post) => {
+      return <Post key={post._id} />;
+    });
+  };
+
+  const renderEmpty = () => {
+    return (
+      <div className="empty-page">
+        <p>There seem to be no posts here yet!</p>
+        <p>Why not make one?</p>
+        <AddPost />
+      </div>
+    );
+  };
+
   return (
     <div className="page-container">
-      <p>Codegory/Nerd Room</p>
+      <p>{codegory.topic}</p>
+      {codegory.posts.length === 0 ? renderEmpty() : renderPosts()}
     </div>
   );
 }

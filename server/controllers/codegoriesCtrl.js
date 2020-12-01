@@ -13,7 +13,7 @@ const allCodegories = (req, res) => {
 
 const getCodegory = (req, res) => {
   db.Codegory.findById(req.params.id)
-    .populate("posts")
+    .populate({ path: "posts", populate: { path: "author comments codegory" } })
     .then((foundCodegory) => {
       res.json({ codegory: foundCodegory });
     })
@@ -22,6 +22,15 @@ const getCodegory = (req, res) => {
       res.json({ error: "Unable to get data" });
     });
 };
+// Get id from params
+// !!!!! YES
+// User.
+// findOne({ name: 'Val' }).
+// populate({
+//   path: 'friends',
+//   // Get friends of friends - populate the 'friends' array for every friend
+//   populate: { path: 'friends' }
+// });
 
 const createCodegory = (req, res) => {
   db.Codegory.create(req.body)
