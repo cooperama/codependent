@@ -17,6 +17,9 @@ export default function SideNav() {
       <li className="side-nav-item">
         <Link to="/findbuddy">Find Study Buddy</Link>
       </li>
+      <li className="side-nav-item">
+        <Link to="/register">signup login</Link>
+      </li>
     </div>
   );
 }
