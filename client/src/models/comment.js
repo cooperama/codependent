@@ -10,7 +10,7 @@ class CommentModel {
       });
   }
 
-  static Comment(id) {
+  static getComment(id) {
     return fetch(`${url}/${id}`)
       .then((res) => res.json())
       .catch((err) => {
@@ -31,7 +31,7 @@ class CommentModel {
         return { comment: {} };
       });
   }
-  // but will this erase all the other info? or just the info specified?
+
   static update(id, Comment) {
     return fetch(`${url}/${id}`, {
       method: "PUT",
@@ -44,6 +44,7 @@ class CommentModel {
         return { comment: {} };
       });
   }
+
   static delete(id) {
     return fetch(`${url}/${id}`, {
       method: "DELETE",
