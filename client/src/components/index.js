@@ -5,6 +5,7 @@ import Comment from "./Comment";
 
 // Auth Components
 import Login from "./auth/Login";
+import Logout from "./auth/Logout";
 import Signup from "./auth/Signup";
 
 // Calendar Components
@@ -42,4 +43,5 @@ export {
   EditProfile,
   Login,
   Signup,
+  Logout,
 };

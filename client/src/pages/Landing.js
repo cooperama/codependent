@@ -1,9 +1,16 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Signup, Login, Logout } from "../components";
 
 export default function Landing() {
+  const { isLoading } = useAuth0();
+  if (isLoading) return <div>Loading...</div>;
   return (
-    <div>
+    <div className="page-container">
       <p>Landing</p>
+      <Signup />
+      <Login />
+      <Logout />
     </div>
   );
 }

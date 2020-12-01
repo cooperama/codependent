@@ -13,7 +13,7 @@ import {
 const routes = (
   <Switch>
     <Route exact path="/" component={Home} />
-    {/* <Route exact path="/" component={Landing} /> */}
+    <Route exact path="/register" component={Landing} />
     {/* <Route path="/user/:id" component={Home} /> */}
     <Route exact path="/findbuddy" component={FindBuddy} />
     <Route exact path="/codegories" component={Codegories} />
