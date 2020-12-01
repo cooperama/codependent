@@ -1,0 +1,17 @@
+.side-nav {
+  background-color: $main-color;
+  height: 100vh;
+  position: fixed;
+  width: $navbar-width;
+  padding-top: 100px;
+  z-index: -1;
+
+  li {
+    display: inline-block;
+    margin: 0 0 30px 20px;
+    padding: 5px;
+    &:hover {
+      border-bottom: 1px solid $accent-color;
+    }
+  }
+}

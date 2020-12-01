@@ -1,0 +1,20 @@
+.find-buddy-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: aquamarine;
+}
+
+.buddy-instructions {
+  background-color: cadetblue;
+  height: 60vh;
+  width: 40vh;
+}
+
+.all-availability {
+  background-color: gold;
+  height: 60vh;
+  width: 40vw;
+}

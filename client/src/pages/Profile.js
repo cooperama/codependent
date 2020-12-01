@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Profile() {
   return (
-    <div>
+    <div className="page-container">
       <p>Profile</p>
     </div>
   );

@@ -2,7 +2,7 @@ import Home from "./Home";
 import Codegory from "./Codegory";
 import FindBuddy from "./FindBuddy";
 import Landing from "./Landing";
-import NerdRoom from "./NerdRoom";
+import Codegories from "./Codegories";
 import Profile from "./Profile";
 
-export { Home, Codegory, FindBuddy, Landing, NerdRoom, Profile };
+export { Home, Codegory, FindBuddy, Landing, Codegories, Profile };

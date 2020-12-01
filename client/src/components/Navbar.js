@@ -1,16 +1,27 @@
 import React from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle, faPeopleCarry } from "@fortawesome/free-solid-svg-icons";
+
 import { Link } from "react-router-dom";
+import { SideNav } from "../components";
 
 export default function Navbar() {
   return (
     <nav>
-      <li>
-        <Link to="/">Home</Link>
-        <Link to="/codegory">Codegories</Link>
-        <Link to="/findbuddy">Find a Study Buddy</Link>
-        <Link to="/nerdroom">Nerd Room</Link>
-        <Link to="/myprofile">My Profile</Link>
-      </li>
+      <SideNav />
+
+      <div className="codependent-logo">
+        <li>
+          <Link to="/">co[de]pendent</Link>
+        </li>
+      </div>
+      <div className="profile-nav">
+        <FontAwesomeIcon icon={faUserCircle} />
+        <li>
+          <Link to="/myprofile">My Profile</Link>
+        </li>
+      </div>
     </nav>
   );
 }

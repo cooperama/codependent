@@ -1,0 +1,36 @@
+nav {
+  background-color: $main-color;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: $navbar-height;
+  display: flex;
+  justify-content: space-between;
+  a {
+    color: white;
+  }
+  svg {
+    color: white;
+  }
+}
+
+.codependent-logo {
+  height: 100%;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    font-size: 1.4rem;
+  }
+}
+
+.profile-nav {
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  li {
+    margin-left: 10px;
+  }
+}

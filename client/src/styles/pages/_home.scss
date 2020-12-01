@@ -1,0 +1,38 @@
+.home-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-content {
+  background-color: $main-color;
+  color: $light-font;
+  height: 70vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  div {
+    background-color: $second-color;
+    height: 200px;
+    width: 80%;
+  }
+}
+
+.recent-code-posts {
+  // background-color: $second-color;
+}
+
+.recent-nerd-posts {
+  // background-color: $second-color;
+}
+
+.calendar-list {
+  background-color: $main-color;
+  height: 70vh;
+  width: 30vw;
+  color: $light-font;
+}

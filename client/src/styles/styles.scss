@@ -1,7 +1,44 @@
 // Variables
+$main-color: #1e3368;
+$second-color: #1e4abb;
+$accent-color: #0088ff;
+
+$light-font: #fff;
+$dark-font: #000;
+
+$navbar-height: 60px;
+$navbar-width: 160px;
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+    color: $dark-font;
+  }
+
+  li {
+    list-style: none;
+  }
 }
+
+// Set main content to take whole screen minus height and width of navs
+.page-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - #{$navbar-height});
+  width: calc(100vw - #{$navbar-width});
+}
+
+// Imports
+@import "pages/codegory";
+@import "pages/findbuddy";
+@import "pages/home";
+@import "pages/landing";
+@import "pages/codegories";
+@import "pages/profile";
+@import "components/navbar";
+@import "components/sidenav";
