@@ -6,6 +6,17 @@ export default function Login() {
 
   // In Tutorial:
   return (
+    //   !isAuthenticated && (
+    //     <button
+    //       onClick={() =>
+    //         loginWithRedirect({
+    //           screen_hint: "signup",
+    //         })
+    //       }
+    //     >
+    //       Log In
+    //     </button>
+    //   )
     !isAuthenticated && (
       <button onClick={() => loginWithRedirect()}>Log In</button>
     )

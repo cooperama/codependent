@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Signup, Login, Logout } from "../components";
+import { Login, Logout } from "../components";
 
 export default function Landing() {
   const { isLoading } = useAuth0();
@@ -8,7 +8,6 @@ export default function Landing() {
   return (
     <div className="page-container">
       <p>Landing</p>
-      <Signup />
       <Login />
       <Logout />
     </div>
