@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import UserModel from "../../models/user";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
+  const history = useHistory();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
 
@@ -20,9 +22,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { email, username, password };
-    console.log(username);
+    // console.log(username);
     UserModel.login(user).then((data) => {
-      console.log(data);
+      // console.log(data);
+      history.push(`/myprofile/${data.user._id}`);
     });
   };
   return (

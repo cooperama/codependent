@@ -11,7 +11,7 @@ class UserModel {
   }
 
   static getUser(id) {
-    return fetch(`${url}/${id}`)
+    return fetch(`${url}/myprofile/${id}`)
       .then((res) => res.json())
       .catch((err) => {
         console.log("Error fetching data in UserModel.get: ", err);

@@ -39,6 +39,8 @@ const allUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
+  console.log(req.params);
+  console.log("sessions? ", req.session);
   db.User.findById(req.params.id)
     .populate("available")
     .then((foundUser) => {
