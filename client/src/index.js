@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 
+import "./styles/styles.scss";
+
 ReactDOM.render(
   <Router>
     <App />
