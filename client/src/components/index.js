@@ -1,11 +1,18 @@
 import Navbar from "./Navbar";
 import SideNav from "./SideNav";
+import AuthNav from "./AuthNav";
 import Post from "./Post";
+import Loading from "./Loading";
 import Comment from "./Comment";
 
 // Auth Components
 import Login from "./auth/Login";
+import LoginButton from "./auth/LoginButton";
+import LogoutButton from "./auth/LogoutButton";
 import Signup from "./auth/Signup";
+import SignupButton from "./auth/SignupButton";
+import AuthenticationButton from "./auth/AuthenticationButton";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 // Calendar Components
 import AllUsersAvail from "./calendar/AllUsersAvail";
@@ -25,6 +32,8 @@ import EditProfile from "./forms/EditProfile";
 
 export {
   Navbar,
+  AuthNav,
+  Loading,
   Post,
   MyListView,
   AllUsersAvail,
@@ -42,4 +51,9 @@ export {
   EditProfile,
   Login,
   Signup,
+  ProtectedRoute,
+  LoginButton,
+  SignupButton,
+  LogoutButton,
+  AuthenticationButton,
 };

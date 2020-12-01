@@ -1,6 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 
-import {} from "../components";
+import { ProtectedRoute } from "../components";
 import {
   Home,
   Codegory,
@@ -18,7 +18,7 @@ const routes = (
     <Route exact path="/findbuddy" component={FindBuddy} />
     <Route exact path="/codegories" component={Codegories} />
     <Route path="/codegories/:id" component={Codegory} />
-    <Route path="/myprofile" component={Profile} />
+    <ProtectedRoute path="/myprofile" component={Profile} />
     {/* // need :id param for this???? */}
   </Switch>
 );
