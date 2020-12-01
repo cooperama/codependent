@@ -1,4 +1,4 @@
-const url = "http://localhost:4000/api/v1/codegory";
+const url = "http://localhost:4000/api/v1/codegories";
 
 class CodegoryModel {
   static all() {

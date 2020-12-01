@@ -1,4 +1,4 @@
-const url = "http://localhost:4000/api/v1/comment";
+const url = "http://localhost:4000/api/v1/comments";
 
 class CommentModel {
   static all() {

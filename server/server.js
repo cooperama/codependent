@@ -23,7 +23,7 @@ app.use("/api/v1/codegories", routes.codegories);
 app.use("/api/v1/comments", routes.comments);
 app.use("/api/v1/posts", routes.posts);
 // Stretchy
-app.use("/api/v1/availability", routes.availability);
+app.use("/api/v1/avail", routes.avail);
 app.use("/api/v1/paired", routes.paired);
 
 // Server home

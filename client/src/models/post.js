@@ -1,4 +1,4 @@
-const url = "http://localhost:4000/api/v1/post";
+const url = "http://localhost:4000/api/v1/posts";
 
 class PostModel {
   static all() {

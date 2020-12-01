@@ -8,3 +8,12 @@ module.exports = {
   availability: require("./availCtrl"),
   paired: require("./pairedCtrl"),
 };
+
+// populationception
+// User.
+// findOne({ name: 'Val' }).
+// populate({
+//   path: 'friends',
+//   // Get friends of friends - populate the 'friends' array for every friend
+//   populate: { path: 'friends' }
+// });
