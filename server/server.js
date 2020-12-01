@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const session = require("express-session");
 
 const routes = require("./routes");
 
@@ -15,6 +16,14 @@ const corsOptions = {
 // middleware
 app.use(express.json());
 app.use(cors(corsOptions));
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 // set up routes
 // MVP

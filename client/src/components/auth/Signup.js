@@ -1,30 +1,46 @@
 import React, { useState } from "react";
 
+import UserModel from "../../models/user";
+
 export default function Signup() {
-  const [username, setUsername] = useState({});
-  const [email, setEmail] = useState({});
-  const [fullname, setFullname] = useState({});
-  const [password, setPassword] = useState({});
-  const [password2, setPassword2] = useState({});
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [fullname, setFullname] = useState();
+  const [password, setPassword] = useState();
+  const [password2, setPassword2] = useState();
   const handleUsernameChange = (e) => {
-    setUsername({ username: e.target.value });
+    setUsername(e.target.value);
   };
   const handleEmailChange = (e) => {
-    setEmail({ email: e.target.value });
+    setEmail(e.target.value);
   };
   const handleFullnameChange = (e) => {
-    setFullname({ fullname: e.target.value });
+    setFullname(e.target.value);
   };
   const handlePasswordChange = (e) => {
-    setPassword({ password: e.target.value });
+    setPassword(e.target.value);
   };
   const handlePassword2Change = (e) => {
-    setPassword2({ password2: e.target.value });
+    setPassword2(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username);
+    const newUser = {
+      username,
+      email,
+      fullname,
+      password,
+    };
+    console.log(newUser);
+    UserModel.create(newUser).then((data) => {
+      console.log(data);
+    });
   };
   return (
     <div>
       <p>Signup</p>
-      <form className="signup-form">
+      <form onSubmit={handleSubmit} className="signup-form">
         <div className="form-group">
           <label htmlFor="username">username</label>
           <input
@@ -65,7 +81,7 @@ export default function Signup() {
           <label htmlFor="password2">confirm password</label>
           <input
             onChange={handlePassword2Change}
-            type="text"
+            type="password"
             name="password2"
             id="password2"
           />

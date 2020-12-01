@@ -1,9 +1,13 @@
 const db = require("../models");
 
 const login = (req, res) => {
-  db.User.find({})
-    .then((foundUsers) => {
-      res.json({ users: foundUsers });
+  req.session.username = req.body.username;
+  req.session.logged = true;
+  console.log(req.session);
+
+  db.User.find({ email: req.body.email })
+    .then((foundUser) => {
+      res.json({ user: foundUser });
     })
     .catch((err) => {
       console.log("Error in users.login: ", err);
@@ -12,13 +16,14 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
+  console.log(req.body);
   db.User.create(req.body)
     .then((newUser) => {
       res.json({ users: newUser });
     })
     .catch((err) => {
       console.log("Error in users.signup: ", err);
-      res.json({ error: "Unable to get data" });
+      res.json({ error: "Unable to get data from signup user.create" });
     });
 };
 

@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/usersCtrl");
 
-router.get("/login", ctrl.login);
+// router.get("/login", ctrl.login);
+router.post("/login", ctrl.login);
 router.post("/signup", ctrl.signup);
 router.get("/", ctrl.allUsers);
 router.get("/:id", ctrl.getUser);

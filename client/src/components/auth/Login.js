@@ -1,25 +1,34 @@
 import React, { useState } from "react";
+import UserModel from "../../models/user";
 
 export default function Login() {
-  const [username, setUsername] = useState({});
-  const [email, setEmail] = useState({});
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
 
-  const [password, setPassword] = useState({});
+  const [password, setPassword] = useState();
 
   const handleUsernameChange = (e) => {
-    setUsername({ username: e.target.value });
+    setUsername(e.target.value);
   };
   const handleEmailChange = (e) => {
-    setEmail({ email: e.target.value });
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword({ password: e.target.value });
+    setPassword(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const user = { email, username, password };
+    console.log(username);
+    UserModel.login(user).then((data) => {
+      console.log(data);
+    });
   };
   return (
     <div>
       <p>Login</p>
-      <form className="login-form">
+      <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label htmlFor="username">username</label>
           <input

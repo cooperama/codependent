@@ -20,7 +20,7 @@ class UserModel {
   }
 
   static create(newUser) {
-    return fetch(url, {
+    return fetch(`${url}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),
@@ -31,6 +31,20 @@ class UserModel {
         return { user: {} };
       });
   }
+
+  static login(user) {
+    return fetch(`${url}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in UserModel.login: ", err);
+        return { user: {} };
+      });
+  }
+
   // but will this erase all the other info? or just the info specified?
   static update(id, updatedUser) {
     return fetch(`${url}/${id}`, {
