@@ -1,0 +1,23 @@
+.login-signup-div {
+  // background: blue;
+  width: 400px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    width: 200px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $neutral-color;
+    &[type="submit"] {
+      // color: $dark-font;
+      background-color: $second-color;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}

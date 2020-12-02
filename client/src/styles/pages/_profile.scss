@@ -1,7 +1,8 @@
 .profile-content {
-  background: pink;
-  // background: $main-color;
-  width: 40vw;
+  // background: pink;
+  background: $main-color;
+  color: $light-font;
+  width: 100%;
   margin: auto;
   // height: 100vh;
   // position: absolute;
@@ -10,6 +11,42 @@
   // right: calc(0px - #{$navbar-width});
 }
 .profile-info {
-  background: olive;
-  width: 400px;
+  background: $second-color;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  .profile-names {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    .profile-username {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 10px;
+      &::before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        border-bottom: 20px solid $neutral-color;
+        border-top: 20px solid $neutral-color;
+        border-right: 20px solid transparent;
+        border-left: 200px solid $neutral-color;
+      }
+      &::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        left: -20px;
+        border-bottom: 20px solid transparent;
+        border-top: 20px solid transparent;
+        border-right: 20px solid $neutral-color;
+      }
+    }
+  }
+}
+
+.profile-page-posts {
+  // margin: 5px 10px;
 }

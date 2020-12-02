@@ -26,7 +26,7 @@
 }
 
 .recent-code-posts {
-  background-color: white;
+  background-color: $second-color;
   height: 35%;
   width: 80%;
   overflow: scroll;
@@ -37,13 +37,13 @@
     background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: pink;
+    background-color: $accent-color;
     border-radius: 5px;
   }
 }
 
 .recent-nerd-posts {
-  background-color: white;
+  background-color: $second-color;
   height: 35%;
   width: 80%;
   overflow: scroll;
@@ -54,7 +54,7 @@
     background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: pink;
+    background-color: $accent-color;
     border-radius: 5px;
   }
 }

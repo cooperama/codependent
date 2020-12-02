@@ -1,8 +1,12 @@
 .each-post {
-  // background: green;
-  border-bottom: 3px solid rgba(44, 59, 108, 0.584);
-  width: 100%;
+  // background: $second-color;
+  border-bottom: 10px solid $neutral-color;
+  // border-bottom: 10px solid $accent-color;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  width: 95%;
   padding: 10px;
+  margin: 10px auto;
   h3 {
     text-align: center;
     margin-bottom: 10px;
@@ -11,7 +15,7 @@
     margin-bottom: 5px;
   }
   .post-content {
-    border-bottom: 1px solid rgba(44, 59, 108, 0.584);
+    border-bottom: 1px solid $neutral-color;
     height: 150px;
     p:nth-of-type(1) {
       text-align: center;

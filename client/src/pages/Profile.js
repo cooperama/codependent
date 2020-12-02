@@ -14,14 +14,7 @@ export default function Profile({ userState, setUserState }) {
   const renderPosts = () => {
     if (userState) {
       return userState.posts.map((post) => {
-        console.log(post);
-        return (
-          <div key={post._id} className="user-post-container">
-            {/* <Link to={`/post/${post._id}`}> */}
-            <Post post={post} />
-            {/* </Link> */}
-          </div>
-        );
+        return <Post key={post._id} post={post} />;
       });
     }
   };
@@ -29,28 +22,32 @@ export default function Profile({ userState, setUserState }) {
     if (userState) {
       return userState.comments.map((comment) => {
         // not sure what kind of data comment is... populated or id????
-        // return (
-        //   <div key={comment} className="user-comment-container">
-        //     {/* comments will link to the parent post */}
-        //     <Link to={`/post/${comment.parentPost}`}>
-        //       <Comment />
-        //     </Link>
-        //   </div>
-        // );
-        return <h3>comment!</h3>;
+        return (
+          <Link key={comment._id} to={`/post/${comment.parentPost}`}>
+            <Comment />
+          </Link>
+        );
       });
     }
   };
   const renderContent = () => {
     if (userState) {
       return (
-        <div className="profile-content">
-          <h1>{userState.username}</h1>
-          <p>{userState.email}</p>
-          <p>
-            joined: <Moment format="MMM DD, YYYY">{userState.createdAt}</Moment>
-          </p>
-        </div>
+        <>
+          <div className="profile-names">
+            <h1 className="profile-username">{userState.username}</h1>
+            <p>{userState.fullname}</p>
+            <p>{userState.email}</p>
+          </div>
+          <div className="profile-stats">
+            <p>
+              Member since::{" "}
+              <Moment format="MMM DD, YYYY">{userState.createdAt}</Moment>
+            </p>
+            <p>Posts: {userState.posts.length}</p>
+            <p>Comments: {userState.comments.length}</p>
+          </div>
+        </>
       );
     } else {
       history.push("/register");

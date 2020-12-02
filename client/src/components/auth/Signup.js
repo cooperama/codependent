@@ -1,81 +1,3 @@
-// import React, { useState } from "react";
-
-// export default function Signup() {
-//   const [username, setUsername] = useState({});
-//   const [email, setEmail] = useState({});
-//   const [fullname, setFullname] = useState({});
-//   const [password, setPassword] = useState({});
-//   const [password2, setPassword2] = useState({});
-//   const handleUsernameChange = (e) => {
-//     setUsername({ username: e.target.value });
-//   };
-//   const handleEmailChange = (e) => {
-//     setEmail({ email: e.target.value });
-//   };
-//   const handleFullnameChange = (e) => {
-//     setFullname({ fullname: e.target.value });
-//   };
-//   const handlePasswordChange = (e) => {
-//     setPassword({ password: e.target.value });
-//   };
-//   const handlePassword2Change = (e) => {
-//     setPassword2({ password2: e.target.value });
-//   };
-//   return (
-//     <div>
-//       <p>Signup</p>
-//       <form className="signup-form">
-//         <div className="form-group">
-//           <label htmlFor="username">username</label>
-//           <input
-//             onChange={handleUsernameChange}
-//             type="text"
-//             name="username"
-//             id="username"
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="email">email</label>
-//           <input
-//             onChange={handleEmailChange}
-//             type="email"
-//             name="email"
-//             id="email"
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="fullname">fullname</label>
-//           <input
-//             onChange={handleFullnameChange}
-//             type="text"
-//             name="fullname"
-//             id="fullname"
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="password">password</label>
-//           <input
-//             onChange={handlePasswordChange}
-//             type="password"
-//             name="password"
-//             id="password"
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="password2">confirm password</label>
-//           <input
-//             onChange={handlePassword2Change}
-//             type="text"
-//             name="password2"
-//             id="password2"
-//           />
-//         </div>
-//         <input type="submit" value="sign up" />
-//       </form>
-//     </div>
-//   );
-// }
-
 import React, { useState } from "react";
 
 import UserModel from "../../models/user";
@@ -116,12 +38,11 @@ export default function Signup() {
     });
   };
   return (
-    <div>
-      <p>Signup</p>
+    <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
         <div className="form-group">
-          <label htmlFor="username">username</label>
           <input
+            placeholder="username"
             onChange={handleUsernameChange}
             type="text"
             name="username"
@@ -129,8 +50,8 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">email</label>
           <input
+            placeholder="email"
             onChange={handleEmailChange}
             type="email"
             name="email"
@@ -138,8 +59,8 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="fullname">fullname</label>
           <input
+            placeholder="full name"
             onChange={handleFullnameChange}
             type="text"
             name="fullname"
@@ -147,8 +68,8 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">password</label>
           <input
+            placeholder="password"
             onChange={handlePasswordChange}
             type="password"
             name="password"
@@ -156,15 +77,15 @@ export default function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password2">confirm password</label>
           <input
+            placeholder="confirm password"
             onChange={handlePassword2Change}
             type="password"
             name="password2"
             id="password2"
           />
         </div>
-        <input type="submit" value="sign up" />
+        <input placeholder="" type="submit" value="sign up" />
       </form>
     </div>
   );

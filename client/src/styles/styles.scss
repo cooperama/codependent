@@ -1,10 +1,35 @@
 // Variables
-$main-color: #1e3368;
-$second-color: #1e4abb;
-$accent-color: #0088ff;
+$background-color: #364159;
+$main-color: #212637;
+$second-color: #283248;
+$accent-color: #0875b3;
+$neutral-color: #6a6d73;
+$lighter-color: #b0c6d9;
+
+// Color scheme:
+// $dark-color: #043F61;
+// $light-color: #32b1fa;
+// $shade-color: #144866;
+
+// $main-color: #043f61;
+// $accent-color: #32b1fa;
+// $second-color: #144866;
+
+$medium-color: #0991e0;
+$md-shade-color: #0875b3;
 
 $light-font: #fff;
 $dark-font: #000;
+
+$deep-clr: #1c1e26;
+$med-clr: #364159;
+$neutral-clr: #6a6d73;
+$light-clr: #b8cad9;
+$dark-clr: #0d0c07;
+$lighter-clr: #b0c6d9;
+$accent-clr: #f28699;
+$accent-red: #960d0d;
+$deep-red: #640d0d;
 
 $navbar-height: 60px;
 $navbar-width: 160px;
@@ -13,23 +38,28 @@ $navbar-width: 160px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: $light-font;
 
   a {
     text-decoration: none;
-    color: $dark-font;
+    // color: $dark-font;
   }
 
   li {
     list-style: none;
   }
+  body {
+    background-color: $background-color;
+  }
 }
 
 // Set main content to take whole screen minus height and width of navs
 .page-container {
-  position: absolute;
+  // position: absolute;
+  // bottom: 0;
   // right: $navbar-width;
-  left: $navbar-width;
-  bottom: 0;
+  // left: $navbar-width;
+  margin: calc(30px + #{$navbar-height}) auto;
   height: calc(95vh - #{$navbar-height});
   width: calc(95vw - #{$navbar-width * 2});
 }
