@@ -1,6 +1,6 @@
-form {
-  background-color: red;
-}
+// form {
+//   background-color: red;
+// }
 
 .add-post-form {
   width: 90%;
@@ -25,5 +25,22 @@ form {
   div {
     width: 90%;
     margin: auto;
+  }
+}
+
+.edit-comment-form {
+  width: 500px;
+  height: 200px;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  .edit-textarea {
+    height: 80%;
+  }
+}
+.buttons-container {
+  width: 100% !important;
+  input {
+    margin: 0 30px;
   }
 }

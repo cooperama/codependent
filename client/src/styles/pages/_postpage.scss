@@ -4,24 +4,23 @@
     background-color: $second-color;
     padding: 10px;
     text-align: center;
-    .postpage-post-stats {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      width: 40%;
-      font-size: 0.8rem;
-    }
+  }
+  .postpage-post-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 40%;
+    font-size: 0.8rem;
   }
   .postpage-post-content {
-    // background-color: red;
     border: 5px solid $second-color;
     padding: 10px;
   }
   .postpage-settings {
     padding: 10px;
     display: flex;
-    justify-content: flex-end;
-
+    justify-content: space-between;
+    border-bottom: 1px solid $main-color;
     div {
       display: flex;
       button {
@@ -29,6 +28,9 @@
         width: 80px;
       }
     }
+  }
+  .postpage-editcomment {
+    position: relative;
   }
 }
 
@@ -39,7 +41,7 @@
   margin: 20px 0;
   .comment-body {
     padding: 10px;
-    height: 80px;
+    // height: 80px;
     // background-color: $neutral-color;
     border-bottom: 3px solid $neutral-color;
   }

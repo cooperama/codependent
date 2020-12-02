@@ -57,6 +57,7 @@ const createComment = (req, res) => {
 const updateComment = (req, res) => {
   db.Comment.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedComment) => {
+      console.log("updated comment in comm ctrl: ", updatedComment);
       res.json({ comment: updatedComment });
     })
     .catch((err) => {

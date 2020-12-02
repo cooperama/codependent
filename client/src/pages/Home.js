@@ -46,8 +46,9 @@ export default function Home({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="home-container">
+        <h3>Recent Activity</h3>
         <div className="main-content">
-          <p>In the Codegories</p>
+          <p>In Codegories</p>
           <div className="recent-code-posts">
             {recentPosts && renderCodePosts()}
           </div>

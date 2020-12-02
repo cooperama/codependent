@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Loading, AddComment, Comment } from "../components";
+import { Loading, AddComment, Comment, EditPost } from "../components";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
   const [newComment, setNewComment] = useState();
+  const [postToEdit, setPostToEdit] = useState();
+  const [editedPost, setEditedPost] = useState();
+  const editPostRef = useRef();
+  const deletePostRef = useRef();
   const addCommentRef = useRef();
   const params = useParams();
   const history = useHistory();
@@ -22,6 +26,14 @@ export default function PostPage({ userState, setUserState }) {
     //
     addCommentRef.current.classList.toggle("hide-content");
   };
+  const editPostClick = () => {
+    //
+    editPostRef.current.classList.toggle("hide-content");
+  };
+  const deletePostClick = () => {
+    //
+    deletePostRef.current.classList.toggle("hide-content");
+  };
   const renderAddCommentForm = () => {
     //
     if (userState) {
@@ -36,6 +48,44 @@ export default function PostPage({ userState, setUserState }) {
       );
     } else {
       console.log("log in to add post or comment or whatever");
+      // history.push("/register");
+    }
+  };
+  const renderEditPostForm = () => {
+    //
+    if (userState) {
+      // need to get Post id...
+      return (
+        <EditPost
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+          // PostToEdit={PostToEdit}
+          // PostToEdit={PostToEdit}
+          // editedPost={}
+          // editedPost={editedPost}
+          setEditedPost={setEditedPost}
+        />
+      );
+    } else {
+      console.log("log in to add post or Post or whatever");
+      // history.push("/register");
+    }
+  };
+  const renderDeletePostForm = () => {
+    //
+    if (userState) {
+      // return (
+      // <AddPost
+      //   userState={userState}
+      //   setUserState={setUserState}
+      //   post={post}
+      //   newPost={newPost}
+      //   setNewPost={setNewPost}
+      // />
+      // );
+    } else {
+      console.log("log in to add post or Post or whatever");
       // history.push("/register");
     }
   };
@@ -66,13 +116,6 @@ export default function PostPage({ userState, setUserState }) {
     return (
       <div className="postpage-post-container">
         <div className="postpage-post-heading">
-          <div className="postpage-post-stats">
-            <p> {post.codegory.topic} </p>
-            <p> [{post.author.username}] </p>
-            <p>
-              <Moment fromNow>{post.createdAt}</Moment>
-            </p>
-          </div>
           <h1>{post.title}</h1>
         </div>
         <div className="postpage-post-content ">
@@ -80,18 +123,34 @@ export default function PostPage({ userState, setUserState }) {
         </div>
 
         <div className="postpage-settings">
-          <div className="user-verified">
-            <button>edit</button>
-            <button>delete</button>
+          <div className="postpage-post-stats">
+            <p> {post.codegory.topic} </p>
+            <p> [{post.author.username}] </p>
+            <p>
+              <Moment fromNow>{post.createdAt}</Moment>
+            </p>
           </div>
           <div>
-            <button onClick={addCommentClick}>comment</button>
+            <div className="user-verified">
+              <button onClick={editPostClick}>edit</button>
+              <button onClick={deletePostClick}>delete</button>
+            </div>
+            <div>
+              <button onClick={addCommentClick}>comment</button>
+            </div>
           </div>
         </div>
         <div ref={addCommentRef} className="postpage-addcomment hide-content">
           {renderAddCommentForm()}
         </div>
+        <div ref={editPostRef} className="postpage-editPost hide-content">
+          {renderEditPostForm()}
+        </div>
+        <div ref={deletePostRef} className="postpage-deletePost hide-content">
+          {renderDeletePostForm()}
+        </div>
         <div className="postpage-comments-container">
+          {post.comments.length === 0 ? <p>no comments!</p> : <p>comments:</p>}
           {post.comments && renderComments()}
         </div>
       </div>

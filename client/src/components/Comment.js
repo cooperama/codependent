@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Moment from "react-moment";
 import CommentModel from "../models/comment";
+import { EditComment } from "../components";
 
 export default function Comment({
   parentPost,
@@ -10,13 +11,67 @@ export default function Comment({
   commentId,
 }) {
   const [comment, setComment] = useState();
+  // const [commentToEdit, setCommentToEdit] = useState();
+  const [editedComment, setEditedComment] = useState();
+  const editCommentRef = useRef();
+  const deleteCommentRef = useRef();
   const addCommentRef = useRef();
+
   useEffect(() => {
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);
     });
   }, []);
+
+  const editCommentClick = () => {
+    // setComment(comment);
+    console.log(comment);
+    editCommentRef.current.classList.toggle("hide-content");
+  };
+  const deleteCommentClick = () => {
+    //
+    deleteCommentRef.current.classList.toggle("hide-content");
+  };
+
+  const renderEditCommentForm = () => {
+    //
+    if (userState) {
+      // need to get comment id...
+      return (
+        <EditComment
+          userState={userState}
+          setUserState={setUserState}
+          editCommentRef={editCommentRef}
+          parentPost={parentPost}
+          comment={comment}
+          // editedComment={}
+          // editedComment={editedComment}
+          setComment={setComment}
+        />
+      );
+    } else {
+      console.log("log in to add post or comment or whatever");
+      // history.push("/register");
+    }
+  };
+  const renderDeleteCommentForm = () => {
+    //
+    if (userState) {
+      // return (
+      // <AddComment
+      //   userState={userState}
+      //   setUserState={setUserState}
+      //   post={post}
+      //   newComment={newComment}
+      //   setNewComment={setNewComment}
+      // />
+      // );
+    } else {
+      console.log("log in to add post or comment or whatever");
+      // history.push("/register");
+    }
+  };
   const renderComment = () => {
     return (
       <>
@@ -34,9 +89,21 @@ export default function Comment({
           </div>
           <div className="comment-settings">
             <div className="user-verified">
-              <button>edit</button>
-              <button>delete</button>
+              <button onClick={editCommentClick}>edit</button>
+              <button onClick={deleteCommentClick}>delete</button>
             </div>
+          </div>
+          <div
+            ref={editCommentRef}
+            className="postpage-editcomment hide-content"
+          >
+            {renderEditCommentForm()}
+          </div>
+          <div
+            ref={deleteCommentRef}
+            className="postpage-deletecomment hide-content"
+          >
+            {renderDeleteCommentForm()}
           </div>
         </div>
       </>

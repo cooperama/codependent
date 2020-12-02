@@ -18,11 +18,11 @@ export default function Post({ post, userState, setUserState }) {
     if (postContent) {
       return (
         <>
-          <div className="post-content">
+          <div className="post-content ">
             <h3>{postContent.title}</h3>
             <p>by {postContent.author.username}</p>
 
-            <p>{postContent.content}</p>
+            <p className="truncated-content">{postContent.content}</p>
           </div>
           <div className="post-content-second">
             <p>{postContent.codegory.topic}</p>
