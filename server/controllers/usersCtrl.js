@@ -88,23 +88,33 @@ const login = (req, res) => {
   // req.session.cookie.logged = true;
 
   // console.log("session on login: ", req.session);
-  db.User.findOne({ email: req.body.email }, (err, user) => {
-    if (err) {
-      res.json({ error: "Unable to get data" });
-      return console.log(err);
-    }
-    if (!user) return console.log("no user found");
-    return res.json({ user: user });
+  // db.User.findOne({ email: req.body.email }, (err, user) => {
+  //   if (err) {
+  //     res.json({ error: "Unable to get data" });
+  //     return console.log(err);
+  //   }
+  //   if (!user) return console.log("no user found");
+  //   return res.json({ user: user });
 
-    //   bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-    //     if (err) return console.log("error with passwords");
-    //     if (isMatch) {
-    //       req.session.currentUser = user._id;
-    //       console.log("req session from user login controller", req.session);
-    //       res.json({ user: user });
-    //     }
-    //   });
-  });
+  //   //   bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+  //   //     if (err) return console.log("error with passwords");
+  //   //     if (isMatch) {
+  //   //       req.session.currentUser = user._id;
+  //   //       console.log("req session from user login controller", req.session);
+  //   //       res.json({ user: user });
+  //   //     }
+  //   //   });
+  // });
+  db.User.findOne({ email: req.body.email })
+    .populate("posts")
+    .populate("comments")
+    .populate("available")
+    .populate("paired")
+    .then((user) => {
+      if (!user) return console.log("no user found");
+      return res.json({ user: user });
+    })
+    .catch((err) => console.log("error in user log in: ", err));
 };
 
 const signup = (req, res) => {

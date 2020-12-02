@@ -20,6 +20,7 @@ const CommentSchema = mongoose.Schema(
     // Stretch goal...
     likes: Number,
     // Not sure if I need these???!!!??? Since they point to the Comment themselves
+    // Comments should always point to a parent Post, even if it's a reply to another comment.
     parentPost: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
