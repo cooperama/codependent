@@ -18,9 +18,6 @@ export default function EditComment({
   const history = useHistory();
 
   useEffect(() => {
-    // const codegoryId = params.id;
-    // console.log("codegory id", codegoryId);
-    // how to get user???
     console.log(comment);
     console.log(parentPost);
     console.log(userState);
@@ -34,18 +31,13 @@ export default function EditComment({
       parentPost: parentPost._id,
       author: userState._id,
     };
-    // update Comment in db
     CommentModel.update(comment._id, editedComment).then((data) => {
       console.log("Comment model updated: ", data);
-      // when data comes back:
       CommentModel.getComment(data.comment._id).then((data) => {
         setComment(data.comment);
       });
-      // setting new comment state (PostPage)
-      // setNewComment(data.comment);
     });
     editCommentRef.current.classList.add("hide-content");
-    // e.target.value = "";
   };
   const handleContentChange = (e) => {
     setNewContent(e.target.value);

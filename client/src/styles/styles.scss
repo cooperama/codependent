@@ -86,6 +86,10 @@ $navbar-width: 160px;
       // color: $deep-red;
     }
   }
+  .delete-button-confirm {
+    background-color: $deep-red;
+    box-shadow: 0 0 2px solid $main-color;
+  }
 }
 
 // Set main content to take whole screen minus height and width of navs

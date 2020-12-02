@@ -33,6 +33,7 @@
   height: 200px;
   position: absolute;
   right: 0;
+  z-index: 2;
   top: 40px;
   .edit-textarea {
     height: 80%;
@@ -41,6 +42,6 @@
 .buttons-container {
   width: 100% !important;
   input {
-    margin: 0 30px;
+    // margin: 0 30px;
   }
 }

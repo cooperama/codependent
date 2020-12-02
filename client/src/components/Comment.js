@@ -2,20 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Moment from "react-moment";
 import CommentModel from "../models/comment";
+import PostModel from "../models/post";
 import { EditComment } from "../components";
 
 export default function Comment({
   parentPost,
   userState,
+  setPost,
   setUserState,
   commentId,
 }) {
   const [comment, setComment] = useState();
-  // const [commentToEdit, setCommentToEdit] = useState();
   const [editedComment, setEditedComment] = useState();
   const editCommentRef = useRef();
   const deleteCommentRef = useRef();
-  const addCommentRef = useRef();
+  const params = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     CommentModel.getComment(commentId).then((data) => {
@@ -24,20 +26,30 @@ export default function Comment({
     });
   }, []);
 
-  const editCommentClick = () => {
-    // setComment(comment);
-    console.log(comment);
+  const editCommentClick = (e) => {
+    e.target.innerText === "edit"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "edit");
     editCommentRef.current.classList.toggle("hide-content");
   };
-  const deleteCommentClick = () => {
-    //
+  const deleteCommentClick = (e) => {
+    e.target.innerText === "delete"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "delete");
     deleteCommentRef.current.classList.toggle("hide-content");
   };
-
+  const handleDelete = () => {
+    CommentModel.delete(comment._id).then((data) => {
+      console.log("deleted: ", data);
+      deleteCommentRef.current.classList.add("hide-content");
+      PostModel.getPost(data.comment.parentPost).then((data) => {
+        setPost(data.post);
+      });
+      // history.push(`/post/${comment.parentPost._id}`);
+    });
+  };
   const renderEditCommentForm = () => {
-    //
     if (userState) {
-      // need to get comment id...
       return (
         <EditComment
           userState={userState}
@@ -45,8 +57,6 @@ export default function Comment({
           editCommentRef={editCommentRef}
           parentPost={parentPost}
           comment={comment}
-          // editedComment={}
-          // editedComment={editedComment}
           setComment={setComment}
         />
       );
@@ -55,18 +65,16 @@ export default function Comment({
       // history.push("/register");
     }
   };
+
   const renderDeleteCommentForm = () => {
-    //
     if (userState) {
-      // return (
-      // <AddComment
-      //   userState={userState}
-      //   setUserState={setUserState}
-      //   post={post}
-      //   newComment={newComment}
-      //   setNewComment={setNewComment}
-      // />
-      // );
+      return (
+        <>
+          <button className="delete-button-confirm" onClick={handleDelete}>
+            confirm delete
+          </button>
+        </>
+      );
     } else {
       console.log("log in to add post or comment or whatever");
       // history.push("/register");

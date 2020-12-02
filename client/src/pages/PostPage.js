@@ -21,27 +21,25 @@ export default function PostPage({ userState, setUserState }) {
       console.log("data from post model: ", data);
       setPost(data.post);
     });
-  }, []);
+  }, [newComment]);
   const addCommentClick = () => {
     //
     addCommentRef.current.classList.toggle("hide-content");
   };
   const editPostClick = () => {
-    //
     editPostRef.current.classList.toggle("hide-content");
   };
   const deletePostClick = () => {
-    //
     deletePostRef.current.classList.toggle("hide-content");
   };
   const renderAddCommentForm = () => {
-    //
     if (userState) {
       return (
         <AddComment
           userState={userState}
           setUserState={setUserState}
           post={post}
+          addCommentRef={addCommentRef}
           newComment={newComment}
           setNewComment={setNewComment}
         />
@@ -52,7 +50,6 @@ export default function PostPage({ userState, setUserState }) {
     }
   };
   const renderEditPostForm = () => {
-    //
     if (userState) {
       // need to get Post id...
       return (
@@ -104,6 +101,7 @@ export default function PostPage({ userState, setUserState }) {
           <Comment
             key={comment._id}
             userState={userState}
+            setPost={setPost}
             setUserState={setUserState}
             parentPost={post}
             commentId={comment._id}

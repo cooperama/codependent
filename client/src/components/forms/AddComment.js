@@ -7,10 +7,12 @@ export default function AddComment({
   post,
   userState,
   setUserState,
+  addCommentRef,
   newComment,
   setNewComment,
 }) {
   const [content, setContent] = useState();
+  // const [post, setPost] = useState();
 
   const params = useParams();
   const history = useHistory();
@@ -23,16 +25,17 @@ export default function AddComment({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newComment = {
+    const createdComment = {
       content,
       parentPost: post._id,
       author: userState._id,
     };
     // create Comment in db
-    CommentModel.create(newComment).then((data) => {
+    CommentModel.create(createdComment).then((data) => {
       console.log("Comment model create: ", data);
       // setting new comment state (PostPage)
       setNewComment(data.comment);
+      addCommentRef.current.classList.add("hide-content");
     });
     e.target.value = "";
   };

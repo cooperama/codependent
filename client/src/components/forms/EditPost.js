@@ -54,8 +54,6 @@ export default function EditPost({ codegoryId, userState, setUserState }) {
           onChange={handleContentChange}
           name="content"
           id="content"
-          // cols="30"
-          // rows="10"
         ></textarea>
       </div>
       <input type="submit" value="add post" />

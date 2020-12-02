@@ -27,6 +27,17 @@ export default function Login({ userState, setUserState }) {
       // history.push(`/myprofile/${data.user._id}`);
     });
   };
+  const loadState = () => {
+    setEmail("whyme@gmail.com");
+    setPassword("why123!@#");
+    setUsername("whyme");
+    const user = { email, username, password };
+    UserModel.login(user).then((data) => {
+      setUserState(data.user);
+      history.push(`/`);
+      // history.push(`/myprofile/${data.user._id}`);
+    });
+  };
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
@@ -57,8 +68,44 @@ export default function Login({ userState, setUserState }) {
             id="password"
           />
         </div>
+
         <input type="submit" value="sign in" />
       </form>
+      <button onClick={loadState}>go</button>
+      {/* <form onSubmit={handleSubmit} className="login-form">
+        <div className="form-group">
+          <input
+            placeholder="username"
+            onClick={handleUsernameChange}
+            type="text"
+            name="username"
+            id="username"
+            value="whyme"
+          />
+        </div>
+        <div className="form-group">
+          <input
+            placeholder="email"
+            onClick={handleEmailChange}
+            type="email"
+            name="email"
+            id="email"
+            value="why@gmail.com"
+          />
+        </div>
+        <div className="form-group">
+          <input
+            placeholder="password"
+            onClick={handlePasswordChange}
+            type="password"
+            name="password"
+            id="password"
+            value="why123!@#"
+          />
+        </div>
+        <button onClick={loadState}>go</button>
+        <input type="submit" value="auto log in" />
+      </form> */}
     </div>
   );
 }
