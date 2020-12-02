@@ -37,7 +37,13 @@ function App() {
     <div className="App">
       <Navbar userState={userState} setUserState={setUserState} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Home userState={userState} setUserState={setUserState} />
+          )}
+        />
         <Route
           exact
           path="/register"

@@ -27,10 +27,11 @@ $navbar-width: 160px;
 // Set main content to take whole screen minus height and width of navs
 .page-container {
   position: absolute;
-  right: 0;
+  // right: $navbar-width;
+  left: $navbar-width;
   bottom: 0;
-  height: calc(100vh - #{$navbar-height});
-  width: calc(100vw - #{$navbar-width});
+  height: calc(95vh - #{$navbar-height});
+  width: calc(95vw - #{$navbar-width * 2});
 }
 
 // Imports
@@ -40,5 +41,6 @@ $navbar-width: 160px;
 @import "pages/landing";
 @import "pages/codegories";
 @import "pages/profile";
+@import "pages/nerdroom";
 @import "components/navbar";
 @import "components/sidenav";

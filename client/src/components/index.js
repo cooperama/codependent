@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import SideNav from "./SideNav";
+import UserNav from "./UserNav";
 import Post from "./Post";
 import Comment from "./Comment";
 import Loading from "./Loading";
@@ -26,6 +27,7 @@ import EditProfile from "./forms/EditProfile";
 
 export {
   Navbar,
+  UserNav,
   Post,
   MyListView,
   AllUsersAvail,

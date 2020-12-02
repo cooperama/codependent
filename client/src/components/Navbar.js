@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faPeopleCarry } from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
-import { SideNav } from "../components";
+import { SideNav, UserNav } from "../components";
 
 export default function Navbar({ userState, setUserState }) {
   useEffect(() => {
@@ -47,6 +47,7 @@ export default function Navbar({ userState, setUserState }) {
         {/* <Link to="/myprofile">My Profile</Link> */}
         {/* </li> */}
       </div>
+      <UserNav />
     </nav>
   );
 }

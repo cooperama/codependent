@@ -9,6 +9,22 @@ class PostModel {
         return { post: [] };
       });
   }
+  static recentPosts() {
+    return fetch(`${url}/recentposts`)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in PostModel.all: ", err);
+        return { post: [] };
+      });
+  }
+  static all() {
+    return fetch(url)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in PostModel.all: ", err);
+        return { post: [] };
+      });
+  }
 
   static getPost(id) {
     return fetch(`${url}/${id}`)

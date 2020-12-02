@@ -11,6 +11,23 @@ const allPosts = (req, res) => {
     });
 };
 
+const recentPosts = (req, res) => {
+  db.Post.find({})
+    .sort({ createdAt: -1 })
+    // .limit(5)
+    // .populate({ path: "posts", populate: { path: "author comments codegory" } })
+    .populate("codegory")
+    .populate("author")
+    .populate("comments")
+    .then((foundPosts) => {
+      res.json({ posts: foundPosts });
+    })
+    .catch((err) => {
+      console.log("Error in Post.allPosts: ", err);
+      res.json({ error: "Unable to get data" });
+    });
+};
+
 const getPost = (req, res) => {
   db.Post.findById(req.params.id)
     .populate("codegory")
@@ -75,5 +92,6 @@ module.exports = {
   getPost,
   createPost,
   updatePost,
+  recentPosts,
   deletePost,
 };
