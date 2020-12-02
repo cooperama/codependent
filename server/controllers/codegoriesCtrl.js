@@ -1,6 +1,8 @@
 const db = require("../models");
 
 const allCodegories = (req, res) => {
+  // if (req.session.currentUser) {
+  console.log("req.session current User ", req.session);
   db.Codegory.find({})
     .then((foundCodegories) => {
       res.json({ codegories: foundCodegories });
@@ -9,9 +11,13 @@ const allCodegories = (req, res) => {
       console.log("Error in Codegory.allCodegories: ", err);
       res.json({ error: "Unable to get data" });
     });
+  // } else {
+  //   console.log("req.session no current User ", req.session);
+  // }
 };
 
 const getCodegory = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Codegory.findById(req.params.id)
     .populate({ path: "posts", populate: { path: "author comments codegory" } })
     .then((foundCodegory) => {
@@ -33,6 +39,7 @@ const getCodegory = (req, res) => {
 // });
 
 const createCodegory = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Codegory.create(req.body)
     .then((newCodegory) => {
       res.json({ codegory: newCodegory });
@@ -44,6 +51,7 @@ const createCodegory = (req, res) => {
 };
 
 const updateCodegory = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Codegory.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedCodegory) => {
       res.json({ codegory: updatedCodegory });
@@ -55,6 +63,7 @@ const updateCodegory = (req, res) => {
 };
 
 const deleteCodegory = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Codegory.findByIdAndDelete(req.params.id)
     .then((deletedCodegory) => {
       res.json({ codegory: deletedCodegory });

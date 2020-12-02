@@ -2,8 +2,13 @@ const bcrypt = require("bcryptjs");
 const db = require("../models");
 
 const login = (req, res) => {
+  console.log("req.session  ", req.session);
   req.session.username = req.body.username;
   req.session.logged = true;
+  //
+  req.session.cookie.username = req.body.username;
+  req.session.cookie.logged = true;
+
   console.log("session on login: ", req.session);
   db.User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
@@ -16,6 +21,7 @@ const login = (req, res) => {
       if (err) return console.log("error with passwords");
       if (isMatch) {
         req.session.currentUser = user._id;
+        console.log("req session from user login controller", req.session);
         res.json({ user: user });
       }
     });
@@ -23,6 +29,7 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
+  console.log("req.session  ", req.session);
   console.log(req.body);
   db.User.findOne({ email: req.body.email }, (err, user) => {
     if (user) {
@@ -55,6 +62,7 @@ const signup = (req, res) => {
 };
 
 const allUsers = (req, res) => {
+  console.log("req.session  ", req.session);
   db.User.find({})
     .then((foundUsers) => {
       res.json({ users: foundUsers });
@@ -66,6 +74,7 @@ const allUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
+  console.log("req.session  ", req.session);
   if (req.session.logged) {
     console.log("req session logged true");
   }
@@ -83,6 +92,7 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
+  console.log("req.session  ", req.session);
   db.User.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedUser) => {
       res.json({ user: updatedUser });
@@ -94,6 +104,7 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
+  console.log("req.session  ", req.session);
   db.User.findByIdAndDelete(req.params.id)
     .then((deletedUser) => {
       res.json({ users: deletedUser });
@@ -105,6 +116,7 @@ const deleteUser = (req, res) => {
 };
 
 const logout = (req, res) => {
+  console.log("req.session  ", req.session);
   console.log("users ctrl");
   console.log(req.session);
   if (req.session.currentUser) {

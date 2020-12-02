@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const allComments = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Comment.find({})
     .then((foundComments) => {
       res.json({ comments: foundComments });
@@ -12,6 +13,7 @@ const allComments = (req, res) => {
 };
 
 const getComment = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Comment.findById(req.params.id)
     .populate("author replies")
     .then((foundComment) => {
@@ -24,6 +26,7 @@ const getComment = (req, res) => {
 };
 
 const createComment = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Comment.create(req.body)
     .then((newComment) => {
       res.json({ comment: newComment });
@@ -35,6 +38,7 @@ const createComment = (req, res) => {
 };
 
 const updateComment = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Comment.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedComment) => {
       res.json({ comment: updatedComment });
@@ -46,6 +50,7 @@ const updateComment = (req, res) => {
 };
 
 const deleteComment = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Comment.findByIdAndDelete(req.params.id)
     .then((deletedComment) => {
       res.json({ comment: deletedComment });

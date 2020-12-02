@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const index = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Availability.find({})
     .populate("user")
     .then((userAvail) => {
@@ -13,6 +14,7 @@ const index = (req, res) => {
 };
 
 const getAvail = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Availability.findById(req.params.id)
     .populate("user")
     .then((foundAvail) => {
@@ -25,6 +27,7 @@ const getAvail = (req, res) => {
 };
 
 const updateAvail = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Availability.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedAvail) => {
       res.json({ avail: updatedAvail });
@@ -36,6 +39,7 @@ const updateAvail = (req, res) => {
 };
 
 const create = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Availability.create(req.body)
     .then((newAvail) => {
       res.json({ avail: newAvail });
@@ -47,6 +51,7 @@ const create = (req, res) => {
 };
 
 const deleteAvail = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Availability.findByIdAndDelete(req.params.id)
     .then((deletedAvail) => {
       res.json({ avail: deletedAvail });

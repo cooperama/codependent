@@ -17,16 +17,16 @@ export default function Navbar({ userState, setUserState }) {
   }, [userState, setUserState]);
   const handleLogOut = () => {
     // make api call to user.logout.....
-    console.log("log out button");
-    UserModel.logout()
-      .then(() => {
-        // this works.... but takes a long time...
-        setUserState(null);
-        console.log("logged out...");
-        history.push("/register");
-      })
-      .catch((err) => console.log("did not log out: ", err));
-    console.log(userState);
+    // console.log("log out button");
+    // UserModel.logout()
+    //   .then(() => {
+    //     // this works.... but takes a long time...
+    //     setUserState(null);
+    //     console.log("logged out...");
+    //     history.push("/register");
+    //   })
+    //   .catch((err) => console.log("did not log out: ", err));
+    // console.log(userState);
   };
   const renderMyProfile = () => {
     if (userState) {

@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const allPosts = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Post.find({})
     .then((foundPosts) => {
       res.json({ posts: foundPosts });
@@ -12,6 +13,7 @@ const allPosts = (req, res) => {
 };
 
 const getPost = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Post.findById(req.params.id)
     .populate("author comments")
     .then((foundPost) => {
@@ -24,6 +26,7 @@ const getPost = (req, res) => {
 };
 
 const createPost = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Post.create(req.body)
     .then((newPost) => {
       res.json({ post: newPost });
@@ -35,6 +38,7 @@ const createPost = (req, res) => {
 };
 
 const updatePost = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPost) => {
       res.json({ post: updatedPost });
@@ -46,6 +50,7 @@ const updatePost = (req, res) => {
 };
 
 const deletePost = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Post.findByIdAndDelete(req.params.id)
     .then((deletedPost) => {
       res.json({ post: deletedPost });

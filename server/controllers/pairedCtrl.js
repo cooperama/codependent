@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const index = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Paired.find({})
     .then((userPaired) => {
       res.json({ Paired: userPaired });
@@ -12,6 +13,7 @@ const index = (req, res) => {
 };
 
 const getPaired = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Paired.findById(req.params.id)
     .then((foundPaired) => {
       res.json({ Paired: foundPaired });
@@ -23,6 +25,7 @@ const getPaired = (req, res) => {
 };
 
 const updatePaired = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Paired.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPaired) => {
       res.json({ Paired: updatedPaired });
@@ -34,6 +37,7 @@ const updatePaired = (req, res) => {
 };
 
 const createPaired = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Paired.create(req.body)
     .then((newPaired) => {
       res.json({ Paired: newPaired });
@@ -45,10 +49,12 @@ const createPaired = (req, res) => {
 };
 
 const sendRequest = (req, res) => {
+  console.log("req.session  ", req.session);
   res.json({ paired: "paired?" });
 };
 
 const deletePaired = (req, res) => {
+  console.log("req.session  ", req.session);
   db.Paired.findByIdAndDelete(req.params.id)
     .then((deletedPaired) => {
       res.json({ Paired: deletedPaired });
