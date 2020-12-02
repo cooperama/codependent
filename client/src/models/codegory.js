@@ -18,6 +18,14 @@ class CodegoryModel {
         return { codegory: {} };
       });
   }
+  static getNerdRoom() {
+    return fetch(`${url}/nerdroom`)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in CodegoryModel.getCodegory: ", err);
+        return { codegory: {} };
+      });
+  }
 
   static create(newCodegory) {
     return fetch(url, {

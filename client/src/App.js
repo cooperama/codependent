@@ -26,6 +26,7 @@ import {
   Landing,
   PostPage,
   Codegories,
+  NerdRoom,
   Profile,
 } from "./pages";
 
@@ -49,6 +50,13 @@ function App() {
           path="/findbuddy"
           render={() => (
             <FindBuddy userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          exact
+          path="/nerdroom"
+          render={() => (
+            <NerdRoom userState={userState} setUserState={setUserState} />
           )}
         />
         <Route

@@ -8,7 +8,7 @@ export default function SideNav() {
         <Link to="/codegories">All Codegories</Link>
       </li>
       <li className="side-nav-item">
-        <Link to="/codegory">One Codegory / Nerd Room</Link>
+        <Link to="/nerdroom">Nerd Room</Link>
       </li>
       {/* <li className="side-nav-item">
         <Link to="/nerdroom">Nerd Room</Link>

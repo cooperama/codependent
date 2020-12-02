@@ -22,6 +22,17 @@ const getCodegory = (req, res) => {
       res.json({ error: "Unable to get data" });
     });
 };
+const getNerdRoom = (req, res) => {
+  db.Codegory.findOne({ topic: "Nerd Room" })
+    .populate({ path: "posts", populate: { path: "author comments codegory" } })
+    .then((foundCodegory) => {
+      res.json({ codegory: foundCodegory });
+    })
+    .catch((err) => {
+      console.log("Error in Codegory.getNerdRoom: ", err);
+      res.json({ error: "Unable to get data" });
+    });
+};
 // Get id from params
 // !!!!! YES
 // User.
@@ -68,6 +79,7 @@ const deleteCodegory = (req, res) => {
 module.exports = {
   allCodegories,
   getCodegory,
+  getNerdRoom,
   createCodegory,
   updateCodegory,
   deleteCodegory,
