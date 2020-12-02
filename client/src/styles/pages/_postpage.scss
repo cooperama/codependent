@@ -32,6 +32,20 @@
   .postpage-editcomment {
     position: relative;
   }
+  .postpage-deletePost {
+    // background: white;
+    // width: 30%;
+    // position: absolute;
+    // height: 20%;
+  }
+  .postpage-deletePost button {
+    width: 120px;
+    height: 30px;
+    box-shadow: 0 0 5px black;
+    position: absolute;
+    top: 26vh;
+    right: 8vw;
+  }
 }
 
 .each-comment-container {

@@ -7,7 +7,6 @@ import PostModel from "../models/post";
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
   const [newComment, setNewComment] = useState();
-  // const [postToEdit, setPostToEdit] = useState();
   const [editedPost, setEditedPost] = useState();
   const editPostRef = useRef();
   const deletePostBtnRef = useRef();
@@ -23,6 +22,7 @@ export default function PostPage({ userState, setUserState }) {
       console.log("data from post model: ", data);
       setPost(data.post);
     });
+    // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
   const addCommentClick = () => {
     //
@@ -36,6 +36,9 @@ export default function PostPage({ userState, setUserState }) {
   };
   const deletePostClick = () => {
     deletePostRef.current.classList.toggle("hide-content");
+    deletePostBtnRef.current.innerText === "delete"
+      ? (deletePostBtnRef.current.innerText = "cancel")
+      : (deletePostBtnRef.current.innerText = "delete");
   };
   const renderAddCommentForm = () => {
     if (userState) {
@@ -78,21 +81,27 @@ export default function PostPage({ userState, setUserState }) {
     }
   };
   const renderDeletePostForm = () => {
-    //
     if (userState) {
-      // return (
-      // <AddPost
-      //   userState={userState}
-      //   setUserState={setUserState}
-      //   post={post}
-      //   newPost={newPost}
-      //   setNewPost={setNewPost}
-      // />
-      // );
+      return (
+        <>
+          <button className="delete-button-confirm" onClick={handleDelete}>
+            confirm delete
+          </button>
+        </>
+      );
     } else {
-      console.log("log in to add post or Post or whatever");
+      console.log("log in to add post or comment or whatever");
       // history.push("/register");
     }
+  };
+
+  const handleDelete = () => {
+    PostModel.delete(post._id).then((data) => {
+      console.log("deleted: ", data);
+      deletePostRef.current.classList.add("hide-content");
+      //   // setPost(data.post);
+      history.push(`/codegories`);
+    });
   };
   const renderComments = () => {
     //
