@@ -24,19 +24,27 @@ export default function Codegories({ userState, setUserState }) {
             <div className="codegories-topic">
               <p>{codegory.topic}</p>
             </div>
-            <div>
-              <div className="codegories-posts-count">
+            <div className="codegories-topic-second">
+              <div className="codegories-blurb">
                 <p>
-                  {postsLength} {postsLength === 1 ? "post" : "posts"}
+                  Lorem, ipsum dolor. Lorem, ipsum dolor. Lorem, ipsum dolor.
+                  Lorem, ipsum dolor.
                 </p>
               </div>
-              <div className="codegories-link-div">
-                <Link to={`/codegories/${codegory._id}`}>
-                  {/* view codegory */}
-                  <span>
-                    <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                  </span>
-                </Link>
+              <div>
+                <div className="codegories-posts-count">
+                  <p>
+                    {postsLength} {postsLength === 1 ? "post" : "posts"}
+                  </p>
+                </div>
+                <div className="codegories-link-div">
+                  <Link to={`/codegories/${codegory._id}`}>
+                    {/* view codegory */}
+                    <span>
+                      <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

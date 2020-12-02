@@ -150,12 +150,21 @@
       -ms-flex-align: center;
           align-items: center;
   height: 80px;
-  border: 1px solid #1e3368;
+  border: 3px solid #1e3368;
   padding: 10px;
+  margin: 10px 0;
 }
 
 .codegory-card .codegories-topic {
   font-size: 1.5rem;
+  width: 150px;
+}
+
+.codegory-card .codegories-topic-second {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 75%;
 }
 
 .codegory-card span {
@@ -170,6 +179,17 @@
 
 .codegory-card .codegories-link-div {
   width: 50px;
+}
+
+.profile-content {
+  background: pink;
+  width: 40vw;
+  margin: auto;
+}
+
+.profile-info {
+  background: olive;
+  width: 400px;
 }
 
 nav {
@@ -286,7 +306,7 @@ nav svg {
 }
 
 .each-post .post-content {
-  border-bottom: 3px solid rgba(44, 59, 108, 0.584);
+  border-bottom: 1px solid rgba(44, 59, 108, 0.584);
   height: 150px;
 }
 

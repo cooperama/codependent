@@ -13,13 +13,18 @@
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  border: 1px solid $main-color;
+  border: 3px solid $main-color;
   padding: 10px;
+  margin: 10px 0;
 
   .codegories-topic {
     font-size: 1.5rem;
+    width: 150px;
   }
-
+  .codegories-topic-second {
+    display: flex;
+    width: 75%;
+  }
   span {
     // color: white;
     display: inline-block;

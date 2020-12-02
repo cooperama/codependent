@@ -58,10 +58,11 @@ export default function Profile({ userState, setUserState }) {
   };
   return (
     <div className="page-container">
-      <p>Profile</p>
-      {renderContent()}
-      {renderPosts()}
-      {renderComments()}
+      <div className="profile-content">
+        <div className="profile-info">{renderContent()}</div>
+        <div className="profile-page-posts">{renderPosts()}</div>
+        <div className="profile-page-comment">{renderComments()}</div>
+      </div>
     </div>
   );
 }
