@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Loading } from "../components";
-
+import Moment from "react-moment";
 import PostModel from "../models/post";
 
 export default function PostPage({ userState, setUserState }) {
@@ -18,16 +18,32 @@ export default function PostPage({ userState, setUserState }) {
   const renderPost = () => {
     return (
       <div className="postpage-post-container">
-        <h3>{post.title}</h3>
-        <p>written by: {post.author.username}</p>
-        <p>{post.content}</p>
+        <div className="postpage-post-heading">
+          <div className="postpage-post-stats">
+            <p>{post.codegory.topic} :: </p>
+            <p>[{post.author.username}] :: </p>
+            <p>
+              <Moment fromNow>{post.createdAt}</Moment>
+            </p>
+          </div>
+          <h1>{post.title}</h1>
+        </div>
+        <div className="postpage-post-content">
+          <p>{post.content}</p>
+        </div>
+        <div className="postpage-settings">
+          <div className="user-verified">
+            <button>edit</button>
+            <button>delete</button>
+          </div>
+          <div>
+            <button>comment</button>
+          </div>
+        </div>
       </div>
     );
   };
   return (
-    <div className="page-container">
-      <h1>Post Page</h1>
-      {post ? renderPost() : <Loading />}
-    </div>
+    <div className="page-container">{post ? renderPost() : <Loading />}</div>
   );
 }

@@ -1,0 +1,26 @@
+.postpage-post-container {
+  padding: 20px;
+  .postpage-post-heading {
+    background-color: $second-color;
+    padding: 10px;
+    text-align: center;
+    .postpage-post-stats {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+  }
+  .postpage-post-content {
+    background-color: red;
+    padding: 10px;
+  }
+  .postpage-settings {
+    background-color: green;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    div {
+      display: flex;
+    }
+  }
+}

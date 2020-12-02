@@ -41,7 +41,7 @@ export default function Profile({ userState, setUserState }) {
           </div>
           <div className="profile-stats">
             <p>
-              Member since::{" "}
+              Member since:
               <Moment format="MMM DD, YYYY">{userState.createdAt}</Moment>
             </p>
             <p>Posts: {userState.posts.length}</p>

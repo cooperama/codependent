@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import PostModel from "../models/post";
 
-export default function Post({ post }) {
+export default function Post({ post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
     //

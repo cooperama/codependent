@@ -1,0 +1,20 @@
+form {
+  background-color: red;
+}
+
+.add-post-form {
+  background-color: green;
+  width: 90%;
+  margin: 50px auto;
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+  }
+  textarea {
+    height: 200px;
+  }
+  input[type="submit"] {
+    background-color: $second-color;
+  }
+}

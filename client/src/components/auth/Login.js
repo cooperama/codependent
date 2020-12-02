@@ -23,7 +23,8 @@ export default function Login({ userState, setUserState }) {
     const user = { email, username, password };
     UserModel.login(user).then((data) => {
       setUserState(data.user);
-      history.push(`/myprofile/${data.user._id}`);
+      history.push(`/`);
+      // history.push(`/myprofile/${data.user._id}`);
     });
   };
   return (
@@ -56,7 +57,7 @@ export default function Login({ userState, setUserState }) {
             id="password"
           />
         </div>
-        <input type="submit" value="log in" />
+        <input type="submit" value="sign in" />
       </form>
     </div>
   );

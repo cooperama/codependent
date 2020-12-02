@@ -12,10 +12,13 @@
     outline: none;
     border: none;
     border-bottom: 1px solid $neutral-color;
+    color: $main-color;
     &[type="submit"] {
       // color: $dark-font;
       background-color: $second-color;
       padding: 5px;
+      color: $light-font;
+      // color: $accent-color;
       border-radius: 5px;
       cursor: pointer;
     }

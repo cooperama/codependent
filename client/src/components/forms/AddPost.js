@@ -39,25 +39,20 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
   };
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
-      <div className="form-group">
-        <label htmlFor="title">title</label>
-        <input
-          onChange={handleTitleChange}
-          type="text"
-          name="title"
-          id="title"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="content">content</label>
-        <textarea
-          onChange={handleContentChange}
-          name="content"
-          id="content"
-          // cols="30"
-          // rows="10"
-        ></textarea>
-      </div>
+      <input
+        onChange={handleTitleChange}
+        type="text"
+        name="title"
+        id="title"
+        placeholder="title"
+      />
+
+      <textarea
+        onChange={handleContentChange}
+        name="content"
+        id="content"
+        placeholder="text"
+      ></textarea>
       <input type="submit" value="add post" />
     </form>
   );
