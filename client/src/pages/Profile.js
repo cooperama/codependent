@@ -17,9 +17,9 @@ export default function Profile({ userState, setUserState }) {
         console.log(post);
         return (
           <div key={post._id} className="user-post-container">
-            <Link to={`/post/${post._id}`}>
-              <Post post={post} />
-            </Link>
+            {/* <Link to={`/post/${post._id}`}> */}
+            <Post post={post} />
+            {/* </Link> */}
           </div>
         );
       });

@@ -3,7 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 import PostModel from "../../models/post";
 
-export default function AddPost({ codegoryId, userState, setUserStat }) {
+export default function AddPost({ codegoryId, userState, setUserState }) {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
@@ -28,8 +28,7 @@ export default function AddPost({ codegoryId, userState, setUserStat }) {
     // create post in db
     PostModel.create(newPost).then((data) => {
       console.log("post mode create: ", data);
-      // maybe push to newPost page
-      history.push(`/post/${newPost._id}`);
+      history.push(`/post/${data.post._id}`);
     });
   };
   const handleTitleChange = (e) => {
