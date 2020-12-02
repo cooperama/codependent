@@ -33,6 +33,7 @@ export default function EditComment({
     };
     CommentModel.update(comment._id, editedComment).then((data) => {
       console.log("Comment model updated: ", data);
+      // ????? why am I doing the below?
       CommentModel.getComment(data.comment._id).then((data) => {
         setComment(data.comment);
       });

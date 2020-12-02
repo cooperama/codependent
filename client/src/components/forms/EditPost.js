@@ -3,60 +3,70 @@ import { useParams, useHistory } from "react-router-dom";
 
 import PostModel from "../../models/post";
 
-export default function EditPost({ codegoryId, userState, setUserState }) {
-  const [post, setPost] = useState({});
+export default function EditPost({
+  setPost,
+  editedPost,
+  setEditedPost,
+  post,
+  userState,
+  setUserState,
+  editPostRef,
+  editPostBtnRef,
+}) {
+  // const [post, setPost] = useState({});
   const [title, setTitle] = useState();
-  const [content, setContent] = useState();
+  const [newContent, setNewContent] = useState();
 
   const params = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    // const codegoryId = params.id;
-    console.log("codegory id", codegoryId);
-    // how to get user???
+    setNewContent(post.content);
+    setTitle(post.title);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = {
+    const editedPost = {
       title,
-      content,
-      codegory: codegoryId,
+      newContent,
       author: userState._id,
     };
     // create post in db
-    PostModel.create(newPost).then((data) => {
+    PostModel.update(post._id, editedPost).then((data) => {
       console.log("post mode create: ", data);
-      history.push(`/post/${data.post._id}`);
+      setEditedPost(data.post);
+      editPostRef.current.classList.add("hide-content");
+      // history.push(`/post/${data.post._id}`);
     });
+    editPostBtnRef.current.innerText = "edit";
   };
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
   const handleContentChange = (e) => {
-    setContent(e.target.value);
+    setNewContent(e.target.value);
   };
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
       <div className="form-group">
-        <label htmlFor="title">title</label>
         <input
           onChange={handleTitleChange}
           type="text"
           name="title"
           id="title"
+          value={title}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="content">content</label>
         <textarea
           onChange={handleContentChange}
           name="content"
           id="content"
+          value={newContent}
         ></textarea>
       </div>
-      <input type="submit" value="add post" />
+      <input type="submit" value="edit post" />
     </form>
   );
 }

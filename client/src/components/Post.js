@@ -19,7 +19,7 @@ export default function Post({ post, userState, setUserState }) {
       return (
         <>
           <div className="post-content ">
-            <h3>{postContent.title}</h3>
+            <h3 className="truncated-title">{postContent.title}</h3>
             <p>by {postContent.author.username}</p>
 
             <p className="truncated-content">{postContent.content}</p>

@@ -19,12 +19,17 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!userState) {
+      return;
+      // return history.push(`/register`);
+    }
     const newPost = {
       title,
       content,
       codegory: codegoryId,
       author: userState._id,
     };
+    console.log(newPost);
     // create post in db
     PostModel.create(newPost).then((data) => {
       console.log("post mode create: ", data);
@@ -51,7 +56,7 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
         onChange={handleContentChange}
         name="content"
         id="content"
-        placeholder="be good"
+        placeholder="be"
       ></textarea>
       <input type="submit" value="add post" />
     </form>

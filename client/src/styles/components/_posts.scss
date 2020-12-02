@@ -22,7 +22,14 @@
       font-size: 0.8rem;
       margin-bottom: 10px;
     }
-
+    .truncated-title {
+      width: 100%;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+    }
     .truncated-content {
       width: 100%;
       overflow: hidden;

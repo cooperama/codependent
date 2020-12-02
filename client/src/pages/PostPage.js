@@ -7,9 +7,11 @@ import PostModel from "../models/post";
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
   const [newComment, setNewComment] = useState();
-  const [postToEdit, setPostToEdit] = useState();
+  // const [postToEdit, setPostToEdit] = useState();
   const [editedPost, setEditedPost] = useState();
   const editPostRef = useRef();
+  const deletePostBtnRef = useRef();
+  const editPostBtnRef = useRef();
   const deletePostRef = useRef();
   const addCommentRef = useRef();
   const params = useParams();
@@ -21,13 +23,16 @@ export default function PostPage({ userState, setUserState }) {
       console.log("data from post model: ", data);
       setPost(data.post);
     });
-  }, [newComment]);
+  }, [newComment, editedPost]);
   const addCommentClick = () => {
     //
     addCommentRef.current.classList.toggle("hide-content");
   };
   const editPostClick = () => {
     editPostRef.current.classList.toggle("hide-content");
+    editPostBtnRef.current.innerText === "edit"
+      ? (editPostBtnRef.current.innerText = "cancel")
+      : (editPostBtnRef.current.innerText = "edit");
   };
   const deletePostClick = () => {
     deletePostRef.current.classList.toggle("hide-content");
@@ -57,10 +62,13 @@ export default function PostPage({ userState, setUserState }) {
           userState={userState}
           setUserState={setUserState}
           post={post}
+          setPost={setPost}
+          editPostRef={editPostRef}
+          editPostBtnRef={editPostBtnRef}
           // PostToEdit={PostToEdit}
           // PostToEdit={PostToEdit}
           // editedPost={}
-          // editedPost={editedPost}
+          editedPost={editedPost}
           setEditedPost={setEditedPost}
         />
       );
@@ -130,8 +138,12 @@ export default function PostPage({ userState, setUserState }) {
           </div>
           <div>
             <div className="user-verified">
-              <button onClick={editPostClick}>edit</button>
-              <button onClick={deletePostClick}>delete</button>
+              <button ref={editPostBtnRef} onClick={editPostClick}>
+                edit
+              </button>
+              <button ref={deletePostBtnRef} onClick={deletePostClick}>
+                delete
+              </button>
             </div>
             <div>
               <button onClick={addCommentClick}>comment</button>
