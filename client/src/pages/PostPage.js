@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Loading, AddComment } from "../components";
+import { Loading, AddComment, Comment } from "../components";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 
@@ -22,6 +22,16 @@ export default function PostPage({ userState, setUserState }) {
   };
   const renderAddCommentForm = () => {
     //
+    return (
+      <AddComment
+        userState={userState}
+        setUserState={setUserState}
+        post={post}
+      />
+    );
+  };
+  const renderComments = () => {
+    //
   };
   const renderPost = () => {
     return (
@@ -39,9 +49,7 @@ export default function PostPage({ userState, setUserState }) {
         <div className="postpage-post-content ">
           <p>{post.content}</p>
         </div>
-        <div ref={addCommentRef} className="postpage-addcomment hide-content">
-          {renderAddCommentForm()}
-        </div>
+
         <div className="postpage-settings">
           <div className="user-verified">
             <button>edit</button>
@@ -50,6 +58,12 @@ export default function PostPage({ userState, setUserState }) {
           <div>
             <button onClick={addCommentClick}>comment</button>
           </div>
+        </div>
+        <div ref={addCommentRef} className="postpage-addcomment hide-content">
+          {renderAddCommentForm()}
+        </div>
+        <div className="postpage-comments-container">
+          {post.comments && renderComments()}
         </div>
       </div>
     );

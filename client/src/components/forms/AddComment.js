@@ -3,9 +3,8 @@ import { useParams, useHistory } from "react-router-dom";
 
 import CommentModel from "../../models/comment";
 
-export default function AddComment({ codegoryId, userState, setUserState }) {
+export default function AddComment({ post, userState, setUserState }) {
   const [comment, setComment] = useState({});
-  const [title, setTitle] = useState();
   const [content, setContent] = useState();
 
   const params = useParams();
@@ -19,20 +18,19 @@ export default function AddComment({ codegoryId, userState, setUserState }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // gotta get parent post / comment
+
     const newComment = {
-      title,
       content,
-      // codegory: codegoryId,
-      // author: userState._id,
+      parentPost: post._id,
+      author: userState._id,
     };
     // create Comment in db
     CommentModel.create(newComment).then((data) => {
       console.log("Comment model create: ", data);
       // history.push(`/post/${data.post._id}`);
     });
-  };
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    e.target.value = "";
   };
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -40,25 +38,16 @@ export default function AddComment({ codegoryId, userState, setUserState }) {
   return (
     <form onSubmit={handleSubmit} className="add-comment-form">
       <div className="form-group">
-        <label htmlFor="title">title</label>
-        <input
-          onChange={handleTitleChange}
-          type="text"
-          name="title"
-          id="title"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="content">content</label>
         <textarea
           onChange={handleContentChange}
           name="content"
           id="content"
-          // cols="30"
-          // rows="10"
+          placeholder="be nice"
         ></textarea>
       </div>
-      <input type="submit" value="add comment" />
+      <div>
+        <input type="submit" value="add comment" />
+      </div>
     </form>
   );
 }

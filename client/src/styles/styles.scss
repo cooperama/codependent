@@ -54,6 +54,8 @@ $navbar-width: 160px;
   input,
   textarea {
     outline: none;
+    width: 100%;
+    padding: 10px;
     border: none;
     border-bottom: 1px solid $neutral-clr;
     color: $dark-font;

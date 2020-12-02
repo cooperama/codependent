@@ -3,7 +3,6 @@ form {
 }
 
 .add-post-form {
-  background-color: green;
   width: 90%;
   margin: 50px auto;
   input,
@@ -16,5 +15,15 @@ form {
   }
   input[type="submit"] {
     background-color: $second-color;
+  }
+}
+
+.add-comment-form {
+  margin: auto;
+  padding: 20px;
+  background-color: $second-color;
+  div {
+    width: 90%;
+    margin: auto;
   }
 }

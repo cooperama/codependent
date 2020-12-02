@@ -26,6 +26,25 @@ const getComment = (req, res) => {
 const createComment = (req, res) => {
   db.Comment.create(req.body)
     .then((newComment) => {
+      db.Post.findById(req.body.parentPost)
+        .then((parentPost) => {
+          parentPost.comments.push(newComment._id);
+          parentPost.save();
+          console.log(parentPost);
+        })
+        .catch((err) =>
+          console.log("error in create comment post save: ", err)
+        );
+      db.User.findById(req.body.author)
+        .then((user) => {
+          user.comments.push(newComment._id);
+          user.save();
+          console.log(user);
+        })
+        .catch((err) =>
+          console.log("error in create comment user save: ", err)
+        );
+      console.log(newComment);
       res.json({ comment: newComment });
     })
     .catch((err) => {
