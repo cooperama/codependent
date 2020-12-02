@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function FindBuddy() {
+export default function FindBuddy({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="find-buddy-container">

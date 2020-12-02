@@ -44,10 +44,36 @@ function App() {
             <Landing userState={userState} setUserState={setUserState} />
           )}
         />
-        <Route exact path="/findbuddy" component={FindBuddy} />
+        <Route
+          exact
+          path="/findbuddy"
+          render={() => (
+            <FindBuddy userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          exact
+          path="/codegories"
+          render={() => (
+            <Codegories userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          path="/codegories/:id"
+          render={() => (
+            <Codegory userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          path="/post/:id"
+          render={() => (
+            <PostPage userState={userState} setUserState={setUserState} />
+          )}
+        />
+        {/* <Route exact path="/findbuddy" component={FindBuddy} />
         <Route exact path="/codegories" component={Codegories} />
         <Route path="/codegories/:id" component={Codegory} />
-        <Route path="/post/:id" component={PostPage} />
+        <Route path="/post/:id" component={PostPage} /> */}
         <Route
           path="/myprofile/:id"
           render={() => (

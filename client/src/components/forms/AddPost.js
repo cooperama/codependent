@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function AddPost({ codegoryId }) {
+import PostModel from "../../models/post";
+
+export default function AddPost({ codegoryId, userState, setUserStat }) {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
@@ -16,13 +18,22 @@ export default function AddPost({ codegoryId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newPost = {
+      title,
+      content,
+      codegory: codegoryId,
+      author: userState._id,
+    };
     // create post in db
+    PostModel.create(newPost).then((data) => {
+      console.log("post mode create: ", data);
+    });
   };
   const handleTitleChange = (e) => {
-    setTitle({ title: e.target.value });
+    setTitle(e.target.value);
   };
   const handleContentChange = (e) => {
-    setContent({ content: e.target.value });
+    setContent(e.target.value);
   };
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
@@ -45,7 +56,7 @@ export default function AddPost({ codegoryId }) {
           // rows="10"
         ></textarea>
       </div>
-      <input type="submit" value="create post" />
+      <input type="submit" value="add post" />
     </form>
   );
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import CodegoryModel from "../models/codegory";
 
-export default function Codegories() {
+export default function Codegories({ userState, setUserState }) {
   const [codegories, setCodegories] = useState([]);
 
   // Make api call for all codegories

@@ -27,6 +27,17 @@ const createPost = (req, res) => {
   db.Post.create(req.body)
     .then((newPost) => {
       res.json({ post: newPost });
+      // Need to push into Codgeory & User
+      db.User.findById(req.body.author).then((data) => {
+        data.posts.push(newPost._id);
+        data.save();
+        console.log("user in post.create: ", data);
+        db.Codegory.findById(req.body.codegory).then((data) => {
+          data.posts.push(newPost._id);
+          data.save();
+          console.log("codegory in post.create: ", data);
+        });
+      });
     })
     .catch((err) => {
       console.log("Error in Post.createPost: ", err);

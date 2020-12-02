@@ -4,7 +4,7 @@ import CodegoryModel from "../models/codegory";
 
 import { Post, AddPost } from "../components";
 
-export default function Codegory() {
+export default function Codegory({ userState, setUserState }) {
   const [codegory, setCodegory] = useState({});
   const [nerdRoom, setNerdRoom] = useState(false);
   const params = useParams();
@@ -27,7 +27,11 @@ export default function Codegory() {
         <div className="empty-page">
           <p>There seem to be no posts here yet!</p>
           <p>Why not make one?</p>
-          <AddPost codegoryId={codegory._id} />
+          <AddPost
+            userState={userState}
+            setUserState={setUserState}
+            codegoryId={codegory._id}
+          />
         </div>
       );
     } else {
