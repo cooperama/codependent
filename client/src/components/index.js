@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import SideNav from "./SideNav";
 import Post from "./Post";
 import Comment from "./Comment";
+import Loading from "./Loading";
 
 // Auth Components
 import Login from "./auth/Login";
@@ -30,6 +31,7 @@ export {
   AllUsersAvail,
   MyAvailability,
   MyFullSchedule,
+  Loading,
   MyPaired,
   RequestBuddy,
   UpdateAvailability,

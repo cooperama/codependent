@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { Loading } from "../components";
 
 import PostModel from "../models/post";
 
@@ -26,7 +27,7 @@ export default function PostPage({ userState, setUserState }) {
   return (
     <div className="page-container">
       <h1>Post Page</h1>
-      {post && renderPost()}
+      {post ? renderPost() : <Loading />}
     </div>
   );
 }
