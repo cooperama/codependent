@@ -21,34 +21,24 @@ export default function Codegory() {
     });
   }, []);
 
-  // const renderPosts = () => {
-  //   return codegory.posts.map((post) => {
-  //     return <Post key={post._id} />;
-  //   });
-  // };
-
-  // const renderEmpty = () => {
-  //   return (
-  //     <div className="empty-page">
-  //       <p>There seem to be no posts here yet!</p>
-  //       <p>Why not make one?</p>
-  //       <AddPost />
-  //     </div>
-  //   );
-  // };
-
   const renderContent = () => {
     if (codegory.posts.length === 0) {
       return (
         <div className="empty-page">
           <p>There seem to be no posts here yet!</p>
           <p>Why not make one?</p>
-          <AddPost />
+          <AddPost codegoryId={codegory._id} />
         </div>
       );
     } else {
       return codegory.posts.map((post) => {
-        return <Post key={post._id} />;
+        return (
+          <div key={post._id}>
+            <Link to={`/post/${post._id}`}>
+              <Post />
+            </Link>
+          </div>
+        );
       });
     }
   };
@@ -56,7 +46,6 @@ export default function Codegory() {
   return (
     <div className="page-container">
       <p>{codegory.topic}</p>
-      {/* {codegory.posts.length === 0 ? renderEmpty() : renderPosts()} */}
       {codegory.posts && renderContent()}
     </div>
   );

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function AddPost() {
+export default function AddPost({ codegoryId }) {
   const [post, setPost] = useState({});
-  const [title, setTitle] = useState({ title: "" });
-  const [content, setContent] = useState({ content: "" });
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
 
   const params = useParams();
 
   useEffect(() => {
-    const codegoryId = params.id;
+    // const codegoryId = params.id;
+    console.log("codegory id", codegoryId);
     // how to get user???
   }, []);
 

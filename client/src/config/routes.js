@@ -7,6 +7,7 @@ import {
   FindBuddy,
   Landing,
   Codegories,
+  PostPage,
   Profile,
 } from "../pages";
 
@@ -19,7 +20,7 @@ const routes = (
     <Route exact path="/codegories" component={Codegories} />
     <Route path="/codegories/:id" component={Codegory} />
     <Route path="/myprofile" component={Profile} />
-    {/* // need :id param for this???? */}
+    <Route path="/post/:id" component={PostPage} />
   </Switch>
 );
 
