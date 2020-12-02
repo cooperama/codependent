@@ -3,8 +3,13 @@ import { useParams, useHistory } from "react-router-dom";
 
 import CommentModel from "../../models/comment";
 
-export default function AddComment({ post, userState, setUserState }) {
-  const [comment, setComment] = useState({});
+export default function AddComment({
+  post,
+  userState,
+  setUserState,
+  newComment,
+  setNewComment,
+}) {
   const [content, setContent] = useState();
 
   const params = useParams();
@@ -18,8 +23,6 @@ export default function AddComment({ post, userState, setUserState }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // gotta get parent post / comment
-
     const newComment = {
       content,
       parentPost: post._id,
@@ -28,7 +31,8 @@ export default function AddComment({ post, userState, setUserState }) {
     // create Comment in db
     CommentModel.create(newComment).then((data) => {
       console.log("Comment model create: ", data);
-      // history.push(`/post/${data.post._id}`);
+      // setting new comment state (PostPage)
+      setNewComment(data.comment);
     });
     e.target.value = "";
   };

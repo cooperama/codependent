@@ -6,6 +6,7 @@ import PostModel from "../models/post";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
+  const [newComment, setNewComment] = useState();
   const addCommentRef = useRef();
   const params = useParams();
   useEffect(() => {
@@ -27,11 +28,23 @@ export default function PostPage({ userState, setUserState }) {
         userState={userState}
         setUserState={setUserState}
         post={post}
+        newComment={newComment}
+        setNewComment={setNewComment}
       />
     );
   };
   const renderComments = () => {
     //
+    return post.comments.map((comment) => {
+      return (
+        <Comment
+          userState={userState}
+          setUserState={setUserState}
+          parentPost={post}
+          commentId={comment._id}
+        />
+      );
+    });
   };
   const renderPost = () => {
     return (

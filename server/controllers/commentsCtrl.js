@@ -13,7 +13,8 @@ const allComments = (req, res) => {
 
 const getComment = (req, res) => {
   db.Comment.findById(req.params.id)
-    .populate("author replies")
+    .populate("author replies ")
+    .populate({ path: "parentPost", populate: { path: "codegory author" } })
     .then((foundComment) => {
       res.json({ comment: foundComment });
     })
