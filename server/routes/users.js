@@ -3,6 +3,7 @@ const ctrl = require("../controllers/usersCtrl");
 
 // router.get("/login", ctrl.login);
 router.post("/login", ctrl.login);
+router.get("/logout", ctrl.logout);
 router.post("/signup", ctrl.signup);
 router.get("/", ctrl.allUsers);
 router.get("/myprofile/:id", ctrl.getUser);

@@ -105,6 +105,8 @@ const deleteUser = (req, res) => {
 };
 
 const logout = (req, res) => {
+  console.log("users ctrl");
+  console.log(req.session);
   if (req.session.currentUser) {
     req.session.destroy((err) => {
       if (err) return console.log("error destroying session");

@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import UserModel from "../../models/user";
 import { useHistory } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ userState, setUserState }) {
   const history = useHistory();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
-
   const [password, setPassword] = useState();
 
   const handleUsernameChange = (e) => {
@@ -23,6 +22,7 @@ export default function Login() {
     e.preventDefault();
     const user = { email, username, password };
     UserModel.login(user).then((data) => {
+      setUserState(data.user);
       history.push(`/myprofile/${data.user._id}`);
     });
   };

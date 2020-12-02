@@ -58,6 +58,15 @@ class UserModel {
         return { user: {} };
       });
   }
+
+  static logout() {
+    return fetch(`${url}/logout`)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in UserModel.logout: ", err);
+        return { user: {} };
+      });
+  }
 }
 
 export default UserModel;

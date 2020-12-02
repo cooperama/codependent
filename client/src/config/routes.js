@@ -14,12 +14,10 @@ const routes = (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route exact path="/register" component={Landing} />
-    {/* <Route path="/user/:id" component={Home} /> */}
     <Route exact path="/findbuddy" component={FindBuddy} />
     <Route exact path="/codegories" component={Codegories} />
     <Route path="/codegories/:id" component={Codegory} />
     <Route path="/myprofile/:id" component={Profile} />
-    {/* // need :id param for this???? */}
   </Switch>
 );
 
