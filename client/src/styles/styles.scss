@@ -96,6 +96,10 @@ $navbar-width: 160px;
   width: calc(95vw - #{$navbar-width * 2});
 }
 
+.hide-content {
+  display: none;
+}
+
 // Imports
 @import "pages/codegory";
 @import "pages/findbuddy";

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Loading } from "../components";
+import { Loading, AddComment } from "../components";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
+  const addCommentRef = useRef();
   const params = useParams();
   useEffect(() => {
     //
@@ -15,6 +16,13 @@ export default function PostPage({ userState, setUserState }) {
       setPost(data.post);
     });
   }, []);
+  const addCommentClick = () => {
+    //
+    addCommentRef.current.classList.toggle("hide-content");
+  };
+  const renderAddCommentForm = () => {
+    //
+  };
   const renderPost = () => {
     return (
       <div className="postpage-post-container">
@@ -28,8 +36,11 @@ export default function PostPage({ userState, setUserState }) {
           </div>
           <h1>{post.title}</h1>
         </div>
-        <div className="postpage-post-content">
+        <div className="postpage-post-content ">
           <p>{post.content}</p>
+        </div>
+        <div ref={addCommentRef} className="postpage-addcomment hide-content">
+          {renderAddCommentForm()}
         </div>
         <div className="postpage-settings">
           <div className="user-verified">
@@ -37,7 +48,7 @@ export default function PostPage({ userState, setUserState }) {
             <button>delete</button>
           </div>
           <div>
-            <button>comment</button>
+            <button onClick={addCommentClick}>comment</button>
           </div>
         </div>
       </div>
