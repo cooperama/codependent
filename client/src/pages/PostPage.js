@@ -9,6 +9,7 @@ export default function PostPage({ userState, setUserState }) {
   const [newComment, setNewComment] = useState();
   const addCommentRef = useRef();
   const params = useParams();
+  const history = useHistory();
   useEffect(() => {
     //
     console.log("params? ", params);
@@ -23,36 +24,51 @@ export default function PostPage({ userState, setUserState }) {
   };
   const renderAddCommentForm = () => {
     //
-    return (
-      <AddComment
-        userState={userState}
-        setUserState={setUserState}
-        post={post}
-        newComment={newComment}
-        setNewComment={setNewComment}
-      />
-    );
+    if (userState) {
+      return (
+        <AddComment
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+          newComment={newComment}
+          setNewComment={setNewComment}
+        />
+      );
+    } else {
+      console.log("log in to add post or comment or whatever");
+      // history.push("/register");
+    }
   };
   const renderComments = () => {
     //
-    return post.comments.map((comment) => {
+    if (post.comments.length === 0) {
       return (
-        <Comment
-          userState={userState}
-          setUserState={setUserState}
-          parentPost={post}
-          commentId={comment._id}
-        />
+        <div className="empty-page">
+          <p>There seem to be no comments here yet!</p>
+          <p>Why not add one?</p>
+        </div>
       );
-    });
+    } else {
+      return post.comments.map((comment) => {
+        return (
+          <Comment
+            key={comment._id}
+            userState={userState}
+            setUserState={setUserState}
+            parentPost={post}
+            commentId={comment._id}
+          />
+        );
+      });
+    }
   };
   const renderPost = () => {
     return (
       <div className="postpage-post-container">
         <div className="postpage-post-heading">
           <div className="postpage-post-stats">
-            <p>{post.codegory.topic} :: </p>
-            <p>[{post.author.username}] :: </p>
+            <p> {post.codegory.topic} </p>
+            <p> [{post.author.username}] </p>
             <p>
               <Moment fromNow>{post.createdAt}</Moment>
             </p>

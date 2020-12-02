@@ -75,11 +75,12 @@ $navbar-width: 160px;
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 3px;
-    &:active,
+    // &:active,
     &:focus,
     &:hover {
       background-color: $deep-red;
       // border: 2px solid $deep-red;
+      transition: all 200ms ease;
       transition: border 200ms ease;
       // color: $deep-red;
     }

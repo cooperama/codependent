@@ -6,8 +6,10 @@
     text-align: center;
     .postpage-post-stats {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       margin-bottom: 10px;
+      width: 40%;
+      font-size: 0.8rem;
     }
   }
   .postpage-post-content {
@@ -45,11 +47,17 @@
     padding: 0 10px;
     // background-color: $neutral-color;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     font-size: 0.8rem;
     margin: 10px 0 0 0;
     height: 30px;
+    width: 100%;
+    div:nth-of-type(1) {
+      display: flex;
+      width: 30%;
+      justify-content: space-between;
+    }
   }
   .comment-settings {
     display: flex;

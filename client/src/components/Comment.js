@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-
+import Moment from "react-moment";
 import CommentModel from "../models/comment";
 
 export default function Comment({
@@ -12,7 +12,6 @@ export default function Comment({
   const [comment, setComment] = useState();
   const addCommentRef = useRef();
   useEffect(() => {
-    // get comments belonging to <parentPost className=""></parentPost>
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);
@@ -25,9 +24,14 @@ export default function Comment({
           <p>{comment.content}</p>
         </div>
         <div className="comment-stats">
-          <p>[{comment.author.username}]</p>
-          <p>{comment.parentPost.codegory.topic}</p>
-          <p>{comment.parentPost.title}</p>
+          <div>
+            <p>[{comment.author.username}]</p>
+            <p>
+              <Moment fromNow>{comment.createAt}</Moment>
+            </p>
+            {/* <p>{comment.parentPost.codegory.topic}</p>
+          <p>{comment.parentPost.title}</p> */}
+          </div>
           <div className="comment-settings">
             <div className="user-verified">
               <button>edit</button>

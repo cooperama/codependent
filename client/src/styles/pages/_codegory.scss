@@ -1,0 +1,22 @@
+.codegorypage-container {
+  text-align: center;
+  padding: 20px;
+  .codegorypage-heading {
+    display: flex;
+    // justify-content: space-between;
+    flex-direction: column;
+  }
+  .codegorypage-settings {
+    margin: 20px 0 0 0;
+    // padding-bottom: 20px;
+    // align-self: center;
+    width: 100%;
+    button {
+      width: 100px;
+    }
+  }
+}
+
+.codegorypage-posts-container {
+  border-top: 1px solid $main-color;
+}

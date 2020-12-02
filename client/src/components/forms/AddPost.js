@@ -51,7 +51,7 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
         onChange={handleContentChange}
         name="content"
         id="content"
-        placeholder="text"
+        placeholder="be good"
       ></textarea>
       <input type="submit" value="add post" />
     </form>

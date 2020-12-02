@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CodegoryModel from "../models/codegory";
-
-import { Post, AddPost } from "../components";
+import Moment from "react-moment";
+import { Post, AddPost, Loading } from "../components";
 
 export default function Codegory({ userState, setUserState }) {
   const [codegory, setCodegory] = useState({});
   const [nerdRoom, setNerdRoom] = useState(false);
+  const addPostRef = useRef();
   const params = useParams();
   const history = useHistory();
   // make api call for Codegory using id from params
@@ -22,6 +23,26 @@ export default function Codegory({ userState, setUserState }) {
     });
   }, []);
 
+  const addPostClick = () => {
+    //
+    console.log("post click");
+    addPostRef.current.classList.toggle("hide-content");
+  };
+
+  const renderAddPostForm = () => {
+    if (userState) {
+      return (
+        <AddPost
+          userState={userState}
+          setUserState={setUserState}
+          codegoryId={codegory._id}
+        />
+      );
+    } else {
+      console.log("log in to add post or comment or whatever");
+      // history.push("/register");
+    }
+  };
   const renderPosts = () => {
     if (codegory.posts.length === 0) {
       return (
@@ -33,33 +54,35 @@ export default function Codegory({ userState, setUserState }) {
     } else {
       return codegory.posts.map((post) => {
         return (
-          <div key={post._id}>
-            <Post post={post} />
-          </div>
+          // <div >
+          <Post post={post} key={post._id} />
+          // {/* </div> */}
         );
       });
     }
   };
-
-  const renderContent = () => {
-    if (userState) {
-      return (
-        <AddPost
-          userState={userState}
-          setUserState={setUserState}
-          codegoryId={codegory._id}
-        />
-      );
-    } else {
-      history.push("/register");
-    }
+  const renderCodegory = () => {
+    return (
+      <div className="codegorypage-container postpage-post-container">
+        <div className="codegorypage-heading postpage-post-heading">
+          <h1>{codegory.topic}</h1>
+        </div>
+        <div className="codegorypage-settings postpage-settings">
+          <button onClick={addPostClick}>post</button>
+        </div>
+        <div ref={addPostRef} className="codegorypage-addpost hide-content">
+          {renderAddPostForm()}
+        </div>
+        <div className="codegorypage-posts-container">
+          {codegory.posts && renderPosts()}
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="page-container">
-      <p>{codegory.topic}</p>
-      {codegory.posts && renderPosts()}
-      {renderContent()}
+      {codegory ? renderCodegory() : <Loading />}
     </div>
   );
 }
