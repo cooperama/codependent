@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PostModel from "../models/post";
 
 export default function Post({ post }) {
@@ -21,9 +22,14 @@ export default function Post({ post }) {
             <p>{postContent.codegory.topic}</p>
             <p>{postContent.content}</p>
           </div>
-          <div className="post-stats">
-            <p>comments: {postContent.comments.length}</p>
-            <p>tags: {postContent.tags.forEach((tag) => tag)}</p>
+          <div>
+            <div className="post-stats">
+              <p>comments: {postContent.comments.length}</p>
+              <p>tags: {postContent.tags.forEach((tag) => tag)}</p>
+            </div>
+            <div>
+              <Link to={`/post/${postContent._id}`}>View Post Page</Link>
+            </div>
           </div>
         </div>
       );

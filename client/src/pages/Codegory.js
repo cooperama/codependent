@@ -38,9 +38,7 @@ export default function Codegory({ userState, setUserState }) {
       return codegory.posts.map((post) => {
         return (
           <div key={post._id}>
-            <Link to={`/post/${post._id}`}>
-              <Post />
-            </Link>
+            <Post post={post} />
           </div>
         );
       });
