@@ -13,7 +13,10 @@ const allPosts = (req, res) => {
 
 const getPost = (req, res) => {
   db.Post.findById(req.params.id)
-    .populate("author comments")
+    .populate("codegory")
+    .populate("author")
+    .populate("comments")
+    // .populate("author comments codegory") // thought I could populate multiple like this, but seems like no.
     .then((foundPost) => {
       res.json({ post: foundPost });
     })

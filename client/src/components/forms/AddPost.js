@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import PostModel from "../../models/post";
 
@@ -9,6 +9,7 @@ export default function AddPost({ codegoryId, userState, setUserStat }) {
   const [content, setContent] = useState();
 
   const params = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     // const codegoryId = params.id;
@@ -27,6 +28,8 @@ export default function AddPost({ codegoryId, userState, setUserStat }) {
     // create post in db
     PostModel.create(newPost).then((data) => {
       console.log("post mode create: ", data);
+      // maybe push to newPost page
+      history.push(`/post/${newPost._id}`);
     });
   };
   const handleTitleChange = (e) => {
