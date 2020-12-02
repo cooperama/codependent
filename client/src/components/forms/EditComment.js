@@ -22,7 +22,7 @@ export default function EditComment({
     console.log(parentPost);
     console.log(userState);
     setNewContent(comment.content);
-  }, []);
+  }, [comment]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
