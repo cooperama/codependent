@@ -1,0 +1,31 @@
+.each-post {
+  // background: green;
+  border-bottom: 3px solid rgba(44, 59, 108, 0.584);
+  width: 100%;
+  padding: 10px;
+  h3 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    margin-bottom: 5px;
+  }
+  .post-content {
+    border-bottom: 3px solid rgba(44, 59, 108, 0.584);
+    height: 150px;
+    p:nth-of-type(1) {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+  }
+  .post-content-second {
+    // background: pink;
+    margin: 15px 0 10px;
+    display: flex;
+    justify-content: space-between;
+    span {
+      padding-left: 10px;
+    }
+  }
+}

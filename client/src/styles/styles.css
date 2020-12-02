@@ -63,9 +63,9 @@
 
 .main-content {
   background-color: #1e3368;
-  color: #fff;
-  height: 70vh;
-  width: 50vw;
+  height: 80vh;
+  width: 70%;
+  min-width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -81,18 +81,44 @@
           align-items: center;
 }
 
-.main-content div {
-  background-color: #1e4abb;
-  height: 200px;
+.recent-code-posts {
+  background-color: white;
+  height: 35%;
   width: 80%;
+  overflow: scroll;
 }
 
-.recent-code-posts {
-  overflow: scroll;
+.recent-code-posts::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.recent-code-posts::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.recent-code-posts::-webkit-scrollbar-thumb {
+  background-color: pink;
+  border-radius: 5px;
 }
 
 .recent-nerd-posts {
+  background-color: white;
+  height: 35%;
+  width: 80%;
   overflow: scroll;
+}
+
+.recent-nerd-posts::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.recent-nerd-posts::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.recent-nerd-posts::-webkit-scrollbar-thumb {
+  background-color: pink;
+  border-radius: 5px;
 }
 
 .calendar-list {
@@ -107,7 +133,6 @@
 }
 
 .codegories-container {
-  background: white;
   width: 70%;
   min-width: 300px;
   max-width: 600px;
@@ -243,5 +268,45 @@ nav svg {
 
 .user-nav li:hover {
   border-bottom: 1px solid #0088ff;
+}
+
+.each-post {
+  border-bottom: 3px solid rgba(44, 59, 108, 0.584);
+  width: 100%;
+  padding: 10px;
+}
+
+.each-post h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.each-post p {
+  margin-bottom: 5px;
+}
+
+.each-post .post-content {
+  border-bottom: 3px solid rgba(44, 59, 108, 0.584);
+  height: 150px;
+}
+
+.each-post .post-content p:nth-of-type(1) {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.each-post .post-content-second {
+  margin: 15px 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.each-post .post-content-second span {
+  padding-left: 10px;
 }
 /*# sourceMappingURL=styles.css.map */

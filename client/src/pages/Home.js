@@ -47,17 +47,19 @@ export default function Home({ userState, setUserState }) {
     <div className="page-container">
       <div className="home-container">
         <div className="main-content">
+          <p>In the Codegories</p>
           <div className="recent-code-posts">
             {recentPosts && renderCodePosts()}
           </div>
+          <p>In the Forum</p>
           <div className="recent-nerd-posts">
             {recentForumPosts && renderForumPosts()}
           </div>
         </div>
-
+        {/* 
         <div className="calendar-list">
           Gonna wanna render calendar list for the week. (MyListView)
-        </div>
+        </div> */}
       </div>
     </div>
   );

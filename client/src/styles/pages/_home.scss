@@ -8,28 +8,55 @@
 
 .main-content {
   background-color: $main-color;
-  color: $light-font;
-  height: 70vh;
-  width: 50vw;
+  // color: $light-font;
+  height: 80vh;
+  // width: 50vw;
+  width: 70%;
+  min-width: 300px;
+  // max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  div {
-    background-color: $second-color;
-    height: 200px;
-    width: 80%;
-  }
+  // div {
+  //   background-color: $second-color;
+  //   height: 200px;
+  //   width: 80%;
+  // }
 }
 
 .recent-code-posts {
-  // background-color: $second-color;
+  background-color: white;
+  height: 35%;
+  width: 80%;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: pink;
+    border-radius: 5px;
+  }
 }
 
 .recent-nerd-posts {
-  // background-color: $second-color;
+  background-color: white;
+  height: 35%;
+  width: 80%;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: pink;
+    border-radius: 5px;
+  }
 }
 
 .calendar-list {
