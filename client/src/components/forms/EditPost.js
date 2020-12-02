@@ -32,7 +32,9 @@ export default function EditPost({
       newContent,
       author: userState._id,
     };
-    // create post in db
+    console.log(editedPost);
+    console.log(post);
+    // create post in dbf
     PostModel.update(post._id, editedPost).then((data) => {
       console.log("post mode create: ", data);
       setEditedPost(data.post);

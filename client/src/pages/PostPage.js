@@ -18,7 +18,17 @@ export default function PostPage({ userState, setUserState }) {
   useEffect(() => {
     //
     console.log("params? ", params);
-    PostModel.getPost(params.id).then((data) => {
+    let postId;
+    if (editedPost) {
+      postId = editedPost._id;
+    } else {
+      postId = params.id;
+    }
+
+    console.log(params);
+    console.log(editedPost);
+    PostModel.getPost(postId).then((data) => {
+      // PostModel.getPost(params.id).then((data) => {
       console.log("data from post model: ", data);
       setPost(data.post);
     });
