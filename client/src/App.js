@@ -79,7 +79,8 @@ function App() {
           )}
         />
         <Route
-          path="/myprofile/:id"
+          path="/myprofile"
+          // path="/myprofile/:id"
           render={() => (
             <Profile userState={userState} setUserState={setUserState} />
           )}

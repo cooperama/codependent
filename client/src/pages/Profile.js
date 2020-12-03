@@ -4,13 +4,17 @@ import Moment from "react-moment";
 import { Post, Comment } from "../components";
 
 import PostModel from "../models/post";
+import UserModel from "../models/user";
 
 export default function Profile({ userState, setUserState }) {
   const [userPosts, setUserPosts] = useState();
   const [profilePage, setProfilePage] = useState(true);
   const history = useHistory();
   useEffect(() => {
-    // get posts from userState
+    if (localStorage.getItem("uid"))
+      UserModel.show().then((response) => {
+        setUserState(response.data);
+      });
   }, []);
   const renderPosts = () => {
     if (userState) {
