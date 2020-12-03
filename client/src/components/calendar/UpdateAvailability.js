@@ -8,13 +8,13 @@ import { v4 as uuidv4 } from "uuid";
 import UserModel from "../../models/user";
 import AvailModel from "../../models/avail";
 
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function UpdateAvailability() {
+  // If I try to set availability for the calendar events from the userState... it gives me an error.
   const [availability, setAvailability] = useState([]);
-  const [updatedAvail, setUpdatedAvail] = useState([]);
+  // const [updatedAvail, setUpdatedAvail] = useState([]);
   const [userState, setUserState] = useState({});
-  const params = useParams();
   const history = useHistory();
 
   // Set availability on calendar to user's current availability
@@ -22,7 +22,7 @@ export default function UpdateAvailability() {
     if (localStorage.getItem("uid")) {
       UserModel.getUser().then((data) => {
         setAvailability(data.user.available);
-        setUpdatedAvail(data.user.available);
+        // setUpdatedAvail(data.user.available);
         setUserState(data.user);
         console.log(userState);
       });
@@ -67,7 +67,7 @@ export default function UpdateAvailability() {
       console.log(" avail created! ", userState);
     });
 
-    setUpdatedAvail([...updatedAvail, e.event.toPlainObject()]);
+    // setUpdatedAvail([...updatedAvail, e.event.toPlainObject()]);
   };
 
   // Click event to remove it
@@ -77,10 +77,13 @@ export default function UpdateAvailability() {
     if (availIdToDelete._id) {
       availIdToDelete = availIdToDelete._id;
     } else if (availIdToDelete.eventId) {
+      // After clicking the update avail button, this causes an error because foundAvail does't exist...
       const foundAvail = userState.available.filter((avail) => {
         return avail.eventId === availIdToDelete.eventId;
       });
       availIdToDelete = foundAvail[0]._id;
+    } else {
+      console.log("event click handler ~ no idssss ");
     }
 
     AvailModel.delete(availIdToDelete).then((data) => {
@@ -92,7 +95,8 @@ export default function UpdateAvailability() {
         ...userState,
         available: newAvail,
       });
-      setUpdatedAvail(newAvail);
+      // setUpdatedAvail(newAvail);
+      console.log("user state from event click: ", userState);
     });
 
     e.event.remove();
@@ -106,10 +110,10 @@ export default function UpdateAvailability() {
       ...userState,
       available: availObjectIds,
     });
-    UserModel.update(params.id, userState).then((data) => {
-      // history.push(`/users/${userState._id}`);
-      // Might want to confirm with a toastify or something that it's been successfully deleted
-    });
+    // UserModel.update(userState._id, userState).then((data) => {
+    //   console.log("in event remove handler... ", data);
+    //   // not working....
+    // });
   };
 
   // Update User model when done updating avail.
@@ -122,8 +126,13 @@ export default function UpdateAvailability() {
       ...userState,
       available: availObjectIds,
     });
-    UserModel.update(params.id, userState).then((data) => {
-      history.push(`/users/${userState._id}`);
+    UserModel.update(userState._id, userState).then((data) => {
+      // history.push(`/myprofile`);
+      console.log("in user update handler... ", data);
+      setUserState({
+        ...userState,
+        available: availObjectIds,
+      });
     });
   };
 

@@ -11,7 +11,8 @@ router.get("/", ctrl.allUsers);
 router.get("/myprofile", authenticateToken, ctrl.getUser);
 // router.get("/myprofile/:id", authenticateToken, ctrl.getUser);
 // router.get("/:id", ctrl.getUser);
-router.put("/:id", authenticateToken, ctrl.updateUser);
+router.put("/:id", ctrl.updateUser);
+// router.put("/:id", authenticateToken, ctrl.updateUser);
 router.delete("/:id", authenticateToken, ctrl.deleteUser);
 
 module.exports = router;

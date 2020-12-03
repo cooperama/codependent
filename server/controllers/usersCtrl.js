@@ -27,7 +27,7 @@ const login = (req, res) => {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "1h" }
           );
-          console.log(user);
+          console.log("login ctrl, line 30 ", user);
           res.json({
             status: 200,
             message: "success",

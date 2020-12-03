@@ -27,6 +27,13 @@ const getAvail = (req, res) => {
 const updateAvail = (req, res) => {
   db.Availability.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedAvail) => {
+      console.log("updated in avail : ", updatedAvail);
+      db.User.findById(updatedAvail.user).then((foundUser) => {
+        foundUser.available.push(updatedAvail._id);
+        foundUser.save();
+        console.log("saved user: ", foundUser);
+        res.json({ avail: updatedAvail });
+      });
       res.json({ avail: updatedAvail });
     })
     .catch((err) => {
@@ -56,6 +63,22 @@ const create = (req, res) => {
 const deleteAvail = (req, res) => {
   db.Availability.findByIdAndDelete(req.params.id)
     .then((deletedAvail) => {
+      // remove from user
+      const userId = deletedAvail.user;
+      console.log("delteed avail: ", deletedAvail);
+      db.User.findById(userId).then((user) => {
+        const newAvail = user.available.filter((avail) => {
+          console.log(
+            `avail: ${avail} & deteldte avail id ${deletedAvail._id}`
+          );
+          console.log(avail === deletedAvail._id);
+          return avail !== deletedAvail._id;
+        });
+        console.log("array: ", newAvail); // not filtering....
+        user.available = newAvail;
+        user.save();
+        console.log("delete avail ctrl user: ", user);
+      });
       res.json({ avail: deletedAvail });
     })
     .catch((err) => {

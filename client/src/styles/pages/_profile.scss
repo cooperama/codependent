@@ -46,7 +46,40 @@
     }
   }
 }
-
+.profile-controller {
+  display: flex;
+  justify-content: space-between;
+  .profile-page-tabs {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    li {
+      padding: 5px 10px;
+      width: 100px;
+      // border: 1px solid red;
+      border-right: 1px solid $second-color;
+      border-top: 1px solid $second-color;
+      font-size: 0.8rem;
+      &:hover {
+        background-color: $second-color;
+        cursor: pointer;
+        transition: background-color 200ms ease;
+      }
+    }
+  }
+}
 .profile-page-posts {
   // margin: 5px 10px;
+}
+
+.active {
+  background-color: $second-color;
+}
+
+.avail-button-div {
+  width: 150px;
+  button {
+    width: 100%;
+    box-shadow: 0 0 2px $second-color;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Moment from "react-moment";
 import { Post, Comment, UpdateAvailability } from "../components";
@@ -10,12 +10,27 @@ export default function Profile({ userState, setUserState }) {
   const [userPosts, setUserPosts] = useState();
   const [profilePage, setProfilePage] = useState(true);
   const history = useHistory();
+  const calendarRef = useRef();
+
+  const infoRef = useRef();
+  const postsRef = useRef();
+  const commentsRef = useRef();
+  const containerRefs = [infoRef, postsRef, commentsRef];
+
+  const profileTabRef = useRef();
+  const postsTabRef = useRef();
+  const commentsTabRef = useRef();
+  const tabRefs = [profileTabRef, postsTabRef, commentsTabRef];
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       console.log(localStorage);
       UserModel.getUser().then((data) => {
         console.log(data);
-        setUserState(data.user);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
       });
     }
   }, []);
@@ -54,6 +69,10 @@ export default function Profile({ userState, setUserState }) {
   };
   const renderContent = () => {
     if (userState) {
+      console.log(
+        "user state in rener content that's cuasing errors: ",
+        userState
+      );
       return (
         <>
           <div className="profile-names">
@@ -72,17 +91,90 @@ export default function Profile({ userState, setUserState }) {
         </>
       );
     } else {
-      // history.push("/register");
       console.log("no user state in profile........");
+      history.push("/register");
     }
+  };
+  const handleMyAvailClick = (e) => {
+    //
+  };
+  const handleTabClick = (e) => {
+    //
+    tabRefs.forEach((tab) => {
+      tab.current.classList.remove("active");
+    });
+    e.target.classList.add("active");
+    console.log(e.target.innerText);
+    switch (e.target.innerText) {
+      case "My Profile":
+        containerRefs.forEach((container) => {
+          container.current.classList.add("hide-content");
+        });
+        infoRef.current.classList.remove("hide-content");
+        break;
+      case "My Posts":
+        containerRefs.forEach((container) => {
+          container.current.classList.add("hide-content");
+        });
+        postsRef.current.classList.remove("hide-content");
+        break;
+      case "My Comments":
+        containerRefs.forEach((container) => {
+          container.current.classList.add("hide-content");
+        });
+        commentsRef.current.classList.remove("hide-content");
+        break;
+      default:
+        break;
+    }
+  };
+  // const handleInfoClick = (e) => {
+  //   //
+  //   tabRefs.forEach(tab => {
+  //     tab.current.classList.remove('active')
+  //   })
+  //   e.target.classList.add('active')
+
+  // };
+  const handlePostsClick = (e) => {
+    //
+  };
+  const handleCommentsClick = (e) => {
+    //
   };
   return (
     <div className="page-container">
       <div className="profile-content">
-        <UpdateAvailability />
-        <div className="profile-info">{renderContent()}</div>
-        <div className="profile-page-posts">{renderPosts()}</div>
-        <div className="profile-page-comment">{renderComments()}</div>
+        <div className="profile-controller">
+          <div className="profile-page-tabs">
+            <li ref={profileTabRef} onClick={handleTabClick} className="active">
+              My Profile
+            </li>
+            <li ref={postsTabRef} onClick={handleTabClick}>
+              My Posts
+            </li>
+            <li ref={commentsTabRef} onClick={handleTabClick}>
+              My Comments
+            </li>
+          </div>
+          <div className="avail-button-div">
+            <button onClick={handleMyAvailClick}>My Availability</button>
+          </div>
+        </div>
+        <div ref={calendarRef} className="calendar-container hide-content">
+          <div className="calendar-availability">
+            <UpdateAvailability />
+          </div>
+        </div>
+        <div ref={infoRef} className="profile-info">
+          {renderContent()}
+        </div>
+        <div ref={postsRef} className="profile-page-posts hide-content">
+          {renderPosts()}
+        </div>
+        <div ref={commentsRef} className="profile-page-comment hide-content">
+          {renderComments()}
+        </div>
       </div>
     </div>
   );
