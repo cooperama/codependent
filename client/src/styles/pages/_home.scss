@@ -2,16 +2,17 @@
   height: 100%;
   width: 100%;
   display: flex;
+  display: column !important;
   justify-content: space-around;
   align-items: center;
 }
 
 .main-content {
-  background-color: $main-color;
+  // background-color: $main-color;
   // color: $light-font;
-  height: 80vh;
+  // height: 80vh;
   // width: 50vw;
-  width: 70%;
+  // width: 70%;
   min-width: 300px;
   // max-width: 600px;
   display: flex;
@@ -28,7 +29,8 @@
 .recent-code-posts {
   background-color: $second-color;
   height: 35%;
-  width: 80%;
+  width: 100%;
+  margin-bottom: 20px;
   overflow: scroll;
   &::-webkit-scrollbar {
     background-color: transparent;
@@ -37,15 +39,15 @@
     background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $accent-color;
-    border-radius: 5px;
+    background-color: $red-color;
+    // border-radius: 5px;
   }
 }
 
 .recent-nerd-posts {
   background-color: $second-color;
   height: 35%;
-  width: 80%;
+  width: 100%;
   overflow: scroll;
   &::-webkit-scrollbar {
     background-color: transparent;
@@ -54,14 +56,22 @@
     background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $accent-color;
-    border-radius: 5px;
+    background-color: $red-color;
+    // border-radius: 5px;
   }
 }
 
 .calendar-list {
   background-color: $main-color;
-  height: 70vh;
+  height: 100vh;
   width: 30vw;
+  position: absolute;
+  right: -200px;
+  top: $navbar-height;
   color: $light-font;
+  transition: right 0.5s ease;
+  &:hover {
+    right: 0;
+    transition: right 0.5s ease;
+  }
 }

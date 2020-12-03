@@ -12,7 +12,7 @@ const data = require("./codegories.json");
 // });
 
 // Remove avail array ~~
-// db.User.find({ username: "traveler" }).then((users) => {
+// db.User.find({ username: "nick" }).then((users) => {
 //   users.forEach((user) => {
 //     user.available = [];
 //     user.save();

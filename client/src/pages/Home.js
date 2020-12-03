@@ -40,9 +40,6 @@ export default function Home({ userState, setUserState }) {
       setRecentForumPosts(forumPosts);
       setRecentPosts(codePosts);
     });
-    console.log(userState);
-    console.log(recentPosts);
-    console.log(recentForumPosts);
   }, []);
   const renderCodePosts = () => {
     return recentPosts.map((post) => {
@@ -70,24 +67,28 @@ export default function Home({ userState, setUserState }) {
   };
   const renderCalendarList = () => {};
   return (
-    <div className="page-container">
-      <div className="home-container">
-        <h3>Recent Activity</h3>
-        <div className="main-content">
-          <p>In Codegories</p>
-          <div className="recent-code-posts">
-            {recentPosts && renderCodePosts()}
-          </div>
-          <p>In the Forum</p>
-          <div className="recent-nerd-posts">
-            {recentForumPosts && renderForumPosts()}
+    <>
+      <div className="page-container">
+        <div className="home-container">
+          <div className="main-content">
+            <div>
+              <p>In Codegories</p>
+            </div>
+            <div className="recent-code-posts">
+              {recentPosts && renderCodePosts()}
+            </div>
+            <div>
+              <p>In the Forum</p>
+            </div>
+            <div className="recent-nerd-posts">
+              {recentForumPosts && renderForumPosts()}
+            </div>
           </div>
         </div>
-        {/* 
-        <div className="calendar-list">
-          Gonna wanna render calendar list for the week. (MyListView)
-        </div> */}
       </div>
-    </div>
+      <div className="calendar-list">
+        Gonna wanna render calendar list for the week. (MyListView)
+      </div>
+    </>
   );
 }

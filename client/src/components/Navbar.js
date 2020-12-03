@@ -15,11 +15,7 @@ import { SideNav, UserNav } from "../components";
 export default function Navbar({ userState, setUserState }) {
   const dropdownRef = useRef();
   const history = useHistory();
-  useEffect(() => {
-    //
-  }, []);
   const handleDropdownClick = (e) => {
-    //
     dropdownRef.current.classList.toggle("hide-profile-dropdown");
   };
   const renderPhoto = () => {
@@ -42,15 +38,11 @@ export default function Navbar({ userState, setUserState }) {
     localStorage.clear();
     history.push("/register");
   };
-  // const handleProfileClick = () => {
-  //   dropdownRef.current.classList.add("hide-profile-dropdown");
-  // };
   const renderProfileContainer = () => {
     if (userState) {
       return (
         <>
           <li className="cursor" onClick={handleDropdownClick}>
-            {/* <Link to={`/myprofile/${userState._id}`}>My Profile</Link> */}
             <h4>[ {userState.username} ]</h4>
           </li>
           <div>
@@ -63,15 +55,8 @@ export default function Navbar({ userState, setUserState }) {
             >
               <ul>
                 <li>
-                  <Link
-                    onClick={handleDropdownClick}
-                    to={`/myprofile`}
-                    // to={`/myprofile/${userState._id}`}
-                  >
-                    <span>
-                      {renderPhoto()}
-                      {/* <FontAwesomeIcon icon={faUser} /> */}
-                    </span>
+                  <Link onClick={handleDropdownClick} to={`/myprofile`}>
+                    <span>{renderPhoto()}</span>
                     <span>profile</span>
                   </Link>
                 </li>
@@ -118,7 +103,6 @@ export default function Navbar({ userState, setUserState }) {
           </Link>
         </li>
       </div>
-      {userState ? "yes" : "no"}
       <div className="profile-nav">
         <FontAwesomeIcon icon={faUserCircle} />
         {renderProfileContainer()}
