@@ -21,14 +21,6 @@ const login = (req, res) => {
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
         if (err) return console.log("error with passwords");
         if (isMatch) {
-          // what i was using \/\/\/
-          // res.json({ user: user });
-          // what i was using ^^^^^^
-
-          // const username = req.body.username;
-          // const user = { name: username };
-          // const accessToken = generateAccessToken(user);
-          // const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
           const signedJwt = jwt.sign(
             { _id: user._id },
             // user,

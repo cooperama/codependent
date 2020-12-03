@@ -24,18 +24,9 @@ export default function Login({ userState, setUserState }) {
     const user = { email, username, password };
     UserModel.login(user).then((data) => {
       setUserState(data.user);
-      history.push(`/`);
-      // history.push(`/myprofile/${data.user._id}`);
-    });
-  };
-  const loadState = () => {
-    setEmail("whyme@gmail.com");
-    setPassword("why123!@#");
-    setUsername("whyme");
-    const user = { email, username, password };
-    UserModel.login(user).then((data) => {
-      setUserState(data.user);
-      localStorage.setItem("uuid", data.signedJwt);
+      console.log(data); // this is coming back right... but below isn't!
+      localStorage.setItem("uid", data.signedJwt);
+      console.log("local storage... ", localStorage);
       UserModel.getUser().then((data) => {
         console.log(data);
         setUserState(data.user);
@@ -44,6 +35,19 @@ export default function Login({ userState, setUserState }) {
       // history.push(`/myprofile/${data.user._id}`);
     });
   };
+  // const loadState = () => {
+  //   const user = { email, username, password };
+  //   UserModel.login(user).then((data) => {
+  //     setUserState(data.user);
+  //     localStorage.setItem("uid", data.signedJwt);
+  //     UserModel.getUser().then((data) => {
+  //       console.log(data);
+  //       setUserState(data.user);
+  //       history.push(`/myprofile`);
+  //     });
+  //     // history.push(`/myprofile/${data.user._id}`);
+  //   });
+  // };
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">

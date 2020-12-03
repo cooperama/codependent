@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Moment from "react-moment";
-import { Post, Comment } from "../components";
+import { Post, Comment, UpdateAvailability } from "../components";
 
 import PostModel from "../models/post";
 import UserModel from "../models/user";
@@ -11,10 +11,13 @@ export default function Profile({ userState, setUserState }) {
   const [profilePage, setProfilePage] = useState(true);
   const history = useHistory();
   useEffect(() => {
-    if (localStorage.getItem("uid"))
-      UserModel.show().then((response) => {
-        setUserState(response.data);
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        setUserState(data.user);
       });
+    }
   }, []);
   const renderPosts = () => {
     if (userState) {
@@ -69,12 +72,14 @@ export default function Profile({ userState, setUserState }) {
         </>
       );
     } else {
-      history.push("/register");
+      // history.push("/register");
+      console.log("no user state in profile........");
     }
   };
   return (
     <div className="page-container">
       <div className="profile-content">
+        <UpdateAvailability />
         <div className="profile-info">{renderContent()}</div>
         <div className="profile-page-posts">{renderPosts()}</div>
         <div className="profile-page-comment">{renderComments()}</div>
