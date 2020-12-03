@@ -21,19 +21,20 @@ export default function Navbar({ userState, setUserState }) {
     //
     dropdownRef.current.classList.toggle("hide-profile-dropdown");
   };
-  const handleSettingsClick = () => {
-    //
-  };
+
   const handleSignoutClick = () => {
-    //
+    dropdownRef.current.classList.add("hide-profile-dropdown");
   };
+  // const handleProfileClick = () => {
+  //   dropdownRef.current.classList.add("hide-profile-dropdown");
+  // };
   const renderProfileContainer = () => {
     if (userState) {
       return (
         <>
-          <li>
+          <li className="cursor" onClick={handleDropdownClick}>
             {/* <Link to={`/myprofile/${userState._id}`}>My Profile</Link> */}
-            <h4>{userState.username}</h4>
+            <h4>[ {userState.username} ]</h4>
           </li>
           <div>
             <span onClick={handleDropdownClick}>
@@ -44,19 +45,25 @@ export default function Navbar({ userState, setUserState }) {
               className="profile-dropdown hide-profile-dropdown"
             >
               <ul>
-                <Link to={`/myprofile/${userState._id}`}>
-                  <li>
+                <li>
+                  <Link
+                    onClick={handleDropdownClick}
+                    to={`/myprofile/${userState._id}`}
+                  >
                     <span>
                       <FontAwesomeIcon icon={faUser} />
                     </span>
                     <span>profile</span>
-                  </li>
-                </Link>
-                <li onClick={handleSettingsClick}>
-                  <span>
-                    <FontAwesomeIcon icon={faCog} />
-                  </span>
-                  <span>settings</span>
+                  </Link>
+                </li>
+
+                <li>
+                  <Link onClick={handleDropdownClick} to="/settings">
+                    <span>
+                      <FontAwesomeIcon icon={faCog} />
+                    </span>
+                    <span>settings</span>
+                  </Link>
                 </li>
                 <li onClick={handleSignoutClick}>
                   <span>

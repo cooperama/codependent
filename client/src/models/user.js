@@ -95,7 +95,6 @@ class UserModel {
       });
   }
 
-  // but will this erase all the other info? or just the info specified?
   static update(id, updatedUser) {
     return fetch(`${url}/${id}`, {
       method: "PUT",

@@ -6,6 +6,7 @@ import Codegories from "./Codegories";
 import Profile from "./Profile";
 import PostPage from "./PostPage";
 import NerdRoom from "./NerdRoom";
+import Settings from "./Settings";
 
 export {
   Home,
@@ -14,6 +15,7 @@ export {
   Landing,
   Codegories,
   Profile,
+  Settings,
   PostPage,
   NerdRoom,
 };

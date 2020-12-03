@@ -45,3 +45,12 @@
     // margin: 0 30px;
   }
 }
+
+.edit-profile-container {
+  max-width: 300px;
+  background-color: $main-color;
+  .edit-profile-form {
+    margin: auto;
+    padding: 20px;
+  }
+}

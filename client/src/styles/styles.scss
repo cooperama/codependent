@@ -51,6 +51,9 @@ $navbar-width: 160px;
   body {
     background-color: $background-color;
   }
+  .cursor {
+    cursor: pointer;
+  }
   input,
   textarea {
     outline: none;
@@ -65,6 +68,9 @@ $navbar-width: 160px;
     //     display: none;
     //   }
     // }
+  }
+  textarea {
+    white-space: pre-line;
   }
   input[type="submit"],
   input[type="button"],

@@ -14,6 +14,10 @@ export default function Post({ post, userState, setUserState }) {
       setPostContent(data.post);
     });
   }, []);
+
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // Need to render data from Mongo with \n!!!
+
   const renderPostContent = () => {
     if (postContent) {
       return (

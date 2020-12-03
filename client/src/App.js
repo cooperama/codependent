@@ -26,6 +26,7 @@ import {
   Landing,
   PostPage,
   Codegories,
+  Settings,
   NerdRoom,
   Profile,
 } from "./pages";
@@ -42,6 +43,13 @@ function App() {
           path="/"
           render={() => (
             <Home userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          exact
+          path="/settings"
+          render={() => (
+            <Settings userState={userState} setUserState={setUserState} />
           )}
         />
         <Route
