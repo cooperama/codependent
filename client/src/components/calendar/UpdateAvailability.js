@@ -53,9 +53,11 @@ export default function UpdateAvailability() {
   // Add avail to db
   const eventAddHandler = (e) => {
     const newAvail = {
+      // this has the start and end times
       ...e.event.toPlainObject(),
-      user: params.id,
+      user: userState._id,
       eventId: e.event.toPlainObject().extendedProps.eventId,
+      available: true,
     };
     AvailModel.create(newAvail).then((data) => {
       setUserState({

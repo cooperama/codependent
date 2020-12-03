@@ -38,7 +38,14 @@ const updateAvail = (req, res) => {
 const create = (req, res) => {
   db.Availability.create(req.body)
     .then((newAvail) => {
-      res.json({ avail: newAvail });
+      // push into user avail array
+      console.log("new in avail : ", newAvail);
+      db.User.findById(newAvail.user).then((foundUser) => {
+        foundUser.available.push(newAvail._id);
+        foundUser.save();
+        console.log("saved user: ", foundUser);
+        res.json({ avail: newAvail });
+      });
     })
     .catch((err) => {
       console.log("Error in avail.create: ", err);
