@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Loading, AddComment, Comment, EditPost } from "../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkSquareAlt } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 
@@ -137,6 +139,15 @@ export default function PostPage({ userState, setUserState }) {
       });
     }
   };
+  const linkDiv = () => {
+    return (
+      <div>
+        <a href={post.link}>
+          visit link <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
+        </a>
+      </div>
+    );
+  };
   const iframeLoaded = () => [console.log("iframe loaded")];
   const renderPost = () => {
     console.log(post.link);
@@ -146,7 +157,7 @@ export default function PostPage({ userState, setUserState }) {
           <h1>{post.title}</h1>
         </div>
         <div className="url-content">
-          {post.link && <a href={post.link}>{post.title}</a>}
+          {post.link && linkDiv()}
           {/* <iframe
             title={post.title}
             src={post.link}
