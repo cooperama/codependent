@@ -9,25 +9,6 @@ const login = (req, res) => {
   // req.session.cookie.username = req.body.username;
   // req.session.cookie.logged = true;
 
-  // console.log("session on login: ", req.session);
-  // db.User.findOne({ email: req.body.email }, (err, user) => {
-  //   if (err) {
-  //     res.json({ error: "Unable to get data" });
-  //     return console.log(err);
-  //   }
-  //   if (!user) return console.log("no user found");
-  //   return res.json({ user: user });
-
-  //   //   bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-  //   //     if (err) return console.log("error with passwords");
-  //   //     if (isMatch) {
-  //   //       req.session.currentUser = user._id;
-  //   //       console.log("req session from user login controller", req.session);
-  //   //       res.json({ user: user });
-  //   //     }
-  //   //   });
-  // });
-  // !!!!!!!!!!!!!!!! been using this \/\/
   db.User.findOne({ email: req.body.email })
     .populate("posts")
     .populate("comments")
@@ -35,44 +16,45 @@ const login = (req, res) => {
     .populate("paired")
     .then((user) => {
       if (!user) return console.log("no user found");
-      return res.json({ user: user });
+      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+        if (err) return console.log("error with passwords");
+        if (isMatch) {
+          // req.session.currentUser = user._id;
+          // console.log("req session from user login controller", req.session);
+          res.json({ user: user });
+        }
+      });
     })
     .catch((err) => console.log("error in user log in: ", err));
-  // !!!!!!!!!!!!!!!! been using this ^^^
 };
 
 const signup = (req, res) => {
-  // !!!!!!!!!!!!!!!! been using this \/\/
   db.User.findOne({ email: req.body.email }, (err, user) => {
     if (user) {
       return console.log("user already exists");
     }
-    // !!!!!!!!!!!!!!!! been using this ^^^
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) return console.log("error generating salt");
 
-    // bcrypt.genSalt(10, (err, salt) => {
-    //   if (err) return console.log("error generating salt");
+      bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+        if (err) return console.log("err hashing password");
 
-    //   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-    //     if (err) return console.log("err hasing password");
+        const newUser = {
+          username: req.body.username,
+          email: req.body.email,
+          password: hashedPassword,
+        };
 
-    // !!!!!!!!!!!!!!!! been using this \/\/
-    const newUser = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      // password: hashedPassword,
-    };
-
-    db.User.create(newUser)
-      .then((newUser) => {
-        res.json({ users: newUser });
-      })
-      .catch((err) => {
-        console.log("Error in users.signup: ", err);
-        res.json({ error: "Unable to get data from signup user.create" });
+        db.User.create(newUser)
+          .then((newUser) => {
+            res.json({ users: newUser });
+          })
+          .catch((err) => {
+            console.log("Error in users.signup: ", err);
+            res.json({ error: "Unable to get data from signup user.create" });
+          });
       });
-    //   });
-    // });
+    });
   });
 };
 

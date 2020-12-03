@@ -32,7 +32,6 @@ export default function Signup() {
       fullname,
       password,
     };
-    console.log(newUser);
     UserModel.create(newUser).then((data) => {
       console.log(data);
     });
