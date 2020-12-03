@@ -9,17 +9,17 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
     //
-    if (localStorage.getItem("uid")) {
-      console.log(localStorage);
-      UserModel.getUser().then((data) => {
-        console.log(data);
-        if (data.user) {
-          setUserState(data.user);
-        } else {
-          console.log("no user in profile useEffect..");
-        }
-      });
-    }
+    // if (localStorage.getItem("uid")) {
+    //   console.log(localStorage);
+    //   UserModel.getUser().then((data) => {
+    //     console.log(data);
+    //     if (data.user) {
+    //       setUserState(data.user);
+    //     } else {
+    //       console.log("no user in profile useEffect..");
+    //     }
+    //   });
+    // }
     // ^^^^^^^^^^^^^^^^^^^^^^^^
     console.log(post);
     PostModel.getPost(post._id).then((data) => {

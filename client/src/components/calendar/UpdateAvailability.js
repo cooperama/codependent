@@ -111,10 +111,10 @@ export default function UpdateAvailability() {
       ...userState,
       available: availObjectIds,
     });
-    // UserModel.update(userState._id, userState).then((data) => {
-    //   console.log("in event remove handler... ", data);
-    //   // not working....
-    // });
+    UserModel.update(userState._id, userState).then((data) => {
+      console.log("in event remove handler... ", data);
+      // not working....
+    });
   };
 
   // Update User model when done updating avail.

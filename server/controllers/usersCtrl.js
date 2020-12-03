@@ -13,10 +13,6 @@ const login = (req, res) => {
   console.log("logging in... user controller: ", req.body);
   db.User.findOne({ email: req.body.email })
     .populate("posts comments available paired")
-    // .populate("posts")
-    // .populate("comments")
-    // .populate("available")
-    // .populate("paired")
     .then((user) => {
       console.log("logging in... user controller findOne: ", user);
       if (!user) return console.log("no user found");
@@ -38,9 +34,10 @@ const login = (req, res) => {
             // ???? how i was doing it before...
             user,
           });
+        } else {
+          console.log(" not is match.....", isMatch);
+          res.json({ error: "Passwords do not match" });
         }
-        console.log(" not is match.....", isMatch);
-        res.json({ error: "Passwords do not match" });
       });
     })
     .catch((err) => console.log("error in user log in: ", err));

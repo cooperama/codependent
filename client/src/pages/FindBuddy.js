@@ -29,7 +29,7 @@ export default function FindBuddy({ userState, setUserState }) {
           </ol>
         </div>
         <div className="all-availability">
-          <AllUsersAvail />
+          <AllUsersAvail userState={userState} setUserState={setUserState} />
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ import UserModel from "../../models/user";
 
 import { useParams, useHistory } from "react-router-dom";
 
-export default function AllUsersAvail() {
+export default function AllUsersAvail({ userState, setUserState }) {
   const [allAvailable, setAllAvailable] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({});

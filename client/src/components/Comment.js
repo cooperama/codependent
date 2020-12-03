@@ -23,17 +23,17 @@ export default function Comment({
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem("uid")) {
-      console.log(localStorage);
-      UserModel.getUser().then((data) => {
-        console.log(data);
-        if (data.user) {
-          setUserState(data.user);
-        } else {
-          console.log("no user in profile useEffect..");
-        }
-      });
-    }
+    // if (localStorage.getItem("uid")) {
+    //   console.log(localStorage);
+    //   UserModel.getUser().then((data) => {
+    //     console.log(data);
+    //     if (data.user) {
+    //       setUserState(data.user);
+    //     } else {
+    //       console.log("no user in profile useEffect..");
+    //     }
+    //   });
+    // }
     // ^^^^^^^^^^^^^^^^^^^^^^^^^^
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
