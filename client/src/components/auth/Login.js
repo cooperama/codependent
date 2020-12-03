@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UserModel from "../../models/user";
 import { useHistory } from "react-router-dom";
+// import { User } from "../../../../server/models";
 
 export default function Login({ userState, setUserState }) {
   const history = useHistory();
@@ -34,7 +35,12 @@ export default function Login({ userState, setUserState }) {
     const user = { email, username, password };
     UserModel.login(user).then((data) => {
       setUserState(data.user);
-      history.push(`/`);
+      localStorage.setItem("uuid", data.signedJwt);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        setUserState(data.user);
+        history.push(`/myprofile`);
+      });
       // history.push(`/myprofile/${data.user._id}`);
     });
   };

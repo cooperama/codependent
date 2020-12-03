@@ -39,6 +39,7 @@ export default function Navbar({ userState, setUserState }) {
   const handleSignoutClick = () => {
     dropdownRef.current.classList.add("hide-profile-dropdown");
     setUserState(null);
+    localStorage.clear();
     history.push("/register");
   };
   // const handleProfileClick = () => {

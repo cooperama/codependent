@@ -146,10 +146,10 @@ export default function PostPage({ userState, setUserState }) {
           <h1>{post.title}</h1>
         </div>
         <div className="url-content">
-          <a href={post.link}>Visit Link</a>
+          {post.link && <a href={post.link}>{post.title}</a>}
           {/* <iframe
             title={post.title}
-            src="https://google.com/"
+            src={post.link}
             frameborder="0"
             onLoad={iframeLoaded}
             scrolling="no"
