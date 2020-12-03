@@ -9,11 +9,12 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { SideNav, UserNav } from "../components";
 
 export default function Navbar({ userState, setUserState }) {
   const dropdownRef = useRef();
+  const history = useHistory();
   useEffect(() => {
     //
   }, []);
@@ -24,6 +25,8 @@ export default function Navbar({ userState, setUserState }) {
 
   const handleSignoutClick = () => {
     dropdownRef.current.classList.add("hide-profile-dropdown");
+    setUserState(null);
+    history.push("/register");
   };
   // const handleProfileClick = () => {
   //   dropdownRef.current.classList.add("hide-profile-dropdown");

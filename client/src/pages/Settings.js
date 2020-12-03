@@ -55,6 +55,7 @@ export default function Settings({ userState, setUserState }) {
     console.log(editedUser);
     UserModel.update(userState._id, editedUser).then((data) => {
       console.log(data);
+      setUserState(data.user);
       history.push(`/myprofile/${userState._id}`);
     });
   };
