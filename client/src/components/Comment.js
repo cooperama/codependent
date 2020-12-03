@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import Moment from "react-moment";
 import CommentModel from "../models/comment";
 import PostModel from "../models/post";
 import { EditComment } from "../components";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 export default function Comment({
   parentPost,
   userState,
   setPost,
   setUserState,
+  profilePage,
   commentId,
 }) {
   const [comment, setComment] = useState();
-  const [editedComment, setEditedComment] = useState();
+  // const [editedComment, setEditedComment] = useState();
   const editCommentRef = useRef();
   const deleteCommentRef = useRef();
   const params = useParams();
@@ -80,21 +82,29 @@ export default function Comment({
       // history.push("/register");
     }
   };
-  const renderComment = () => {
-    return (
-      <>
-        <div className="comment-body">
-          <p>{comment.content}</p>
-        </div>
-        <div className="comment-stats">
-          <div>
-            <p>[{comment.author.username}]</p>
-            <p>
-              <Moment fromNow>{comment.createAt}</Moment>
+
+  const renderButtons = () => {
+    if (profilePage) {
+      return (
+        <>
+          {/* <div className="comment-settings"> */}
+          <Link to={`/post/${comment.parentPost._id}`}>
+            {/* <div className="view-post-link"> */}
+            <p className="view-thread">
+              View Thread
+              <span>
+                <FontAwesomeIcon icon={faArrowAltCircleRight} />
+              </span>
             </p>
-            {/* <p>{comment.parentPost.codegory.topic}</p>
-          <p>{comment.parentPost.title}</p> */}
-          </div>
+
+            {/* </div> */}
+          </Link>
+          {/* </div> */}
+        </>
+      );
+    } else {
+      return (
+        <>
           <div className="comment-settings">
             <div className="user-verified">
               <button onClick={editCommentClick}>edit</button>
@@ -113,6 +123,45 @@ export default function Comment({
           >
             {renderDeleteCommentForm()}
           </div>
+        </>
+      );
+    }
+  };
+
+  const renderComment = () => {
+    return (
+      <>
+        <div className="comment-body">
+          <p>{comment.content}</p>
+        </div>
+        <div className="comment-stats">
+          <div>
+            <p>[{comment.author.username}]</p>
+            <p>
+              <Moment fromNow>{comment.createAt}</Moment>
+            </p>
+            {/* <p>{comment.parentPost.codegory.topic}</p>
+          <p>{comment.parentPost.title}</p> */}
+          </div>
+          {/* <div className="comment-settings">
+            <div className="user-verified">
+              <button onClick={editCommentClick}>edit</button>
+              <button onClick={deleteCommentClick}>delete</button>
+            </div>
+          </div>
+          <div
+            ref={editCommentRef}
+            className="postpage-editcomment hide-content"
+          >
+            {renderEditCommentForm()}
+          </div>
+          <div
+            ref={deleteCommentRef}
+            className="postpage-deletecomment hide-content"
+          >
+            {renderDeleteCommentForm()}
+          </div> */}
+          {renderButtons()}
         </div>
       </>
     );

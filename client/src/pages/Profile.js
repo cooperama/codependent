@@ -7,6 +7,7 @@ import PostModel from "../models/post";
 
 export default function Profile({ userState, setUserState }) {
   const [userPosts, setUserPosts] = useState();
+  const [profilePage, setProfilePage] = useState(true);
   const history = useHistory();
   useEffect(() => {
     // get posts from userState
@@ -14,17 +15,32 @@ export default function Profile({ userState, setUserState }) {
   const renderPosts = () => {
     if (userState) {
       return userState.posts.map((post) => {
-        return <Post key={post._id} post={post} />;
+        return (
+          <Post
+            userState={userState}
+            setUserState={setUserState}
+            key={post._id}
+            post={post}
+          />
+        );
       });
     }
   };
   const renderComments = () => {
+    console.log("render comments funciton!");
     if (userState) {
       return userState.comments.map((comment) => {
         // not sure what kind of data comment is... populated or id????
         return (
           <Link key={comment._id} to={`/post/${comment.parentPost}`}>
-            <Comment />
+            <Comment
+              // parentPost={comment.parentPost}
+              userState={userState}
+              setUserState={setUserState}
+              // setPost={}
+              profilePage={profilePage}
+              commentId={comment._id}
+            />
           </Link>
         );
       });

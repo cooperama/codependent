@@ -63,7 +63,7 @@
     padding: 0 10px;
     // background-color: $neutral-color;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     font-size: 0.8rem;
     margin: 10px 0 0 0;
@@ -74,6 +74,12 @@
       display: flex;
       width: 30%;
       justify-content: space-between;
+    }
+    span {
+      padding-left: 10px;
+    }
+    .view-thread {
+      font-size: 1rem;
     }
   }
   .comment-settings {
