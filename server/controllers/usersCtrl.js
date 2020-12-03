@@ -100,16 +100,106 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  // console.log("req.session  ", req.session);
-  db.User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((updatedUser) => {
-      // Send user without the password???
-      res.json({ user: updatedUser });
-    })
-    .catch((err) => {
-      console.log("Error in users.updateUser: ", err);
-      res.json({ error: "Unable to get data" });
-    });
+  console.log("req.params  ", req.params);
+  db.User.findById(req.params.id).then((user) => {
+    console.log("user in update user users controller: ", user);
+    if (req.body.password2) {
+      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+        if (err) return console.log("error with passwords");
+        if (isMatch) {
+          bcrypt.genSalt(10, (err, salt) => {
+            if (err) return console.log("error generating salt");
+
+            bcrypt.hash(req.body.password2, salt, (err, hashedPassword) => {
+              if (err) return console.log("err hashing password");
+
+              const updatedUser = {
+                username: req.body.username,
+                email: req.body.email,
+                fullname: req.body.fullname,
+                password: hashedPassword,
+              };
+              db.User.findByIdAndUpdate(req.params.id, updatedUser, {
+                new: true,
+              })
+                .then((updatedUser) => {
+                  // Send user without the password???
+                  const signedJwt = jwt.sign(
+                    { _id: updatedUser._id },
+                    // user,
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: "1h" }
+                  );
+                  console.log("login ctrl, line 127 ", updatedUser);
+                  res.json({
+                    status: 200,
+                    message: "success",
+                    id: updatedUser._id,
+                    signedJwt,
+                    updatedUser,
+                  });
+                  // res.json({ user: updatedUser });
+                })
+                .catch((err) => {
+                  console.log("Error in users.updateUser: ", err);
+                  res.json({ error: "Unable to get data" });
+                });
+            });
+          });
+        } else {
+          console.log(" not is match updatedUser .....", isMatch);
+          res.json({ error: "Passwords do not match" });
+        }
+      });
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+        if (err) return console.log("error with passwords");
+        if (isMatch) {
+          const updatedUser = {
+            username: req.body.username,
+            email: req.body.email,
+            fullname: req.body.fullname,
+            // password,
+          };
+          db.User.findByIdAndUpdate(req.params.id, updatedUser, { new: true })
+            .then((updatedUser) => {
+              // Send user without the password???
+              const signedJwt = jwt.sign(
+                { _id: updatedUser._id },
+                // user,
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1h" }
+              );
+              console.log("login ctrl, line 127 ", updatedUser);
+              res.json({
+                status: 200,
+                message: "success",
+                id: updatedUser._id,
+                signedJwt,
+                updatedUser,
+              });
+              // res.json({ user: updatedUser });
+            })
+            .catch((err) => {
+              console.log("Error in users.updateUser: ", err);
+              res.json({ error: "Unable to get data" });
+            });
+        } else {
+          console.log(" not is match updatedUser .....", isMatch);
+          res.json({ error: "Passwords do not match" });
+        }
+      });
+    }
+    // db.User.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    //   .then((updatedUser) => {
+    //     // Send user without the password???
+    //     res.json({ user: updatedUser });
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error in users.updateUser: ", err);
+    //     res.json({ error: "Unable to get data" });
+    //   });
+  });
 };
 
 const deleteUser = (req, res) => {
