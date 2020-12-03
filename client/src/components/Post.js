@@ -4,13 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import PostModel from "../models/post";
 
-export default function Post({ post, userState, setUserState }) {
+export default function Post({ nerdRoom, post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
     //
     console.log(post);
     PostModel.getPost(post._id).then((data) => {
-      console.log("post dataaaaaaa: ", data.post);
       setPostContent(data.post);
     });
   }, []);
@@ -37,7 +36,7 @@ export default function Post({ post, userState, setUserState }) {
 
             <div className="view-post-link">
               <Link to={`/post/${postContent._id}`}>
-                View Post
+                {nerdRoom ? "View Thread" : "View Post"}
                 <span>
                   <FontAwesomeIcon icon={faArrowAltCircleRight} />
                 </span>

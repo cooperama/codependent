@@ -5,7 +5,7 @@ import CodegoryModel from "../models/codegory";
 import { Post, AddPost } from "../components";
 
 export default function NerdRoom({ userState, setUserState }) {
-  const [codegory, setCodegory] = useState({});
+  const [codegory, setCodegory] = useState();
   const params = useParams();
   const history = useHistory();
   // make api call for Codegory using id from params
@@ -18,7 +18,7 @@ export default function NerdRoom({ userState, setUserState }) {
   }, []);
 
   const renderPosts = () => {
-    if (codegory.posts.length === 0) {
+    if (!codegory.posts) {
       return (
         <div className="empty-page">
           <p>There seem to be no posts here yet!</p>
@@ -28,8 +28,8 @@ export default function NerdRoom({ userState, setUserState }) {
     } else {
       return codegory.posts.map((post) => {
         return (
-          <div key={post._id}>
-            <Post post={post} />
+          <div className="forum-post" key={post._id}>
+            <Post nerdRoom={codegory} post={post} />
           </div>
         );
       });
@@ -39,11 +39,14 @@ export default function NerdRoom({ userState, setUserState }) {
   const renderContent = () => {
     if (userState) {
       return (
-        <AddPost
-          userState={userState}
-          setUserState={setUserState}
-          codegoryId={codegory._id}
-        />
+        <>
+          {codegory && renderPosts()}
+          <AddPost
+            userState={userState}
+            setUserState={setUserState}
+            codegory={codegory}
+          />
+        </>
       );
     } else {
       history.push("/register");
@@ -52,10 +55,12 @@ export default function NerdRoom({ userState, setUserState }) {
 
   return (
     <div className="page-container">
-      <h1>Nerd Room</h1>
-      <p>{codegory.topic}</p>
-      {codegory.posts && renderPosts()}
-      {renderContent()}
+      <div className="codegorypage-container">
+        <div className="codegorypage-heading">
+          <h1>Nerd Room</h1>
+        </div>
+        <div className="codegorypage-posts-container">{renderContent()}</div>
+      </div>
     </div>
   );
 }

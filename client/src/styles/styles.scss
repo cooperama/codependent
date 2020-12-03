@@ -6,6 +6,12 @@ $accent-color: #0875b3;
 $neutral-color: #6a6d73;
 $lighter-color: #b0c6d9;
 
+// matching favicon colors
+$blue-color: #025;
+$blue2-color: #124;
+$black-color: #222;
+$red-color: #500;
+
 // Color scheme:
 // $dark-color: #043F61;
 // $light-color: #32b1fa;
@@ -53,6 +59,13 @@ $navbar-width: 160px;
   }
   .cursor {
     cursor: pointer;
+  }
+  .logo {
+    padding-left: 5px;
+  }
+  .logo-emphasis {
+    // background: $blue-color;
+    padding: 5px;
   }
   input,
   textarea {

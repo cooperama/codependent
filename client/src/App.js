@@ -1,17 +1,3 @@
-// import { Navbar } from "./components";
-// import routes from "./config/routes";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <Navbar />
-//       {routes}
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { useState } from "react";
 import UserModel from "./models/user";
 import { useHistory } from "react-router-dom";
@@ -92,10 +78,6 @@ function App() {
             <PostPage userState={userState} setUserState={setUserState} />
           )}
         />
-        {/* <Route exact path="/findbuddy" component={FindBuddy} />
-        <Route exact path="/codegories" component={Codegories} />
-        <Route path="/codegories/:id" component={Codegory} />
-        <Route path="/post/:id" component={PostPage} /> */}
         <Route
           path="/myprofile/:id"
           render={() => (

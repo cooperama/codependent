@@ -36,9 +36,9 @@ export default function EditComment({
       // ????? why am I doing the below?
       CommentModel.getComment(data.comment._id).then((data) => {
         setComment(data.comment);
+        editCommentRef.current.classList.add("hide-content");
       });
     });
-    editCommentRef.current.classList.add("hide-content");
   };
   const handleContentChange = (e) => {
     setNewContent(e.target.value);

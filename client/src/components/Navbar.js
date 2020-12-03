@@ -95,7 +95,11 @@ export default function Navbar({ userState, setUserState }) {
 
       <div className="codependent-logo">
         <li>
-          <Link to="/">co[de]pendent</Link>
+          <Link to="/">
+            <p className="logo">
+              co<span className="logo-emphasis">[de]</span>pendent
+            </p>
+          </Link>
         </li>
       </div>
       {userState ? "yes" : "no"}

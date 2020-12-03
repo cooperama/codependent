@@ -13,13 +13,23 @@
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  background-color: $main-color;
-  border-bottom: 3px solid $accent-color;
+  // background-color: $main-color;
+  // border-bottom: 3px solid $accent-color;
   padding: 10px;
   // margin: 10px 0;
   // &:nth-of-type(even) {
   //   background-color: $second-color;
   // }
+
+  //
+  border-bottom: 10px solid $neutral-color;
+  // border-bottom: 10px solid $accent-color;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  // padding: 10px;
+  // margin: 10px auto;
+
+  //
 
   .codegories-topic {
     font-size: 1.5rem;

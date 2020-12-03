@@ -10,10 +10,6 @@ export default function SideNav() {
       <li className="side-nav-item">
         <Link to="/nerdroom">Nerd Room</Link>
       </li>
-      {/* <li className="side-nav-item">
-        <Link to="/nerdroom">Nerd Room</Link>
-        <Link to="/codegory/:id">Nerd Room</Link> // id corresponds to nerd room!
-      </li> */}
       <li className="side-nav-item">
         <Link to="/findbuddy">Find Study Buddy</Link>
       </li>
