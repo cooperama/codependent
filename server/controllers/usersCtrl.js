@@ -27,6 +27,7 @@ const login = (req, res) => {
   //   //     }
   //   //   });
   // });
+  // !!!!!!!!!!!!!!!! been using this \/\/
   db.User.findOne({ email: req.body.email })
     .populate("posts")
     .populate("comments")
@@ -37,15 +38,16 @@ const login = (req, res) => {
       return res.json({ user: user });
     })
     .catch((err) => console.log("error in user log in: ", err));
+  // !!!!!!!!!!!!!!!! been using this ^^^
 };
 
 const signup = (req, res) => {
-  // console.log("req.session  ", req.session);
-  // console.log(req.body);
+  // !!!!!!!!!!!!!!!! been using this \/\/
   db.User.findOne({ email: req.body.email }, (err, user) => {
     if (user) {
       return console.log("user already exists");
     }
+    // !!!!!!!!!!!!!!!! been using this ^^^
 
     // bcrypt.genSalt(10, (err, salt) => {
     //   if (err) return console.log("error generating salt");
@@ -53,6 +55,7 @@ const signup = (req, res) => {
     //   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
     //     if (err) return console.log("err hasing password");
 
+    // !!!!!!!!!!!!!!!! been using this \/\/
     const newUser = {
       username: req.body.username,
       email: req.body.email,
@@ -92,6 +95,7 @@ const getUser = (req, res) => {
   // }
   // console.log(req.params);
   // console.log("sessions? ", req.session);
+  // !!!!!!!!!!!!!!!! been using this \/\/
   db.User.findById(req.params.id)
     .populate("available")
     .then((foundUser) => {
