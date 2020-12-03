@@ -137,11 +137,23 @@ export default function PostPage({ userState, setUserState }) {
       });
     }
   };
+  const iframeLoaded = () => [console.log("iframe loaded")];
   const renderPost = () => {
+    console.log(post.link);
     return (
       <div className="postpage-post-container">
         <div className="postpage-post-heading">
           <h1>{post.title}</h1>
+        </div>
+        <div className="url-content">
+          <a href={post.link}>Visit Link</a>
+          {/* <iframe
+            title={post.title}
+            src="https://google.com/"
+            frameborder="0"
+            onLoad={iframeLoaded}
+            scrolling="no"
+          ></iframe> */}
         </div>
         <div className="postpage-post-content ">
           <p>{post.content}</p>
@@ -152,7 +164,9 @@ export default function PostPage({ userState, setUserState }) {
             <p> {post.codegory.topic} </p>
             <p> [{post.author.username}] </p>
             <p>
-              <Moment fromNow>{post.createdAt}</Moment>
+              <Moment fromNow ago>
+                {post.createdAt}
+              </Moment>
             </p>
           </div>
           <div>

@@ -15,6 +15,7 @@ const PostSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    link: String,
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

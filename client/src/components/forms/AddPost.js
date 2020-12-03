@@ -6,6 +6,7 @@ import PostModel from "../../models/post";
 export default function AddPost({ codegoryId, userState, setUserState }) {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState();
+  const [link, setLink] = useState();
   const [content, setContent] = useState();
 
   const params = useParams();
@@ -25,6 +26,7 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
     }
     const newPost = {
       title,
+      link,
       content,
       codegory: codegoryId,
       author: userState._id,
@@ -42,6 +44,9 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
   const handleContentChange = (e) => {
     setContent(e.target.value);
   };
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  };
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
       <input
@@ -51,12 +56,19 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
         id="title"
         placeholder="title"
       />
+      <input
+        onChange={handleLinkChange}
+        type="url"
+        name="link"
+        id="link"
+        placeholder="https://www....com (optional)"
+      />
 
       <textarea
         onChange={handleContentChange}
         name="content"
         id="content"
-        placeholder="be"
+        placeholder="be good"
       ></textarea>
       <input type="submit" value="add post" />
     </form>

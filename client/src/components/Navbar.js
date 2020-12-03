@@ -22,7 +22,20 @@ export default function Navbar({ userState, setUserState }) {
     //
     dropdownRef.current.classList.toggle("hide-profile-dropdown");
   };
-
+  const renderPhoto = () => {
+    console.log(userState);
+    if (userState.photo) {
+      return (
+        <img
+          src={userState.photo}
+          alt={userState.username}
+          className="photo-thumbnail"
+        />
+      );
+    } else {
+      return <FontAwesomeIcon icon={faUser} />;
+    }
+  };
   const handleSignoutClick = () => {
     dropdownRef.current.classList.add("hide-profile-dropdown");
     setUserState(null);
@@ -54,7 +67,8 @@ export default function Navbar({ userState, setUserState }) {
                     to={`/myprofile/${userState._id}`}
                   >
                     <span>
-                      <FontAwesomeIcon icon={faUser} />
+                      {renderPhoto()}
+                      {/* <FontAwesomeIcon icon={faUser} /> */}
                     </span>
                     <span>profile</span>
                   </Link>

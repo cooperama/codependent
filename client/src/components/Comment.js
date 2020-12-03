@@ -138,7 +138,9 @@ export default function Comment({
           <div>
             <p>[{comment.author.username}]</p>
             <p>
-              <Moment fromNow>{comment.createAt}</Moment>
+              <Moment fromNow ago>
+                {comment.createAt}
+              </Moment>
             </p>
             {/* <p>{comment.parentPost.codegory.topic}</p>
           <p>{comment.parentPost.title}</p> */}

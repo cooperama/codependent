@@ -32,16 +32,15 @@ export default function Profile({ userState, setUserState }) {
       return userState.comments.map((comment) => {
         // not sure what kind of data comment is... populated or id????
         return (
-          <Link key={comment._id} to={`/post/${comment.parentPost}`}>
-            <Comment
-              // parentPost={comment.parentPost}
-              userState={userState}
-              setUserState={setUserState}
-              // setPost={}
-              profilePage={profilePage}
-              commentId={comment._id}
-            />
-          </Link>
+          <Comment
+            // parentPost={comment.parentPost}
+            userState={userState}
+            setUserState={setUserState}
+            // setPost={}
+            profilePage={profilePage}
+            commentId={comment._id}
+            key={comment._id}
+          />
         );
       });
     }

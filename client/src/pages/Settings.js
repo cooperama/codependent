@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import UserModel from "../models/user";
+import FileBase from "react-file-base64";
+
 export default function Settings({ userState, setUserState }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [fullname, setFullname] = useState();
+  const [photo, setPhoto] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
   const [password3, setPassword3] = useState();
@@ -14,6 +17,7 @@ export default function Settings({ userState, setUserState }) {
     setUsername(userState.username);
     setEmail(userState.email);
     setFullname(userState.fullname);
+    setPhoto(userState.photo);
     setPassword(userState.password);
     setPassword2(userState.password2);
     setPassword3(userState.password3);
@@ -27,6 +31,9 @@ export default function Settings({ userState, setUserState }) {
   };
   const handleFullnameChange = (e) => {
     setFullname(e.target.value);
+  };
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.value);
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -50,6 +57,7 @@ export default function Settings({ userState, setUserState }) {
       username,
       email,
       fullname,
+      // photo,
       password: password2,
     };
     console.log(editedUser);
@@ -90,6 +98,17 @@ export default function Settings({ userState, setUserState }) {
               id="fullname"
             />
           </div>
+          {/* FileBase */}
+          {/* <div className="form-group"> */}
+          {/* <input
+              placeholder={userState.photo}
+              onChange={handlePhotoChange}
+              type="file"
+              name="photo"
+              id="photo"
+            /> */}
+
+          {/* </div> */}
           <div className="form-group">
             <input
               placeholder="current password"
@@ -117,6 +136,11 @@ export default function Settings({ userState, setUserState }) {
               id="password3"
             />
           </div>
+          {/* <FileBase
+            type="file"
+            multiple={false}
+            onDone={({ base64 }) => setPhoto(base64)}
+          /> */}
           <input placeholder="" type="submit" value="edit profile" />
         </form>
       </div>

@@ -15,6 +15,7 @@ export default function EditPost({
 }) {
   // const [post, setPost] = useState({});
   const [title, setTitle] = useState();
+  const [link, setLink] = useState();
   const [newContent, setNewContent] = useState();
 
   const params = useParams();
@@ -22,6 +23,7 @@ export default function EditPost({
 
   useEffect(() => {
     setNewContent(post.content);
+    setLink(post.link);
     setTitle(post.title);
   }, []);
 
@@ -29,6 +31,7 @@ export default function EditPost({
     e.preventDefault();
     const editedPost = {
       title,
+      link,
       newContent,
       author: userState._id,
     };
@@ -49,6 +52,9 @@ export default function EditPost({
   const handleContentChange = (e) => {
     setNewContent(e.target.value);
   };
+  const handleLinkChange = (e) => {
+    setLink(e.target.value);
+  };
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
       <div className="form-group">
@@ -58,6 +64,15 @@ export default function EditPost({
           name="title"
           id="title"
           value={title}
+        />
+      </div>
+      <div className="form-group">
+        <input
+          onChange={handleLinkChange}
+          type="url"
+          name="link"
+          id="link"
+          value={link}
         />
       </div>
       <div className="form-group">

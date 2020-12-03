@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const routes = require("./routes");
 
@@ -15,6 +16,9 @@ const corsOptions = {
 // middleware
 app.use(express.json());
 app.use(cors(corsOptions));
+
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // set up routes
 // MVP
