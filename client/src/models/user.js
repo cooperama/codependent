@@ -60,13 +60,17 @@ class UserModel {
       });
   }
 
-  static getUser(id) {
-    return fetch(`${url}/myprofile/${id}`)
-      .then((res) => res.json())
-      .catch((err) => {
-        console.log("Error fetching data in UserModel.get: ", err);
-        return { user: {} };
-      });
+  static getUser() {
+    return (
+      fetch(`${url}/myprofile`)
+        // static getUser(id) {
+        //   return fetch(`${url}/myprofile/${id}`)
+        .then((res) => res.json())
+        .catch((err) => {
+          console.log("Error fetching data in UserModel.get: ", err);
+          return { user: {} };
+        })
+    );
   }
 
   static create(newUser) {
@@ -110,6 +114,14 @@ class UserModel {
 
   static logout() {
     return fetch(`${url}/logout`)
+      .then((res) => res.json())
+      .catch((err) => {
+        console.log("Error fetching data in UserModel.logout: ", err);
+        return { user: {} };
+      });
+  }
+  static token() {
+    return fetch(`${url}/token`)
       .then((res) => res.json())
       .catch((err) => {
         console.log("Error fetching data in UserModel.logout: ", err);

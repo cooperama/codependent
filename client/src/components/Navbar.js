@@ -64,7 +64,8 @@ export default function Navbar({ userState, setUserState }) {
                 <li>
                   <Link
                     onClick={handleDropdownClick}
-                    to={`/myprofile/${userState._id}`}
+                    to={`/myprofile`}
+                    // to={`/myprofile/${userState._id}`}
                   >
                     <span>
                       {renderPhoto()}

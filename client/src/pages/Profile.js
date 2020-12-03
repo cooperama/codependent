@@ -71,6 +71,8 @@ export default function Profile({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="profile-content">
+        <p>profiel page</p>
+
         <div className="profile-info">{renderContent()}</div>
         <div className="profile-page-posts">{renderPosts()}</div>
         <div className="profile-page-comment">{renderComments()}</div>
