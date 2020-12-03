@@ -137,7 +137,7 @@ export default function UpdateAvailability() {
   };
 
   return (
-    <div>
+    <>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
@@ -166,6 +166,6 @@ export default function UpdateAvailability() {
         eventRemove={eventRemoveHandler}
       />
       <button onClick={updateUserAvailability}>Update Availability</button>
-    </div>
+    </>
   );
 }

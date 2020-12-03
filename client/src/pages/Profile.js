@@ -97,13 +97,14 @@ export default function Profile({ userState, setUserState }) {
   };
   const handleMyAvailClick = (e) => {
     //
+    calendarRef.current.classList.toggle("hide-content");
   };
   const handleTabClick = (e) => {
     //
     tabRefs.forEach((tab) => {
-      tab.current.classList.remove("active");
+      tab.current.classList.remove("profile-tab-active");
     });
-    e.target.classList.add("active");
+    e.target.classList.add("profile-tab-active");
     console.log(e.target.innerText);
     switch (e.target.innerText) {
       case "My Profile":
@@ -128,14 +129,7 @@ export default function Profile({ userState, setUserState }) {
         break;
     }
   };
-  // const handleInfoClick = (e) => {
-  //   //
-  //   tabRefs.forEach(tab => {
-  //     tab.current.classList.remove('active')
-  //   })
-  //   e.target.classList.add('active')
 
-  // };
   const handlePostsClick = (e) => {
     //
   };
@@ -147,7 +141,11 @@ export default function Profile({ userState, setUserState }) {
       <div className="profile-content">
         <div className="profile-controller">
           <div className="profile-page-tabs">
-            <li ref={profileTabRef} onClick={handleTabClick} className="active">
+            <li
+              ref={profileTabRef}
+              onClick={handleTabClick}
+              className="profile-tab-active"
+            >
               My Profile
             </li>
             <li ref={postsTabRef} onClick={handleTabClick}>
@@ -158,14 +156,13 @@ export default function Profile({ userState, setUserState }) {
             </li>
           </div>
           <div className="avail-button-div">
-            <button onClick={handleMyAvailClick}>My Availability</button>
+            {/* <button onClick={handleMyAvailClick}>My Availability</button> */}
+            <Link to="/updateavail">
+              <button>My Availability</button>
+            </Link>
           </div>
         </div>
-        <div ref={calendarRef} className="calendar-container hide-content">
-          <div className="calendar-availability">
-            <UpdateAvailability />
-          </div>
-        </div>
+
         <div ref={infoRef} className="profile-info">
           {renderContent()}
         </div>
@@ -176,6 +173,16 @@ export default function Profile({ userState, setUserState }) {
           {renderComments()}
         </div>
       </div>
+      {/* <div ref={calendarRef} className="calendar-container ">
+        <div className="calendar-availability">
+          <UpdateAvailability />
+        </div>
+      </div> */}
+      {/* <div ref={calendarRef} className="calendar-container hide-content">
+        <div className="calendar-availability">
+          <UpdateAvailability />
+        </div>
+      </div> */}
     </div>
   );
 }

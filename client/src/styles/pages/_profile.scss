@@ -72,7 +72,7 @@
   // margin: 5px 10px;
 }
 
-.active {
+.profile-tab-active {
   background-color: $second-color;
 }
 
@@ -81,5 +81,35 @@
   button {
     width: 100%;
     box-shadow: 0 0 2px $second-color;
+  }
+}
+
+.calendar-container {
+  background-color: violet;
+  // position: absolute;
+  // background-color: $main-color;
+  // width: 500px;
+  // top: 0;
+  height: 500px;
+  z-index: 3;
+  .calendar-availability {
+    //   background-color: $main-color;
+    //   width: 100%;
+    height: 100%;
+    //   button {
+    //     background-color: purple;
+    //     // z-index: 8;
+    //   }
+  }
+  // &:before {
+  //   content: "";
+  //   position: absolute;
+  //   width: 100%;
+  //   height: 100%;
+  //   z-index: -1;
+  //   background-color: red;
+  // }
+  .fc .fc-media-screen {
+    height: 100%;
   }
 }

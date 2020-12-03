@@ -21,6 +21,8 @@ export default function Login({ userState, setUserState }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("log in button clicked....");
+    console.log("user");
     const user = { email, username, password };
     UserModel.login(user).then((data) => {
       setUserState(data.user);
