@@ -134,6 +134,7 @@ export default function UpdateAvailability() {
         ...userState,
         available: availObjectIds,
       });
+      history.push("/myprofile");
     });
   };
 
@@ -166,7 +167,9 @@ export default function UpdateAvailability() {
         eventClick={eventClickHandler} // destroys with eventRemove
         eventRemove={eventRemoveHandler}
       />
-      <button onClick={updateUserAvailability}>Update Availability</button>
+      <button className="update-avail-button" onClick={updateUserAvailability}>
+        Update Availability
+      </button>
     </>
   );
 }

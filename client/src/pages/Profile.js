@@ -36,6 +36,13 @@ export default function Profile({ userState, setUserState }) {
   }, []);
   const renderPosts = () => {
     if (userState) {
+      if (userState.posts.length === 0) {
+        return (
+          <div className="no-posts-div">
+            <p>You have no posts yet!</p>
+          </div>
+        );
+      }
       return userState.posts.map((post) => {
         return (
           <Post
@@ -51,6 +58,13 @@ export default function Profile({ userState, setUserState }) {
   const renderComments = () => {
     console.log("render comments funciton!");
     if (userState) {
+      if (userState.posts.length === 0) {
+        return (
+          <div className="no-posts-div">
+            <p>You have no comments yet!</p>
+          </div>
+        );
+      }
       return userState.comments.map((comment) => {
         // not sure what kind of data comment is... populated or id????
         return (
@@ -95,10 +109,7 @@ export default function Profile({ userState, setUserState }) {
       history.push("/register");
     }
   };
-  const handleMyAvailClick = (e) => {
-    //
-    calendarRef.current.classList.toggle("hide-content");
-  };
+
   const handleTabClick = (e) => {
     //
     tabRefs.forEach((tab) => {
@@ -130,12 +141,6 @@ export default function Profile({ userState, setUserState }) {
     }
   };
 
-  const handlePostsClick = (e) => {
-    //
-  };
-  const handleCommentsClick = (e) => {
-    //
-  };
   return (
     <div className="page-container">
       <div className="profile-content">
@@ -156,9 +161,8 @@ export default function Profile({ userState, setUserState }) {
             </li>
           </div>
           <div className="avail-button-div">
-            {/* <button onClick={handleMyAvailClick}>My Availability</button> */}
             <Link to="/updateavail">
-              <button>My Availability</button>
+              <button>Update Availability</button>
             </Link>
           </div>
         </div>
