@@ -25,6 +25,7 @@ export default function UpdateAvailability() {
         setAvailability(data.user.available);
         // setUpdatedAvail(data.user.available);
         setUserState(data.user);
+        console.log(data.user);
         console.log(userState);
       });
     } else {

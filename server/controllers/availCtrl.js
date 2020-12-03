@@ -68,16 +68,10 @@ const deleteAvail = (req, res) => {
       console.log("delteed avail: ", deletedAvail);
       db.User.findById(userId).then((user) => {
         const newAvail = user.available.filter((avail) => {
-          console.log(
-            `avail: ${avail} & deteldte avail id ${deletedAvail._id}`
-          );
-          console.log(avail === deletedAvail._id);
-          return avail !== deletedAvail._id;
+          return avail.toString() !== deletedAvail._id.toString();
         });
-        console.log("array: ", newAvail); // not filtering....
         user.available = newAvail;
         user.save();
-        console.log("delete avail ctrl user: ", user);
       });
       res.json({ avail: deletedAvail });
     })

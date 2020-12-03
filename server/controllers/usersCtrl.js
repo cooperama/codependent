@@ -190,15 +190,6 @@ const updateUser = (req, res) => {
         }
       });
     }
-    // db.User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    //   .then((updatedUser) => {
-    //     // Send user without the password???
-    //     res.json({ user: updatedUser });
-    //   })
-    //   .catch((err) => {
-    //     console.log("Error in users.updateUser: ", err);
-    //     res.json({ error: "Unable to get data" });
-    //   });
   });
 };
 
