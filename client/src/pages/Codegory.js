@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 import Moment from "react-moment";
 import { Post, AddPost, Loading } from "../components";
 
@@ -12,6 +13,17 @@ export default function Codegory({ userState, setUserState }) {
   const history = useHistory();
   // make api call for Codegory using id from params
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     const codeId = params.id;
     CodegoryModel.getCodegory(codeId).then((data) => {
       console.log(data);

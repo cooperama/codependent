@@ -3,12 +3,24 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 
 export default function Codegories({ userState, setUserState }) {
   const [codegories, setCodegories] = useState([]);
 
   // Make api call for all codegories
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     CodegoryModel.all().then((data) => {
       setCodegories(data.codegories);
     });

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLinkSquareAlt } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import PostModel from "../models/post";
+import UserModel from "../models/user";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
@@ -19,6 +20,17 @@ export default function PostPage({ userState, setUserState }) {
   const history = useHistory();
   useEffect(() => {
     //
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     console.log("params? ", params);
     let postId;
     if (editedPost) {

@@ -123,7 +123,7 @@ export default function Navbar({ userState, setUserState }) {
         <FontAwesomeIcon icon={faUserCircle} />
         {renderProfileContainer()}
       </div>
-      <UserNav />
+      {/* <UserNav /> */}
     </nav>
   );
 }

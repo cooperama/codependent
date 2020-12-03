@@ -3,6 +3,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import Moment from "react-moment";
 import CommentModel from "../models/comment";
 import PostModel from "../models/post";
+import UserModel from "../models/user";
 import { EditComment } from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
@@ -22,6 +23,18 @@ export default function Comment({
   const history = useHistory();
 
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);

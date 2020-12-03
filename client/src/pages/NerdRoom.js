@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 
 import { Post, AddPost } from "../components";
 
@@ -10,6 +11,17 @@ export default function NerdRoom({ userState, setUserState }) {
   const history = useHistory();
   // make api call for Codegory using id from params
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     const codeId = params.id;
     CodegoryModel.getNerdRoom().then((data) => {
       console.log(data);
@@ -29,7 +41,12 @@ export default function NerdRoom({ userState, setUserState }) {
       return codegory.posts.map((post) => {
         return (
           <div className="forum-post" key={post._id}>
-            <Post nerdRoom={codegory} post={post} />
+            <Post
+              nerdRoom={codegory}
+              post={post}
+              userState={userState}
+              setUserState={setUserState}
+            />
           </div>
         );
       });

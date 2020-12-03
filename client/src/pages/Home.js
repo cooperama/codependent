@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 
 import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 import PostModel from "../models/post";
 
 import { Post, MyListView } from "../components";
@@ -10,6 +11,17 @@ export default function Home({ userState, setUserState }) {
   const [recentPosts, setRecentPosts] = useState();
   const [recentForumPosts, setRecentForumPosts] = useState();
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     //get most recent posts
     PostModel.recentPosts().then((data) => {
       console.log(data);
@@ -34,12 +46,26 @@ export default function Home({ userState, setUserState }) {
   }, []);
   const renderCodePosts = () => {
     return recentPosts.map((post) => {
-      return <Post post={post} />;
+      return (
+        <Post
+          key={post._id}
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+        />
+      );
     });
   };
   const renderForumPosts = () => {
     return recentForumPosts.map((post) => {
-      return <Post post={post} />;
+      return (
+        <Post
+          key={post._id}
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+        />
+      );
     });
   };
   const renderCalendarList = () => {};

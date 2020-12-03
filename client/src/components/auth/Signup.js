@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import UserModel from "../../models/user";
 
-export default function Signup() {
+export default function Signup({ userState, setUserState }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [fullname, setFullname] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
+  const history = useHistory();
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -34,6 +35,17 @@ export default function Signup() {
     };
     UserModel.create(newUser).then((data) => {
       console.log(data);
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      // history.push(`/myprofile`);
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      // localStorage.setItem("uid", data.signedJwt);
+      // console.log("local storage... ", localStorage);
+      // UserModel.getUser().then((data) => {
+      //   console.log(data);
+      //   setUserState(data.user);
+      //   history.push(`/myprofile`);
+      // });
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     });
   };
   return (

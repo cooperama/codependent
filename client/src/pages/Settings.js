@@ -14,6 +14,17 @@ export default function Settings({ userState, setUserState }) {
   const history = useHistory();
 
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     setUsername(userState.username);
     setEmail(userState.email);
     setFullname(userState.fullname);

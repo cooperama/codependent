@@ -10,6 +10,7 @@ const token = (req, res) => {
 };
 
 const login = (req, res) => {
+  console.log("logging in... user controller: ", req.body);
   db.User.findOne({ email: req.body.email })
     .populate("posts comments available paired")
     // .populate("posts")
@@ -17,6 +18,7 @@ const login = (req, res) => {
     // .populate("available")
     // .populate("paired")
     .then((user) => {
+      console.log("logging in... user controller findOne: ", user);
       if (!user) return console.log("no user found");
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
         if (err) return console.log("error with passwords");
@@ -37,6 +39,8 @@ const login = (req, res) => {
             user,
           });
         }
+        console.log(" not is match.....", isMatch);
+        res.json({ error: "Passwords do not match" });
       });
     })
     .catch((err) => console.log("error in user log in: ", err));

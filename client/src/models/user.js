@@ -13,6 +13,7 @@ class UserModel {
   }
 
   static getUser() {
+    console.log("get user model: ", localStorage.uid);
     return (
       fetch(`${url}/myprofile`, {
         method: "GET",
@@ -41,6 +42,7 @@ class UserModel {
   }
 
   static login(user) {
+    console.log("logging in user model client...", user);
     return fetch(`${url}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

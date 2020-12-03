@@ -11,6 +11,7 @@ import AvailModel from "../../models/avail";
 import { useHistory } from "react-router-dom";
 
 export default function UpdateAvailability() {
+  // export default function UpdateAvailability({ userState, setUserState }) {
   // If I try to set availability for the calendar events from the userState... it gives me an error.
   const [availability, setAvailability] = useState([]);
   // const [updatedAvail, setUpdatedAvail] = useState([]);
