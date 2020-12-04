@@ -20,17 +20,21 @@ export default function FindBuddy({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="find-buddy-container">
+        {" "}
+        <div className="codegorypage-heading postpage-post-heading">
+          <h1>Find a Study Buddy</h1>
+        </div>
         <div className="buddy-instructions">
-          <p>Find a Study Buddy!</p>
-          <ol>
-            <li>1. Choose an available time</li>
-            <li>2. Select overlapping time</li>
+          {/* <p>Find a Study Buddy!</p>
+          <ol> */}
+          <li>1. Choose an available time</li>
+          {/* <li>2. Select overlapping time</li>
             <li>3. Send request</li>
-          </ol>
+          </ol> */}
         </div>
-        <div className="all-availability">
-          <AllUsersAvail userState={userState} setUserState={setUserState} />
-        </div>
+      </div>
+      <div className="all-availability">
+        <AllUsersAvail userState={userState} setUserState={setUserState} />
       </div>
     </div>
   );

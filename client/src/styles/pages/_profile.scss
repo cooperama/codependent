@@ -2,9 +2,15 @@
   background: $main-color;
   color: $light-font;
   width: 100%;
-  margin: auto;
+  margin: 50px auto;
   min-width: 510px;
   max-width: 660px;
+  .each-comment-container,
+  .each-post {
+    background-color: $second-color;
+    border-bottom: 3px solid $main-color !important;
+    margin-top: 20px;
+  }
 }
 .profile-info {
   background: $second-color;
@@ -87,7 +93,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  p {
-    // height: 100%;
-  }
+}
+
+.profile-page-comment,
+.profile-page-posts {
+  background: #283248;
+  width: 100%;
+  padding: 20px;
 }

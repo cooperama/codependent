@@ -86,11 +86,12 @@
       justify-content: space-between;
       width: 180px;
     }
+    p {
+      font-size: 0.8rem;
+    }
     span {
       padding-left: 10px;
-    }
-    .view-thread {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
   .comment-settings {

@@ -37,7 +37,7 @@ export default function SideNav() {
           <p>
             <span>Buddy Up</span>
             <span>
-              <FontAwesomeIcon icon={faCode} />
+              <FontAwesomeIcon icon={faPeopleArrows} />
             </span>
           </p>
         </Link>
@@ -47,7 +47,7 @@ export default function SideNav() {
           <p>
             <span>Collab Lab</span>
             <span>
-              <FontAwesomeIcon icon={faPeopleArrows} />
+              <FontAwesomeIcon icon={faCode} />
             </span>
           </p>
         </Link>

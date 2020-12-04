@@ -39,9 +39,9 @@ export default function Navbar({ userState, setUserState }) {
     history.push("/register");
   };
   const renderSignup = () => {
-    if (userState) {
+    if (!userState) {
       return (
-        <li onClick={handleSignoutClick}>
+        <li>
           <Link to="/register">
             <span>
               <FontAwesomeIcon icon={faSignOutAlt} />

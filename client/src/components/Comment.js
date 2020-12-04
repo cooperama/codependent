@@ -6,7 +6,7 @@ import PostModel from "../models/post";
 import UserModel from "../models/user";
 import { EditComment } from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 export default function Comment({
   parentPost,
   userState,
@@ -22,18 +22,6 @@ export default function Comment({
   const history = useHistory();
 
   useEffect(() => {
-    // if (localStorage.getItem("uid")) {
-    //   console.log(localStorage);
-    //   UserModel.getUser().then((data) => {
-    //     console.log(data);
-    //     if (data.user) {
-    //       setUserState(data.user);
-    //     } else {
-    //       console.log("no user in profile useEffect..");
-    //     }
-    //   });
-    // }
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);
@@ -105,7 +93,7 @@ export default function Comment({
             <p className="view-thread">
               View Thread
               <span>
-                <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                <FontAwesomeIcon icon={faChevronRight} />
               </span>
             </p>
 
@@ -152,7 +140,8 @@ export default function Comment({
             <p>
               <Moment fromNow ago>
                 {comment.createdAt}
-              </Moment>
+              </Moment>{" "}
+              ago
             </p>
           </div>
           {/* <div className="comment-settings">

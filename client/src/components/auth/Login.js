@@ -33,7 +33,8 @@ export default function Login({ userState, setUserState }) {
       UserModel.getUser().then((data) => {
         console.log(data);
         setUserState(data.user);
-        history.push(`/myprofile`);
+        history.push(`/`);
+        // history.push(`/myprofile`);
       });
       // history.push(`/myprofile/${data.user._id}`);
     });

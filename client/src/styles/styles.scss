@@ -13,15 +13,6 @@ $blue2-color: #124;
 $black-color: #222;
 $red-color: #500;
 
-// Color scheme:
-// $dark-color: #043F61;
-// $light-color: #32b1fa;
-// $shade-color: #144866;
-
-// $main-color: #043f61;
-// $accent-color: #32b1fa;
-// $second-color: #144866;
-
 $medium-color: #0991e0;
 $md-shade-color: #0875b3;
 
@@ -48,12 +39,10 @@ $navbar-width: 160px;
   color: $light-font;
   font-family: "Open Sans", sans-serif;
   font-weight: lighter;
-  white-space: pre-line; //
-  // font-family: "Press Start 2P", cursive;
+  white-space: pre-line;
 
   a {
     text-decoration: none;
-    // color: $dark-font;
   }
 
   li {
@@ -73,9 +62,6 @@ $navbar-width: 160px;
   }
   .logo-emphasis {
     font-family: "Major Mono Display", monospace;
-    // background: $blue-color;
-    // padding: 5px;
-    // font-size: 1.1rem;
   }
   input,
   textarea {
@@ -85,12 +71,6 @@ $navbar-width: 160px;
     border: none;
     border-bottom: 1px solid $neutral-clr;
     color: $dark-font;
-    // &:focus,
-    // &:active {
-    //   ::placeholder {
-    //     display: none;
-    //   }
-    // }
   }
   textarea {
     white-space: pre-line;
@@ -105,14 +85,11 @@ $navbar-width: 160px;
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 3px;
-    // &:active,
     &:focus,
     &:hover {
       background-color: $deep-red;
-      // border: 2px solid $deep-red;
       transition: all 200ms ease;
       transition: border 200ms ease;
-      // color: $deep-red;
     }
   }
   .delete-button-confirm {
@@ -121,17 +98,10 @@ $navbar-width: 160px;
   }
 }
 
-// Set main content to take whole screen minus height and width of navs
 .page-container {
   position: relative;
-  // bottom: 0;
-  // right: $navbar-width;
-  // left: $navbar-width;
   margin: auto;
-  // margin: calc(30px + #{$navbar-height}) auto;
-  // margin-bottom: 200px;
-  // height: calc(95vh - #{$navbar-height});
-  width: calc(95vw - #{$navbar-width * 2});
+  width: calc(95vw - #{$navbar-width});
 }
 
 .hide-content {
@@ -152,3 +122,4 @@ $navbar-width: 160px;
 @import "components/posts";
 @import "components/forms";
 @import "components/calendar";
+@import "./mediaqueries";

@@ -9,15 +9,12 @@ import UserModel from "../models/user";
 
 export default function Codegory({ userState, setUserState }) {
   const [codegory, setCodegory] = useState({});
-  // const [nerdRoom, setNerdRoom] = useState(false);
   const addPostRef = useRef();
   const params = useParams();
 
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
@@ -25,14 +22,9 @@ export default function Codegory({ userState, setUserState }) {
         }
       });
     }
-    // const codeId = params.id;
     CodegoryModel.getCodegory(params.id).then((data) => {
-      // CodegoryModel.getCodegory(codeId).then((data) => {
       console.log(data);
       setCodegory(data.codegory);
-      // if (data.codegory.topic === "Nerd Room") {
-      //   setNerdRoom(true);
-      // }
     });
   }, []);
 

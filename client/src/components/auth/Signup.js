@@ -5,7 +5,7 @@ import UserModel from "../../models/user";
 export default function Signup({ userState, setUserState }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
-  const [fullname, setFullname] = useState();
+  // const [fullname, setFullname] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
   const history = useHistory();
@@ -15,9 +15,9 @@ export default function Signup({ userState, setUserState }) {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const handleFullnameChange = (e) => {
-    setFullname(e.target.value);
-  };
+  // const handleFullnameChange = (e) => {
+  //   setFullname(e.target.value);
+  // };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -30,7 +30,7 @@ export default function Signup({ userState, setUserState }) {
     const newUser = {
       username,
       email,
-      fullname,
+      // fullname,
       password,
     };
     UserModel.create(newUser).then((data) => {
@@ -69,7 +69,7 @@ export default function Signup({ userState, setUserState }) {
             id="email"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <input
             placeholder="full name"
             onChange={handleFullnameChange}
@@ -77,7 +77,7 @@ export default function Signup({ userState, setUserState }) {
             name="fullname"
             id="fullname"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <input
             placeholder="password"

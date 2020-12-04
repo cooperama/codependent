@@ -20,17 +20,25 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
         <>
           <div className="post-content ">
             <h3 className="truncated-title">{postContent.title}</h3>
-            <p>by {postContent.author.username}</p>
+            <p>
+              {postContent.codegory.topic === "Nerd Room"
+                ? ""
+                : postContent.author.username}
+            </p>
 
             <p className="truncated-content">{postContent.content}</p>
           </div>
           <div className="post-content-second">
-            <p>{postContent.codegory.topic}</p>{" "}
+            <p>
+              {postContent.codegory.topic === "Nerd Room"
+                ? postContent.author.username
+                : postContent.codegory.topic}
+            </p>
             <p>
               <Moment fromNow ago>
                 {postContent.createdAt}
               </Moment>
-              ago
+              <span> ago</span>
             </p>
             <>comments: {postContent.comments.length}</>
             <div className="view-post-link">

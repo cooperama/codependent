@@ -40,9 +40,11 @@ export default function EditPost({
     // create post in dbf
     PostModel.update(post._id, editedPost).then((data) => {
       console.log("post mode create: ", data);
-      setEditedPost(data.post);
-      editPostRef.current.classList.add("hide-content");
-      // history.push(`/post/${data.post._id}`);
+      PostModel.getPost(data.post._id).then((data) => {
+        setEditedPost(data.post);
+        editPostRef.current.classList.add("hide-content");
+        // history.push(`/post/${data.post._id}`);
+      });
     });
     editPostBtnRef.current.innerText = "edit";
   };
