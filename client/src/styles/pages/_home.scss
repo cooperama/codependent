@@ -63,13 +63,14 @@
 
 .calendar-list {
   background-color: $main-color;
-  height: 100vh;
+  height: 110vh;
   width: 30vw;
   position: absolute;
   right: -200px;
   top: $navbar-height;
   color: $light-font;
   transition: right 0.5s ease;
+  border-bottom-left-radius: 50%;
   &:hover {
     right: 0;
     transition: right 0.5s ease;
