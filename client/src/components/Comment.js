@@ -16,6 +16,7 @@ export default function Comment({
   commentId,
 }) {
   const [comment, setComment] = useState();
+  const [sameUser, setSameUser] = useState();
   const editCommentRef = useRef();
   const deleteCommentRef = useRef();
   const params = useParams();
@@ -25,7 +26,15 @@ export default function Comment({
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);
+      if (data.comment.author._id === userState._id) {
+        console.log("they are the same!");
+        setSameUser(true);
+      } else {
+        setSameUser(false);
+        console.log("they are not the same!");
+      }
     });
+    console.log();
   }, []);
 
   const editCommentClick = (e) => {
@@ -68,63 +77,40 @@ export default function Comment({
     }
   };
 
-  const renderDeleteCommentForm = () => {
-    if (userState) {
-      return (
-        <>
-          <button className="delete-button-confirm" onClick={handleDelete}>
-            confirm delete
-          </button>
-        </>
-      );
-    } else {
-      console.log("log in to add post or comment or whatever");
-      // history.push("/register");
-    }
-  };
-
   const renderButtons = () => {
     if (profilePage) {
       return (
         <>
-          {/* <div className="comment-settings"> */}
           <Link to={`/post/${comment.parentPost._id}`}>
-            {/* <div className="view-post-link"> */}
             <p className="view-thread">
               View Thread
               <span>
                 <FontAwesomeIcon icon={faChevronRight} />
               </span>
             </p>
-
-            {/* </div> */}
           </Link>
-          {/* </div> */}
         </>
       );
     } else {
-      return (
-        <>
-          <div className="comment-settings">
-            <div className="user-verified">
-              <button onClick={editCommentClick}>edit</button>
-              <button onClick={deleteCommentClick}>delete</button>
+      if (sameUser) {
+        return (
+          <>
+            <div className="comment-settings">
+              <div className="user-verified">
+                <button onClick={editCommentClick}>edit</button>
+                <button
+                  ref={deleteCommentRef}
+                  className="delete-button-confirm  hide-content"
+                  onClick={handleDelete}
+                >
+                  confirm delete
+                </button>
+                <button onClick={deleteCommentClick}>delete</button>
+              </div>
             </div>
-          </div>
-          {/* <div
-            ref={editCommentRef}
-            className="postpage-editcomment hide-content"
-          >
-            {renderEditCommentForm()}
-          </div> */}
-          <div
-            ref={deleteCommentRef}
-            className="postpage-deletecomment hide-content"
-          >
-            {renderDeleteCommentForm()}
-          </div>
-        </>
-      );
+          </>
+        );
+      }
     }
   };
 
@@ -145,24 +131,6 @@ export default function Comment({
             </p>
           </div>
 
-          {/* <div className="comment-settings">
-            <div className="user-verified">
-              <button onClick={editCommentClick}>edit</button>
-              <button onClick={deleteCommentClick}>delete</button>
-            </div>
-          </div>
-          <div
-            ref={editCommentRef}
-            className="postpage-editcomment hide-content"
-          >
-            {renderEditCommentForm()}
-          </div>
-          <div
-            ref={deleteCommentRef}
-            className="postpage-deletecomment hide-content"
-          >
-            {renderDeleteCommentForm()}
-          </div> */}
           {renderButtons()}
         </div>
         <div ref={editCommentRef} className="postpage-editcomment hide-content">

@@ -12,6 +12,7 @@ import UserModel from "../models/user";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
+  const [sameUser, setSameUser] = useState();
   const [newComment, setNewComment] = useState();
   const [editedPost, setEditedPost] = useState();
   const editPostRef = useRef();
@@ -42,6 +43,14 @@ export default function PostPage({ userState, setUserState }) {
 
     PostModel.getPost(postId).then((data) => {
       setPost(data.post);
+      console.log(data.post.author._id);
+      if (data.post.author._id === userState._id) {
+        console.log("they are the same!");
+        setSameUser(true);
+      } else {
+        setSameUser(false);
+        console.log("they are not the same!");
+      }
     });
     // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
@@ -100,9 +109,9 @@ export default function PostPage({ userState, setUserState }) {
     if (userState) {
       return (
         <>
-          <button className="delete-button-confirm" onClick={handleDelete}>
+          {/* <button className="delete-button-confirm" onClick={handleDelete}>
             confirm delete
-          </button>
+          </button> */}
         </>
       );
     } else {
@@ -118,6 +127,29 @@ export default function PostPage({ userState, setUserState }) {
       history.push(`/codegories`);
     });
   };
+
+  const renderButtons = () => {
+    if (sameUser) {
+      return (
+        <div className="user-verified">
+          <button ref={editPostBtnRef} onClick={editPostClick}>
+            edit
+          </button>
+          <button
+            ref={deletePostRef}
+            className="delete-button-confirm hide-content"
+            onClick={handleDelete}
+          >
+            confirm
+          </button>
+          <button ref={deletePostBtnRef} onClick={deletePostClick}>
+            delete
+          </button>
+        </div>
+      );
+    }
+  };
+
   const renderComments = () => {
     //
     if (post.comments.length === 0) {
@@ -157,16 +189,7 @@ export default function PostPage({ userState, setUserState }) {
         <div className="postpage-post-heading">
           <h1>{post.title}</h1>
         </div>
-        <div className="url-content">
-          {post.link && linkDiv()}
-          {/* <iframe
-            title={post.title}
-            src={post.link}
-            frameborder="0"
-            onLoad={iframeLoaded}
-            scrolling="no"
-          ></iframe> */}
-        </div>
+        <div className="url-content">{post.link && linkDiv()}</div>
         <div className="postpage-post-content ">
           <p>{post.content}</p>
         </div>
@@ -183,14 +206,7 @@ export default function PostPage({ userState, setUserState }) {
             </p>
           </div>
           <div>
-            <div className="user-verified">
-              <button ref={editPostBtnRef} onClick={editPostClick}>
-                edit
-              </button>
-              <button ref={deletePostBtnRef} onClick={deletePostClick}>
-                delete
-              </button>
-            </div>
+            {renderButtons()}
             <div>
               <button onClick={addCommentClick}>
                 comment
@@ -206,9 +222,6 @@ export default function PostPage({ userState, setUserState }) {
         </div>
         <div ref={editPostRef} className="postpage-editPost hide-content">
           {renderEditPostForm()}
-        </div>
-        <div ref={deletePostRef} className="postpage-deletePost hide-content">
-          {renderDeletePostForm()}
         </div>
         <div className="postpage-comments-container">
           {post.comments && renderComments()}

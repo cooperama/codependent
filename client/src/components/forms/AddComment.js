@@ -12,15 +12,9 @@ export default function AddComment({
   setNewComment,
 }) {
   const [content, setContent] = useState();
-  // const [post, setPost] = useState();
-
-  const params = useParams();
-  const history = useHistory();
 
   useEffect(() => {
-    // const codegoryId = params.id;
-    // console.log("codegory id", codegoryId);
-    // how to get user???
+    //
   }, []);
 
   const handleSubmit = (e) => {
@@ -35,9 +29,11 @@ export default function AddComment({
       console.log("Comment model create: ", data);
       // setting new comment state (PostPage)
       setNewComment(data.comment);
+      // form not emptying....
+      setContent(null);
+      e.target.value = "";
       addCommentRef.current.classList.add("hide-content");
     });
-    e.target.value = "";
   };
   const handleContentChange = (e) => {
     setContent(e.target.value);
@@ -50,6 +46,7 @@ export default function AddComment({
           name="content"
           id="content"
           placeholder="be nice"
+          value={content}
         ></textarea>
       </div>
       <div>

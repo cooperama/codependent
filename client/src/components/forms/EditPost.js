@@ -39,7 +39,7 @@ export default function EditPost({
     console.log(post);
     // create post in dbf
     PostModel.update(post._id, editedPost).then((data) => {
-      console.log("post mode create: ", data);
+      console.log("post model update: ", data);
       PostModel.getPost(data.post._id).then((data) => {
         setEditedPost(data.post);
         editPostRef.current.classList.add("hide-content");
