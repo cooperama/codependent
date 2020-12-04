@@ -81,6 +81,9 @@ export default function Settings({ userState, setUserState }) {
   };
   return (
     <div className="page-container">
+      <div className="update-heading">
+        <h1>Update Profile</h1>
+      </div>
       <div className="edit-profile-container">
         <form onSubmit={handleSubmit} className="edit-profile-form">
           <div className="form-group">
@@ -153,7 +156,7 @@ export default function Settings({ userState, setUserState }) {
             multiple={false}
             onDone={({ base64 }) => setPhoto(base64)}
           /> */}
-          <input placeholder="" type="submit" value="edit profile" />
+          <input placeholder="" type="submit" value="edit" />
         </form>
       </div>
     </div>

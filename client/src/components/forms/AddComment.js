@@ -12,7 +12,7 @@ export default function AddComment({
   setNewComment,
 }) {
   const [content, setContent] = useState();
-
+  const history = useHistory();
   useEffect(() => {
     //
   }, []);
@@ -33,6 +33,9 @@ export default function AddComment({
       setContent(null);
       e.target.value = "";
       addCommentRef.current.classList.add("hide-content");
+      //////////////
+      // history.push(`/post/${data.comment.parentPost}`);
+      /////^^^^^^^^
     });
   };
   const handleContentChange = (e) => {

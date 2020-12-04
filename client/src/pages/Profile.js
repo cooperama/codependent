@@ -143,6 +143,9 @@ export default function Profile({ userState, setUserState }) {
 
   return (
     <div className="page-container">
+      <div className="profile-heading">
+        {userState && <h1>{userState.username}</h1>}
+      </div>
       <div className="profile-content">
         <div className="profile-controller">
           <div className="profile-page-tabs">

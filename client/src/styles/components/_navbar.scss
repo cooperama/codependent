@@ -27,13 +27,12 @@ nav {
 }
 
 .profile-nav {
-  width: 160px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  // z-index: 2;
-  // background-color: $main-color;
+  padding-right: 30px;
+  background-color: $main-color;
   span {
     margin: 0 18px;
     cursor: pointer;
@@ -47,13 +46,13 @@ nav {
 }
 
 .profile-dropdown {
-  // width: $navbar-width;
   background-color: $main-color;
-  // width: calc(#{$navbar-width} - 25px);
   width: calc(#{$navbar-width} + 25px);
   position: absolute;
   top: $navbar-height;
-  left: -15px;
+  left: 0;
+  z-index: -3;
+  transition: all 0.5s ease;
   li {
     width: 100%;
     display: inline-block;
@@ -66,7 +65,5 @@ nav {
 
 .hide-profile-dropdown {
   top: -200px;
-  // transform: all 2s ease;
-  // background: red;
-  // z-index: -1;
+  transition: all 0.5s ease;
 }

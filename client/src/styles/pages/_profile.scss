@@ -101,3 +101,16 @@
   width: 100%;
   padding: 20px;
 }
+.profile-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 40px;
+  border-bottom: 2px solid $main-color;
+  h1 {
+    font-family: "Major Mono Display", monospace;
+    font-size: 2.5rem;
+  }
+}

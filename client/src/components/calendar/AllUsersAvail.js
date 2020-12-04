@@ -34,7 +34,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
       const backgroundEvents = data.avail.map((event) => {
         return {
           ...event,
-          backgroundColor: "#cece46",
+          backgroundColor: "#025",
         };
       });
       setAllAvailable(backgroundEvents);

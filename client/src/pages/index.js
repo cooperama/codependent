@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import PostPage from "./PostPage";
 import UpdateAvail from "./UpdateAvail";
 import NerdRoom from "./NerdRoom";
+import CollabLab from "./CollabLab";
 import Settings from "./Settings";
 
 export {
@@ -20,4 +21,5 @@ export {
   UpdateAvail,
   PostPage,
   NerdRoom,
+  CollabLab,
 };
