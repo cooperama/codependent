@@ -57,6 +57,7 @@ $navbar-width: 160px;
   }
   body {
     background-color: $background-color;
+    overflow-x: hidden;
   }
   .cursor {
     cursor: pointer;

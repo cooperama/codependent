@@ -4,6 +4,12 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
 import PostModel from "../models/post";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendar,
+  faChevronRight,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { Post, MyListView } from "../components";
 
@@ -27,12 +33,12 @@ export default function Home({ userState, setUserState }) {
       console.log(data);
       const codePosts = [];
       const forumPosts = [];
-      for (let i = 0; codePosts.length < 5 && i < data.posts.length; i++) {
+      for (let i = 0; codePosts.length < 3 && i < data.posts.length; i++) {
         if (data.posts[i].codegory.topic !== "Nerd Room") {
           codePosts.push(data.posts[i]);
         }
       }
-      for (let i = 0; forumPosts.length < 5 && i < data.posts.length; i++) {
+      for (let i = 0; forumPosts.length < 3 && i < data.posts.length; i++) {
         if (data.posts[i].codegory.topic === "Nerd Room") {
           forumPosts.push(data.posts[i]);
         }
@@ -71,23 +77,42 @@ export default function Home({ userState, setUserState }) {
       <div className="page-container">
         <div className="home-container">
           <div className="main-content">
-            <div>
-              <p>In Codegories</p>
+            <div className="home-banner-div">
+              <h1>co[de]pendent</h1>
             </div>
-            <div className="recent-code-posts">
-              {recentPosts && renderCodePosts()}
+            {/* <h1>Recent Activty</h1>
+            <FontAwesomeIcon icon={faChevronDown} /> */}
+            <div className="home-post-containers">
+              <div className="vertical-text">
+                <p>In Codegories</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+              <div className="recent-code-posts">
+                {recentPosts && renderCodePosts()}
+              </div>
             </div>
-            <div>
-              <p>In the Forum</p>
-            </div>
-            <div className="recent-nerd-posts">
-              {recentForumPosts && renderForumPosts()}
+            <div className="home-post-containers">
+              <div className="vertical-text">
+                <p>In the Forum</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+              <div className="recent-code-posts">
+                {recentForumPosts && renderForumPosts()}
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="calendar-list">
-        Gonna wanna render calendar list for the week. (MyListView)
+        <div className="calendar-icon-div">
+          <span>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </span>
+          <span>
+            <FontAwesomeIcon icon={faCalendar} />
+          </span>
+        </div>
+        {/* Gonna wanna render calendar list for the week. (MyListView) */}
       </div>
     </>
   );
