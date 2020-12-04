@@ -18,14 +18,10 @@ The user can view comments on each post page, add a comment, edit, and delete it
 
 ## Wireframes
 
-![addcomment](./client/public/wireframes/addcomment.png)
-![choosetime](./client/public/wireframes/choosetime.png)
-![findbuddy](./client/public/wireframes/findbuddy.png)
-![homepage](./client/public/wireframes/homepage.png)
-![landing](./client/public/wireframes/landing.png)
-![postpage](./client/public/wireframes/postpage.png)
-![profile](./client/public/wireframes/profile.png)
-![updateavail](./client/public/wireframes/updateavail.png)
+![landing](./client/public/wireframes/landing.png)![homepage](./client/public/wireframes/homepage.png)
+![profile](./client/public/wireframes/profile.png)![updateavail](./client/public/wireframes/updateavail.png)
+![postpage](./client/public/wireframes/postpage.png)![addcomment](./client/public/wireframes/addcomment.png)
+![findbuddy](./client/public/wireframes/findbuddy.png)![choosetime](./client/public/wireframes/choosetime.png)
 
 ## ERD
 
