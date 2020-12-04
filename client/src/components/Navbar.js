@@ -108,7 +108,7 @@ export default function Navbar({ userState, setUserState }) {
       return (
         <>
           <li>
-            <Link to="/register">Log In</Link>
+            <Link to="/register">Sign In</Link>
           </li>
         </>
       );
