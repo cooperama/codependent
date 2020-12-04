@@ -5,21 +5,13 @@ $second-color: #283248;
 $accent-color: #0875b3;
 $neutral-color: #6a6d73;
 $lighter-color: #b0c6d9;
+$button-color: rgb(10, 36, 74);
 
 // matching favicon colors
 $blue-color: #025;
 $blue2-color: #124;
 $black-color: #222;
 $red-color: #500;
-
-// Color scheme:
-// $dark-color: #043F61;
-// $light-color: #32b1fa;
-// $shade-color: #144866;
-
-// $main-color: #043f61;
-// $accent-color: #32b1fa;
-// $second-color: #144866;
 
 $medium-color: #0991e0;
 $md-shade-color: #0875b3;
@@ -45,10 +37,12 @@ $navbar-width: 160px;
   padding: 0;
   box-sizing: border-box;
   color: $light-font;
+  font-family: "Open Sans", sans-serif;
+  font-weight: lighter;
+  white-space: pre-line;
 
   a {
     text-decoration: none;
-    // color: $dark-font;
   }
 
   li {
@@ -56,16 +50,18 @@ $navbar-width: 160px;
   }
   body {
     background-color: $background-color;
+    overflow-x: hidden;
   }
   .cursor {
     cursor: pointer;
   }
   .logo {
-    padding-left: 5px;
+    padding-left: 15px;
+    font-size: 1rem;
+    font-family: "Major Mono Display", monospace;
   }
   .logo-emphasis {
-    // background: $blue-color;
-    padding: 5px;
+    font-family: "Major Mono Display", monospace;
   }
   input,
   textarea {
@@ -75,12 +71,6 @@ $navbar-width: 160px;
     border: none;
     border-bottom: 1px solid $neutral-clr;
     color: $dark-font;
-    // &:focus,
-    // &:active {
-    //   ::placeholder {
-    //     display: none;
-    //   }
-    // }
   }
   textarea {
     white-space: pre-line;
@@ -95,14 +85,11 @@ $navbar-width: 160px;
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 3px;
-    // &:active,
     &:focus,
     &:hover {
       background-color: $deep-red;
-      // border: 2px solid $deep-red;
       transition: all 200ms ease;
       transition: border 200ms ease;
-      // color: $deep-red;
     }
   }
   .delete-button-confirm {
@@ -111,20 +98,14 @@ $navbar-width: 160px;
   }
 }
 
-// Set main content to take whole screen minus height and width of navs
 .page-container {
   position: relative;
-  // bottom: 0;
-  // right: $navbar-width;
-  // left: $navbar-width;
-  margin: calc(30px + #{$navbar-height}) auto;
-  margin-bottom: 200px;
-  // height: calc(95vh - #{$navbar-height});
-  width: calc(95vw - #{$navbar-width * 2});
+  margin: auto;
+  width: calc(95vw - #{$navbar-width});
 }
 
 .hide-content {
-  display: none;
+  display: none !important;
 }
 
 // Imports
@@ -140,3 +121,5 @@ $navbar-width: 160px;
 @import "components/sidenav";
 @import "components/posts";
 @import "components/forms";
+@import "components/calendar";
+@import "./mediaqueries";

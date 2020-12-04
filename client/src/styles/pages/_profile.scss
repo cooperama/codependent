@@ -1,21 +1,25 @@
 .profile-content {
-  // background: pink;
   background: $main-color;
   color: $light-font;
   width: 100%;
-  margin: auto;
-  // height: 100vh;
-  // position: absolute;
-  // top: 0;
-  // top: calc(0px - #{$navbar-height});
-  // right: calc(0px - #{$navbar-width});
+  margin: 50px auto;
+  min-width: 510px;
+  max-width: 660px;
+  .each-comment-container,
+  .each-post {
+    background-color: $second-color;
+    border-bottom: 3px solid $main-color !important;
+    margin-top: 20px;
+  }
 }
 .profile-info {
   background: $second-color;
   width: 100%;
+  height: 200px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   .profile-names {
     width: 40%;
     display: flex;
@@ -46,7 +50,54 @@
     }
   }
 }
-
+.profile-controller {
+  display: flex;
+  justify-content: space-between;
+  .profile-page-tabs {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    li {
+      padding: 10px;
+      width: 110px;
+      border-right: 1px solid $second-color;
+      border-top: 1px solid $second-color;
+      font-size: 0.8rem;
+      &:hover {
+        background-color: $second-color;
+        cursor: pointer;
+        transition: background-color 200ms ease;
+      }
+    }
+  }
+}
 .profile-page-posts {
   // margin: 5px 10px;
+}
+
+.profile-tab-active {
+  background-color: $second-color;
+}
+
+.avail-button-div {
+  width: 170px;
+  button {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 2px $second-color;
+  }
+}
+
+.no-posts-div {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page-comment,
+.profile-page-posts {
+  background: #283248;
+  width: 100%;
+  padding: 20px;
 }

@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import PostModel from "../models/post";
 
 export default function Post({ nerdRoom, post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
-    //
     console.log(post);
     PostModel.getPost(post._id).then((data) => {
       setPostContent(data.post);
     });
   }, []);
-
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Need to render data from Mongo with \n!!!
 
   const renderPostContent = () => {
     if (postContent) {
@@ -23,22 +20,32 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
         <>
           <div className="post-content ">
             <h3 className="truncated-title">{postContent.title}</h3>
-            <p>by {postContent.author.username}</p>
+            <p>
+              {postContent.codegory.topic === "Nerd Room"
+                ? ""
+                : postContent.author.username}
+            </p>
 
             <p className="truncated-content">{postContent.content}</p>
           </div>
           <div className="post-content-second">
-            <p>{postContent.codegory.topic}</p>
-            <p>comments: {postContent.comments.length}</p>
-            {/* {postContent.tags.length > 0 && (
-              <p>tags: {postContent.tags.forEach((tag) => tag)}</p>
-            )} */}
-
+            <p>
+              {postContent.codegory.topic === "Nerd Room"
+                ? postContent.author.username
+                : postContent.codegory.topic}
+            </p>
+            <p>
+              <Moment fromNow ago>
+                {postContent.createdAt}
+              </Moment>
+              <span> ago</span>
+            </p>
+            <>comments: {postContent.comments.length}</>
             <div className="view-post-link">
               <Link to={`/post/${postContent._id}`}>
                 {nerdRoom ? "View Thread" : "View Post"}
                 <span>
-                  <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                  <FontAwesomeIcon icon={faChevronRight} />
                 </span>
               </Link>
             </div>

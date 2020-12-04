@@ -2,33 +2,23 @@
   height: 100%;
   width: 100%;
   display: flex;
+  display: column !important;
   justify-content: space-around;
   align-items: center;
 }
 
 .main-content {
-  background-color: $main-color;
-  // color: $light-font;
-  height: 80vh;
-  // width: 50vw;
-  width: 70%;
   min-width: 300px;
-  // max-width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  // div {
-  //   background-color: $second-color;
-  //   height: 200px;
-  //   width: 80%;
-  // }
 }
 
 .recent-code-posts {
-  background-color: $second-color;
   height: 35%;
-  width: 80%;
+  width: 650px;
+  margin-bottom: 20px;
   overflow: scroll;
   &::-webkit-scrollbar {
     background-color: transparent;
@@ -37,31 +27,103 @@
     background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: $accent-color;
-    border-radius: 5px;
+    background-color: $red-color;
+    // border-radius: 5px;
   }
 }
 
-.recent-nerd-posts {
-  background-color: $second-color;
-  height: 35%;
-  width: 80%;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: $accent-color;
-    border-radius: 5px;
+.home-banner-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 40px;
+  border-bottom: 2px solid $main-color;
+  h1 {
+    font-family: "Major Mono Display", monospace;
   }
 }
+
+.home-post-containers {
+  // background: red;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 75vw;
+  .vertical-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // transform: rotate(-90deg);
+    width: 160px;
+    position: relative;
+    top: 150px;
+    right: -30px;
+    height: 50px;
+    // background: green;
+    font-size: 2rem;
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   // height: 100%;
+    //   right: 200px;
+    //   top: 0;
+    //   z-index: -1;
+    //   // width: 100%;
+    //   border-bottom: 30px solid transparent;
+    //   // border-left: 10px solid transparent;
+    //   border-top: 20px solid transparent;
+    //   border-right: 200px solid $accent-color;
+    // }
+  }
+}
+
+// .recent-nerd-posts {
+//   background-color: $second-color;
+//   height: 35%;
+//   width: 100%;
+//   overflow: scroll;
+//   &::-webkit-scrollbar {
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar-corner {
+//     background-color: transparent;
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     background-color: $red-color;
+//     // border-radius: 5px;
+//   }
+// }
 
 .calendar-list {
   background-color: $main-color;
-  height: 70vh;
+  height: 110vh;
   width: 30vw;
+  // position: fixed;
+  position: absolute;
+  right: -265px;
+  // right: -200px;
+  top: $navbar-height;
   color: $light-font;
+  transition: right 0.5s ease;
+  border-bottom-left-radius: 50%;
+  &:hover {
+    right: 0;
+    transition: right 0.5s ease;
+  }
+}
+
+.calendar-icon-div {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 1.2rem;
+    padding-left: 20px;
+  }
 }

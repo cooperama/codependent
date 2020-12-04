@@ -1,9 +1,16 @@
 .postpage-post-container {
   padding: 20px;
   .postpage-post-heading {
-    background-color: $second-color;
-    padding: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    margin-bottom: 40px;
+    border-bottom: 2px solid $main-color;
+    h1 {
+      font-family: "Major Mono Display", monospace;
+    }
   }
   .postpage-post-stats {
     display: flex;
@@ -20,9 +27,10 @@
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $main-color;
+    // border-bottom: 1px solid $main-color;
     div {
       display: flex;
+      height: 30px;
       button {
         margin-left: 10px;
         width: 80px;
@@ -47,6 +55,9 @@
     right: 8vw;
   }
 }
+.visit-link {
+  text-align: right;
+}
 
 .each-comment-container {
   border-bottom: 3px solid $second-color;
@@ -70,16 +81,17 @@
     height: 30px;
     position: relative;
     width: 100%;
-    div:nth-of-type(1) {
+    .comment-author-date {
       display: flex;
-      // width: 30%;
       justify-content: space-between;
+      width: 180px;
+    }
+    p {
+      font-size: 0.8rem;
     }
     span {
       padding-left: 10px;
-    }
-    .view-thread {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
   .comment-settings {

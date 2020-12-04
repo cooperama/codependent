@@ -1,11 +1,24 @@
 .codegories-heading {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 40px;
+  border-bottom: 2px solid $main-color;
+  font-family: "Major Mono Display", monospace;
+  font-size: 2.5rem;
 }
 .codegories-container {
-  width: 70%;
-  min-width: 300px;
-  max-width: 700px;
+  // width: 70%;
+  // min-width: 300px;
+  // max-width: 750px;
+  width: 750px;
   margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  flex-wrap: wrap;
 }
 
 .codegory-card {
@@ -13,36 +26,33 @@
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  // background-color: $main-color;
+  width: 350px;
+  background-color: $second-color;
   // border-bottom: 3px solid $accent-color;
   padding: 10px;
-  // margin: 10px 0;
+  margin: 10px 0;
   // &:nth-of-type(even) {
   //   background-color: $second-color;
   // }
 
   //
-  border-bottom: 10px solid $neutral-color;
-  // border-bottom: 10px solid $accent-color;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  // padding: 10px;
-  // margin: 10px auto;
-
-  //
+  border-bottom: 5px solid $neutral-color;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 
   .codegories-topic {
     font-size: 1.5rem;
     width: 150px;
+    p {
+      font-family: "Major Mono Display", monospace;
+    }
   }
   .codegories-topic-second {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 75%;
   }
   span {
-    // color: white;
     display: inline-block;
     margin-left: 10px;
     font-size: 1.2rem;
@@ -50,8 +60,5 @@
 
   .codegories-posts-count {
     margin-bottom: 10px;
-  }
-  .codegories-link-div {
-    width: 50px;
   }
 }

@@ -1,0 +1,19 @@
+@media (max-width: 1150px) {
+  .welcome-div {
+    .welcome-text {
+      right: -10%;
+      transition: all 0.5s ease;
+      top: 15%;
+    }
+  }
+
+  .login-signup-div {
+    .about {
+      position: absolute;
+      left: -300px;
+      top: 40%;
+      transition: all 0.5s ease;
+      z-index: 2;
+    }
+  }
+}

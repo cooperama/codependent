@@ -1,12 +1,12 @@
 .each-post {
-  // background: $second-color;
-  border-bottom: 10px solid $neutral-color;
-  // border-bottom: 10px solid $accent-color;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
+  background: $second-color;
+  border-bottom: 5px solid $neutral-color;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
   width: 95%;
   padding: 10px;
-  margin: 10px auto;
+  margin: 10px;
   h3 {
     text-align: center;
     margin-bottom: 10px;
@@ -40,10 +40,10 @@
     }
   }
   .post-content-second {
-    // background: pink;
-    margin: 15px 0 10px;
+    margin: 10px 0 5px;
     display: flex;
     justify-content: space-between;
+    font-size: 0.8rem;
     span {
       padding-left: 10px;
     }

@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-
-import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 import PostModel from "../models/post";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-import { Post, MyListView } from "../components";
+import { Post } from "../components";
 
 export default function Home({ userState, setUserState }) {
   const [recentPosts, setRecentPosts] = useState();
   const [recentForumPosts, setRecentForumPosts] = useState();
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     //get most recent posts
     PostModel.recentPosts().then((data) => {
       console.log(data);
       const codePosts = [];
       const forumPosts = [];
-      for (let i = 0; codePosts.length < 5 && i < data.posts.length; i++) {
+      for (let i = 0; codePosts.length < 3 && i < data.posts.length; i++) {
         if (data.posts[i].codegory.topic !== "Nerd Room") {
           codePosts.push(data.posts[i]);
         }
       }
-      for (let i = 0; forumPosts.length < 5 && i < data.posts.length; i++) {
+      for (let i = 0; forumPosts.length < 3 && i < data.posts.length; i++) {
         if (data.posts[i].codegory.topic === "Nerd Room") {
           forumPosts.push(data.posts[i]);
         }
@@ -28,40 +39,72 @@ export default function Home({ userState, setUserState }) {
       setRecentForumPosts(forumPosts);
       setRecentPosts(codePosts);
     });
-    console.log(userState);
-    console.log(recentPosts);
-    console.log(recentForumPosts);
   }, []);
   const renderCodePosts = () => {
     return recentPosts.map((post) => {
-      return <Post post={post} />;
+      return (
+        <Post
+          key={post._id}
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+        />
+      );
     });
   };
   const renderForumPosts = () => {
     return recentForumPosts.map((post) => {
-      return <Post post={post} />;
+      return (
+        <Post
+          key={post._id}
+          userState={userState}
+          setUserState={setUserState}
+          post={post}
+        />
+      );
     });
   };
   const renderCalendarList = () => {};
   return (
-    <div className="page-container">
-      <div className="home-container">
-        <h3>Recent Activity</h3>
-        <div className="main-content">
-          <p>In Codegories</p>
-          <div className="recent-code-posts">
-            {recentPosts && renderCodePosts()}
-          </div>
-          <p>In the Forum</p>
-          <div className="recent-nerd-posts">
-            {recentForumPosts && renderForumPosts()}
+    <>
+      <div className="page-container">
+        <div className="home-container">
+          <div className="main-content">
+            <div className="home-banner-div">
+              <h1>co[de]pendent</h1>
+            </div>
+            <div className="home-post-containers">
+              <div className="vertical-text">
+                <p>Recent Forum Posts</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+              <div className="recent-code-posts">
+                {recentForumPosts && renderForumPosts()}
+              </div>
+            </div>
+            <div className="home-post-containers">
+              <div className="vertical-text">
+                <p>Recent Code Posts</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+              <div className="recent-code-posts">
+                {recentPosts && renderCodePosts()}
+              </div>
+            </div>
           </div>
         </div>
-        {/* 
-        <div className="calendar-list">
-          Gonna wanna render calendar list for the week. (MyListView)
-        </div> */}
       </div>
-    </div>
+      {/* <div className="calendar-list">
+        <div className="calendar-icon-div">
+          <span>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </span>
+          <span>
+            <FontAwesomeIcon icon={faCalendar} />
+          </span>
+        </div> */}
+      {/* Gonna wanna render calendar list for the week. (MyListView) */}
+      {/* </div> */}
+    </>
   );
 }

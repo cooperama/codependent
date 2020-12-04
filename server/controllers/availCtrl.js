@@ -27,6 +27,13 @@ const getAvail = (req, res) => {
 const updateAvail = (req, res) => {
   db.Availability.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedAvail) => {
+      console.log("updated in avail : ", updatedAvail);
+      db.User.findById(updatedAvail.user).then((foundUser) => {
+        foundUser.available.push(updatedAvail._id);
+        foundUser.save();
+        console.log("saved user: ", foundUser);
+        res.json({ avail: updatedAvail });
+      });
       res.json({ avail: updatedAvail });
     })
     .catch((err) => {
@@ -38,7 +45,14 @@ const updateAvail = (req, res) => {
 const create = (req, res) => {
   db.Availability.create(req.body)
     .then((newAvail) => {
-      res.json({ avail: newAvail });
+      // push into user avail array
+      console.log("new in avail : ", newAvail);
+      db.User.findById(newAvail.user).then((foundUser) => {
+        foundUser.available.push(newAvail._id);
+        foundUser.save();
+        console.log("saved user: ", foundUser);
+        res.json({ avail: newAvail });
+      });
     })
     .catch((err) => {
       console.log("Error in avail.create: ", err);
@@ -49,6 +63,16 @@ const create = (req, res) => {
 const deleteAvail = (req, res) => {
   db.Availability.findByIdAndDelete(req.params.id)
     .then((deletedAvail) => {
+      // remove from user
+      const userId = deletedAvail.user;
+      console.log("delteed avail: ", deletedAvail);
+      db.User.findById(userId).then((user) => {
+        const newAvail = user.available.filter((avail) => {
+          return avail.toString() !== deletedAvail._id.toString();
+        });
+        user.available = newAvail;
+        user.save();
+      });
       res.json({ avail: deletedAvail });
     })
     .catch((err) => {

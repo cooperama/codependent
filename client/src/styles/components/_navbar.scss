@@ -47,10 +47,13 @@ nav {
 }
 
 .profile-dropdown {
-  width: calc(#{$navbar-width} - 25px);
+  // width: $navbar-width;
+  background-color: $main-color;
+  // width: calc(#{$navbar-width} - 25px);
+  width: calc(#{$navbar-width} + 25px);
   position: absolute;
   top: $navbar-height;
-  left: 0;
+  left: -15px;
   li {
     width: 100%;
     display: inline-block;

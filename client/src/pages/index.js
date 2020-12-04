@@ -5,6 +5,7 @@ import Landing from "./Landing";
 import Codegories from "./Codegories";
 import Profile from "./Profile";
 import PostPage from "./PostPage";
+import UpdateAvail from "./UpdateAvail";
 import NerdRoom from "./NerdRoom";
 import Settings from "./Settings";
 
@@ -16,6 +17,7 @@ export {
   Codegories,
   Profile,
   Settings,
+  UpdateAvail,
   PostPage,
   NerdRoom,
 };

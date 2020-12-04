@@ -14,6 +14,17 @@ export default function Settings({ userState, setUserState }) {
   const history = useHistory();
 
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     setUsername(userState.username);
     setEmail(userState.email);
     setFullname(userState.fullname);
@@ -63,8 +74,9 @@ export default function Settings({ userState, setUserState }) {
     console.log(editedUser);
     UserModel.update(userState._id, editedUser).then((data) => {
       console.log(data);
-      setUserState(data.user);
-      history.push(`/myprofile/${userState._id}`);
+      // setUserState(data.user);
+      history.push(`/myprofile`);
+      // history.push(`/myprofile/${userState._id}`);
     });
   };
   return (

@@ -21,6 +21,7 @@ export default function EditComment({
     console.log(comment);
     console.log(parentPost);
     console.log(userState);
+
     setNewContent(comment.content);
   }, [comment]);
 
@@ -43,9 +44,6 @@ export default function EditComment({
   const handleContentChange = (e) => {
     setNewContent(e.target.value);
   };
-  const handleCancel = (e) => {
-    editCommentRef.current.classList.add("hide-content");
-  };
   const renderForm = () => {
     return (
       <form onSubmit={handleSubmit} className="edit-comment-form">
@@ -58,7 +56,6 @@ export default function EditComment({
         ></textarea>
         <div className="buttons-container">
           <input type="submit" value="edit" />
-          <input onClick={handleCancel} type="button" value="cancel" />
         </div>
       </form>
     );

@@ -1,15 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CodegoryModel from "../models/codegory";
+import UserModel from "../models/user";
 
 import { Post, AddPost } from "../components";
 
 export default function NerdRoom({ userState, setUserState }) {
   const [codegory, setCodegory] = useState();
   const params = useParams();
+  const addPostRef = useRef();
   const history = useHistory();
   // make api call for Codegory using id from params
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     const codeId = params.id;
     CodegoryModel.getNerdRoom().then((data) => {
       console.log(data);
@@ -28,19 +43,26 @@ export default function NerdRoom({ userState, setUserState }) {
     } else {
       return codegory.posts.map((post) => {
         return (
-          <div className="forum-post" key={post._id}>
-            <Post nerdRoom={codegory} post={post} />
-          </div>
+          <Post
+            key={post._id}
+            nerdRoom={codegory}
+            post={post}
+            userState={userState}
+            setUserState={setUserState}
+          />
         );
       });
     }
   };
 
-  const renderContent = () => {
+  const addPostClick = () => {
+    addPostRef.current.classList.toggle("hide-content");
+  };
+
+  const renderAddPostForm = () => {
     if (userState) {
       return (
         <>
-          {codegory && renderPosts()}
           <AddPost
             userState={userState}
             setUserState={setUserState}
@@ -53,13 +75,34 @@ export default function NerdRoom({ userState, setUserState }) {
     }
   };
 
+  const renderContent = () => {
+    return (
+      <>
+        <div className="codegorypage-settings postpage-settings">
+          <button onClick={addPostClick}>
+            create post
+            <span className="font-icon" onClick={addPostClick}>
+              <FontAwesomeIcon icon={faChevronDown} />
+            </span>
+          </button>
+        </div>
+        <div ref={addPostRef} className="codegorypage-addpost hide-content">
+          {renderAddPostForm()}
+        </div>
+        <div className="nerdpage-posts-container">
+          {codegory && renderPosts()}
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="page-container">
       <div className="codegorypage-container">
-        <div className="codegorypage-heading">
-          <h1>Nerd Room</h1>
+        <div className="codegorypage-heading nerd-room-heading-div">
+          <h1 className="nerd-room-heading">Nerd Room</h1>
         </div>
-        <div className="codegorypage-posts-container">{renderContent()}</div>
+        {codegory && renderContent()}
       </div>
     </div>
   );

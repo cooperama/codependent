@@ -10,32 +10,22 @@ const token = (req, res) => {
 };
 
 const login = (req, res) => {
+  console.log("logging in... user controller: ", req.body);
   db.User.findOne({ email: req.body.email })
     .populate("posts comments available paired")
-    // .populate("posts")
-    // .populate("comments")
-    // .populate("available")
-    // .populate("paired")
     .then((user) => {
+      console.log("logging in... user controller findOne: ", user);
       if (!user) return console.log("no user found");
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
         if (err) return console.log("error with passwords");
         if (isMatch) {
-          // what i was using \/\/\/
-          // res.json({ user: user });
-          // what i was using ^^^^^^
-
-          // const username = req.body.username;
-          // const user = { name: username };
-          // const accessToken = generateAccessToken(user);
-          // const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
           const signedJwt = jwt.sign(
             { _id: user._id },
             // user,
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "1h" }
           );
-          console.log(user);
+          console.log("login ctrl, line 30 ", user);
           res.json({
             status: 200,
             message: "success",
@@ -44,6 +34,9 @@ const login = (req, res) => {
             // ???? how i was doing it before...
             user,
           });
+        } else {
+          console.log(" not is match.....", isMatch);
+          res.json({ error: "Passwords do not match" });
         }
       });
     })
@@ -107,16 +100,97 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  // console.log("req.session  ", req.session);
-  db.User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    .then((updatedUser) => {
-      // Send user without the password???
-      res.json({ user: updatedUser });
-    })
-    .catch((err) => {
-      console.log("Error in users.updateUser: ", err);
-      res.json({ error: "Unable to get data" });
-    });
+  console.log("req.params  ", req.params);
+  db.User.findById(req.params.id).then((user) => {
+    console.log("user in update user users controller: ", user);
+    if (req.body.password2) {
+      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+        if (err) return console.log("error with passwords");
+        if (isMatch) {
+          bcrypt.genSalt(10, (err, salt) => {
+            if (err) return console.log("error generating salt");
+
+            bcrypt.hash(req.body.password2, salt, (err, hashedPassword) => {
+              if (err) return console.log("err hashing password");
+
+              const updatedUser = {
+                username: req.body.username,
+                email: req.body.email,
+                fullname: req.body.fullname,
+                password: hashedPassword,
+              };
+              db.User.findByIdAndUpdate(req.params.id, updatedUser, {
+                new: true,
+              })
+                .then((updatedUser) => {
+                  // Send user without the password???
+                  const signedJwt = jwt.sign(
+                    { _id: updatedUser._id },
+                    // user,
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: "1h" }
+                  );
+                  console.log("login ctrl, line 127 ", updatedUser);
+                  res.json({
+                    status: 200,
+                    message: "success",
+                    id: updatedUser._id,
+                    signedJwt,
+                    updatedUser,
+                  });
+                  // res.json({ user: updatedUser });
+                })
+                .catch((err) => {
+                  console.log("Error in users.updateUser: ", err);
+                  res.json({ error: "Unable to get data" });
+                });
+            });
+          });
+        } else {
+          console.log(" not is match updatedUser .....", isMatch);
+          res.json({ error: "Passwords do not match" });
+        }
+      });
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+        if (err) return console.log("error with passwords");
+        if (isMatch) {
+          const updatedUser = {
+            username: req.body.username,
+            email: req.body.email,
+            fullname: req.body.fullname,
+            // password,
+          };
+          db.User.findByIdAndUpdate(req.params.id, updatedUser, { new: true })
+            .then((updatedUser) => {
+              // Send user without the password???
+              const signedJwt = jwt.sign(
+                { _id: updatedUser._id },
+                // user,
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1h" }
+              );
+              console.log("login ctrl, line 127 ", updatedUser);
+              res.json({
+                status: 200,
+                message: "success",
+                id: updatedUser._id,
+                signedJwt,
+                updatedUser,
+              });
+              // res.json({ user: updatedUser });
+            })
+            .catch((err) => {
+              console.log("Error in users.updateUser: ", err);
+              res.json({ error: "Unable to get data" });
+            });
+        } else {
+          console.log(" not is match updatedUser .....", isMatch);
+          res.json({ error: "Passwords do not match" });
+        }
+      });
+    }
+  });
 };
 
 const deleteUser = (req, res) => {

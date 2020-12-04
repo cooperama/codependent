@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Loading, AddComment, Comment, EditPost } from "../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExternalLinkSquareAlt,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import PostModel from "../models/post";
+import UserModel from "../models/user";
 
 export default function PostPage({ userState, setUserState }) {
   const [post, setPost] = useState();
+  const [sameUser, setSameUser] = useState();
   const [newComment, setNewComment] = useState();
   const [editedPost, setEditedPost] = useState();
   const editPostRef = useRef();
@@ -16,8 +23,17 @@ export default function PostPage({ userState, setUserState }) {
   const params = useParams();
   const history = useHistory();
   useEffect(() => {
-    //
-    console.log("params? ", params);
+    if (localStorage.getItem("uid")) {
+      console.log(localStorage);
+      UserModel.getUser().then((data) => {
+        console.log(data);
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+        }
+      });
+    }
     let postId;
     if (editedPost) {
       postId = editedPost._id;
@@ -25,17 +41,20 @@ export default function PostPage({ userState, setUserState }) {
       postId = params.id;
     }
 
-    console.log(params);
-    console.log(editedPost);
     PostModel.getPost(postId).then((data) => {
-      // PostModel.getPost(params.id).then((data) => {
-      console.log("data from post model: ", data);
       setPost(data.post);
+      console.log(data.post.author._id);
+      if (data.post.author._id === userState._id) {
+        console.log("they are the same!");
+        setSameUser(true);
+      } else {
+        setSameUser(false);
+        console.log("they are not the same!");
+      }
     });
     // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
   const addCommentClick = () => {
-    //
     addCommentRef.current.classList.toggle("hide-content");
   };
   const editPostClick = () => {
@@ -69,7 +88,6 @@ export default function PostPage({ userState, setUserState }) {
   };
   const renderEditPostForm = () => {
     if (userState) {
-      // need to get Post id...
       return (
         <EditPost
           userState={userState}
@@ -78,9 +96,6 @@ export default function PostPage({ userState, setUserState }) {
           setPost={setPost}
           editPostRef={editPostRef}
           editPostBtnRef={editPostBtnRef}
-          // PostToEdit={PostToEdit}
-          // PostToEdit={PostToEdit}
-          // editedPost={}
           editedPost={editedPost}
           setEditedPost={setEditedPost}
         />
@@ -94,9 +109,9 @@ export default function PostPage({ userState, setUserState }) {
     if (userState) {
       return (
         <>
-          <button className="delete-button-confirm" onClick={handleDelete}>
+          {/* <button className="delete-button-confirm" onClick={handleDelete}>
             confirm delete
-          </button>
+          </button> */}
         </>
       );
     } else {
@@ -109,10 +124,32 @@ export default function PostPage({ userState, setUserState }) {
     PostModel.delete(post._id).then((data) => {
       console.log("deleted: ", data);
       deletePostRef.current.classList.add("hide-content");
-      //   // setPost(data.post);
       history.push(`/codegories`);
     });
   };
+
+  const renderButtons = () => {
+    if (sameUser) {
+      return (
+        <div className="user-verified">
+          <button ref={editPostBtnRef} onClick={editPostClick}>
+            edit
+          </button>
+          <button
+            ref={deletePostRef}
+            className="delete-button-confirm hide-content"
+            onClick={handleDelete}
+          >
+            confirm
+          </button>
+          <button ref={deletePostBtnRef} onClick={deletePostClick}>
+            delete
+          </button>
+        </div>
+      );
+    }
+  };
+
   const renderComments = () => {
     //
     if (post.comments.length === 0) {
@@ -137,24 +174,22 @@ export default function PostPage({ userState, setUserState }) {
       });
     }
   };
-  const iframeLoaded = () => [console.log("iframe loaded")];
+  const linkDiv = () => {
+    return (
+      <div className="visit-link">
+        <a href={post.link}>
+          visit link <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
+        </a>
+      </div>
+    );
+  };
   const renderPost = () => {
-    console.log(post.link);
     return (
       <div className="postpage-post-container">
         <div className="postpage-post-heading">
           <h1>{post.title}</h1>
         </div>
-        <div className="url-content">
-          {post.link && <a href={post.link}>{post.title}</a>}
-          {/* <iframe
-            title={post.title}
-            src={post.link}
-            frameborder="0"
-            onLoad={iframeLoaded}
-            scrolling="no"
-          ></iframe> */}
-        </div>
+        <div className="url-content">{post.link && linkDiv()}</div>
         <div className="postpage-post-content ">
           <p>{post.content}</p>
         </div>
@@ -166,20 +201,19 @@ export default function PostPage({ userState, setUserState }) {
             <p>
               <Moment fromNow ago>
                 {post.createdAt}
-              </Moment>
+              </Moment>{" "}
+              ago
             </p>
           </div>
           <div>
-            <div className="user-verified">
-              <button ref={editPostBtnRef} onClick={editPostClick}>
-                edit
-              </button>
-              <button ref={deletePostBtnRef} onClick={deletePostClick}>
-                delete
-              </button>
-            </div>
+            {renderButtons()}
             <div>
-              <button onClick={addCommentClick}>comment</button>
+              <button onClick={addCommentClick}>
+                comment
+                <span className="font-icon">
+                  <FontAwesomeIcon icon={faChevronDown} />
+                </span>
+              </button>
             </div>
           </div>
         </div>
@@ -189,11 +223,7 @@ export default function PostPage({ userState, setUserState }) {
         <div ref={editPostRef} className="postpage-editPost hide-content">
           {renderEditPostForm()}
         </div>
-        <div ref={deletePostRef} className="postpage-deletePost hide-content">
-          {renderDeletePostForm()}
-        </div>
         <div className="postpage-comments-container">
-          {post.comments.length === 0 ? <p>no comments!</p> : <p>comments:</p>}
           {post.comments && renderComments()}
         </div>
       </div>

@@ -1,0 +1,38 @@
+.calendar-container {
+  // margin-top: -75px;
+  position: relative;
+  .calendar-availability {
+    height: 100%;
+  }
+}
+
+.update-instructions {
+  margin-top: -40px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0.5em;
+  height: 70px;
+}
+
+.update-avail-button {
+  padding: 8px 18px;
+  background-color: $main-color;
+}
+
+.update-calendar-heading,
+.postpage-post-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 40px;
+  border-bottom: 2px solid $main-color;
+  h1 {
+    font-family: "Major Mono Display", monospace;
+  }
+}

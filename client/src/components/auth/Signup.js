@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-
+import { useHistory } from "react-router-dom";
 import UserModel from "../../models/user";
 
-export default function Signup() {
+export default function Signup({ userState, setUserState }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
-  const [fullname, setFullname] = useState();
+  // const [fullname, setFullname] = useState();
   const [password, setPassword] = useState();
   const [password2, setPassword2] = useState();
+  const history = useHistory();
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const handleFullnameChange = (e) => {
-    setFullname(e.target.value);
-  };
+  // const handleFullnameChange = (e) => {
+  //   setFullname(e.target.value);
+  // };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -29,11 +30,22 @@ export default function Signup() {
     const newUser = {
       username,
       email,
-      fullname,
+      // fullname,
       password,
     };
     UserModel.create(newUser).then((data) => {
       console.log(data);
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      // history.push(`/myprofile`);
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      // localStorage.setItem("uid", data.signedJwt);
+      // console.log("local storage... ", localStorage);
+      // UserModel.getUser().then((data) => {
+      //   console.log(data);
+      //   setUserState(data.user);
+      //   history.push(`/myprofile`);
+      // });
+      // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     });
   };
   return (
@@ -57,7 +69,7 @@ export default function Signup() {
             id="email"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <input
             placeholder="full name"
             onChange={handleFullnameChange}
@@ -65,7 +77,7 @@ export default function Signup() {
             name="fullname"
             id="fullname"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <input
             placeholder="password"

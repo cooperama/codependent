@@ -10,6 +10,7 @@ import {
   Codegory,
   FindBuddy,
   Landing,
+  UpdateAvail,
   PostPage,
   Codegories,
   Settings,
@@ -29,6 +30,13 @@ function App() {
           path="/"
           render={() => (
             <Home userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          exact
+          path="/updateavail"
+          render={() => (
+            <UpdateAvail userState={userState} setUserState={setUserState} />
           )}
         />
         <Route
