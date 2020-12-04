@@ -67,6 +67,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
     // history.push(`/avail/${eventObj._id}`);
 
     AvailModel.getAvail(eventObj._id).then((data) => {
+      console.log(data.avail.user._id);
       // new page, render calendar (day view...) with only this event,
       // message: groovyBear is available from x -> y. would you like to request a study sesh?
       // on click yes, what time? --- how can I show a timeGrid of just the times of the event?

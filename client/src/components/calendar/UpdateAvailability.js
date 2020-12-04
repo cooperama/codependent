@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FullCalendar, { formatDate } from "@fullcalendar/react";
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -108,7 +108,6 @@ export default function UpdateAvailability() {
     });
     UserModel.update(userState._id, userState).then((data) => {
       console.log("in event remove handler... ", data);
-      // not working....
     });
   };
 
@@ -123,8 +122,6 @@ export default function UpdateAvailability() {
       available: availObjectIds,
     });
     UserModel.update(userState._id, userState).then((data) => {
-      // history.push(`/myprofile`);
-      console.log("in user update handler... ", data);
       setUserState({
         ...userState,
         available: availObjectIds,
@@ -146,15 +143,8 @@ export default function UpdateAvailability() {
         selectable={true}
         selectMirror={true}
         // render events on calendar
-        // events={userState.available}
         events={availability}
         eventContent={renderEventContent}
-        // datesSet is called when a new DATE RANGE is rendered
-        // datesSet={datesSetHandler} // READ
-        // events set is called after event dat is initialized or changed
-        // eventsSet={eventsSetHandler} // is this the same as datesSet???
-        //
-
         // create new events
         select={dateSelectHandler} // creates with eventAdd
         eventAdd={eventAddHandler} // CREATE
