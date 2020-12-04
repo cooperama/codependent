@@ -41,7 +41,7 @@ export default function Navbar({ userState, setUserState }) {
   const renderSignup = () => {
     if (userState) {
       return (
-        <li>
+        <li onClick={handleSignoutClick}>
           <Link to="/register">
             <span>
               <FontAwesomeIcon icon={faSignOutAlt} />

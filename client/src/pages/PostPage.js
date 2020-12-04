@@ -42,7 +42,6 @@ export default function PostPage({ userState, setUserState }) {
     console.log(params);
     console.log(editedPost);
     PostModel.getPost(postId).then((data) => {
-      // PostModel.getPost(params.id).then((data) => {
       console.log("data from post model: ", data);
       setPost(data.post);
     });
@@ -83,7 +82,6 @@ export default function PostPage({ userState, setUserState }) {
   };
   const renderEditPostForm = () => {
     if (userState) {
-      // need to get Post id...
       return (
         <EditPost
           userState={userState}
@@ -92,9 +90,6 @@ export default function PostPage({ userState, setUserState }) {
           setPost={setPost}
           editPostRef={editPostRef}
           editPostBtnRef={editPostBtnRef}
-          // PostToEdit={PostToEdit}
-          // PostToEdit={PostToEdit}
-          // editedPost={}
           editedPost={editedPost}
           setEditedPost={setEditedPost}
         />
@@ -123,7 +118,6 @@ export default function PostPage({ userState, setUserState }) {
     PostModel.delete(post._id).then((data) => {
       console.log("deleted: ", data);
       deletePostRef.current.classList.add("hide-content");
-      //   // setPost(data.post);
       history.push(`/codegories`);
     });
   };
@@ -153,16 +147,14 @@ export default function PostPage({ userState, setUserState }) {
   };
   const linkDiv = () => {
     return (
-      <div>
+      <div className="visit-link">
         <a href={post.link}>
           visit link <FontAwesomeIcon icon={faExternalLinkSquareAlt} />
         </a>
       </div>
     );
   };
-  const iframeLoaded = () => [console.log("iframe loaded")];
   const renderPost = () => {
-    console.log(post.link);
     return (
       <div className="postpage-post-container">
         <div className="postpage-post-heading">
@@ -216,7 +208,6 @@ export default function PostPage({ userState, setUserState }) {
           {renderDeletePostForm()}
         </div>
         <div className="postpage-comments-container">
-          {post.comments.length === 0 ? <p>no comments!</p> : <p>comments:</p>}
           {post.comments && renderComments()}
         </div>
       </div>

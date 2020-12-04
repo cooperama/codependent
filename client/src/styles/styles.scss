@@ -71,8 +71,10 @@ $navbar-width: 160px;
     font-family: "Major Mono Display", monospace;
   }
   .logo-emphasis {
+    font-family: "Major Mono Display", monospace;
     // background: $blue-color;
-    padding: 5px;
+    // padding: 5px;
+    // font-size: 1.1rem;
   }
   input,
   textarea {
@@ -131,7 +133,7 @@ $navbar-width: 160px;
 }
 
 .hide-content {
-  display: none;
+  display: none !important;
 }
 
 // Imports

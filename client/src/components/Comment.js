@@ -16,7 +16,6 @@ export default function Comment({
   commentId,
 }) {
   const [comment, setComment] = useState();
-  // const [editedComment, setEditedComment] = useState();
   const editCommentRef = useRef();
   const deleteCommentRef = useRef();
   const params = useParams();
@@ -148,15 +147,13 @@ export default function Comment({
           <p>{comment.content}</p>
         </div>
         <div className="comment-stats">
-          <div>
+          <div className="comment-author-date">
             <p>[{comment.author.username}]</p>
             <p>
               <Moment fromNow ago>
-                {comment.createAt}
+                {comment.createdAt}
               </Moment>
             </p>
-            {/* <p>{comment.parentPost.codegory.topic}</p>
-          <p>{comment.parentPost.title}</p> */}
           </div>
           {/* <div className="comment-settings">
             <div className="user-verified">

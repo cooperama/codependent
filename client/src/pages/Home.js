@@ -80,11 +80,9 @@ export default function Home({ userState, setUserState }) {
             <div className="home-banner-div">
               <h1>co[de]pendent</h1>
             </div>
-            {/* <h1>Recent Activty</h1>
-            <FontAwesomeIcon icon={faChevronDown} /> */}
             <div className="home-post-containers">
               <div className="vertical-text">
-                <p>Code Posts</p>
+                <p>Recent Code Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
               <div className="recent-code-posts">
@@ -93,7 +91,7 @@ export default function Home({ userState, setUserState }) {
             </div>
             <div className="home-post-containers">
               <div className="vertical-text">
-                <p>Forum Posts</p>
+                <p>Recent Forum Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
               <div className="recent-code-posts">

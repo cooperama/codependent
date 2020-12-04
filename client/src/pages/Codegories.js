@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
 
@@ -38,20 +38,15 @@ export default function Codegories({ userState, setUserState }) {
                 <p>{codegory.topic}</p>
               </div>
               <div className="codegories-topic-second">
-                <div className="codegories-blurb">
-                  <p>Icons here would be cool!</p>
+                <div className="codegories-posts-count">
+                  <p>
+                    {postsLength} {postsLength === 1 ? "post" : "posts"}
+                  </p>
                 </div>
-                <div>
-                  <div className="codegories-posts-count">
-                    <p>
-                      {postsLength} {postsLength === 1 ? "post" : "posts"}
-                    </p>
-                  </div>
-                  <div className="codegories-link-div">
-                    <span>
-                      <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                    </span>
-                  </div>
+                <div className="codegories-link-div">
+                  <span>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </span>
                 </div>
               </div>
             </div>
