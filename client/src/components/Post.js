@@ -14,26 +14,51 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
     });
   }, []);
 
+  const renderNerdPosts = () => {
+    if (postContent.codegory) {
+      return (
+        <p>
+          {postContent.codegory.topic === "Nerd Room"
+            ? ""
+            : postContent.author.username}
+        </p>
+      );
+    }
+  };
+
+  const renderCodePosts = () => {
+    if (postContent.codegory) {
+      return (
+        <p>
+          {postContent.codegory.topic === "Nerd Room"
+            ? postContent.author.username
+            : postContent.codegory.topic}
+        </p>
+      );
+    }
+  };
+
   const renderPostContent = () => {
     if (postContent) {
       return (
         <>
           <div className="post-content ">
             <h3 className="truncated-title">{postContent.title}</h3>
-            <p>
+            {/* <p>
               {postContent.codegory.topic === "Nerd Room"
                 ? ""
                 : postContent.author.username}
-            </p>
-
+              </p> */}
+            {renderNerdPosts()}
             <p className="truncated-content">{postContent.content}</p>
           </div>
           <div className="post-content-second">
-            <p>
+            {/* <p>
               {postContent.codegory.topic === "Nerd Room"
                 ? postContent.author.username
                 : postContent.codegory.topic}
-            </p>
+            </p> */}
+            {renderCodePosts()}
             <p>
               <Moment fromNow ago>
                 {postContent.createdAt}

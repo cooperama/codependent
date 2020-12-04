@@ -21,19 +21,23 @@ export default function Home({ userState, setUserState }) {
         }
       });
     }
-    //get most recent posts
+    // get most recent posts
     PostModel.recentPosts().then((data) => {
       console.log(data);
       const codePosts = [];
       const forumPosts = [];
       for (let i = 0; codePosts.length < 3 && i < data.posts.length; i++) {
-        if (data.posts[i].codegory.topic !== "Nerd Room") {
-          codePosts.push(data.posts[i]);
+        if (data.posts[i].codegory) {
+          if (data.posts[i].codegory.topic !== "Nerd Room") {
+            codePosts.push(data.posts[i]);
+          }
         }
       }
       for (let i = 0; forumPosts.length < 3 && i < data.posts.length; i++) {
-        if (data.posts[i].codegory.topic === "Nerd Room") {
-          forumPosts.push(data.posts[i]);
+        if (data.posts[i].codegory) {
+          if (data.posts[i].codegory.topic === "Nerd Room") {
+            forumPosts.push(data.posts[i]);
+          }
         }
       }
       setRecentForumPosts(forumPosts);

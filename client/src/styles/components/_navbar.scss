@@ -6,7 +6,8 @@ nav {
   height: $navbar-height;
   display: flex;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 3;
+  // z-index: 2;
   a {
     color: white;
   }
@@ -52,7 +53,7 @@ nav {
   top: $navbar-height;
   left: 0;
   z-index: -3;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
   li {
     width: 100%;
     display: inline-block;
@@ -65,5 +66,5 @@ nav {
 
 .hide-profile-dropdown {
   top: -200px;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }

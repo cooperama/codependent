@@ -59,13 +59,17 @@ The user can view comments on each post page, add a comment, edit, and delete it
 
 - React Font Awesome
 
-- React Bootstracp
+- React Bootstrap
 
 ## Technologies
 
 - MongoDB/Mongoose, Express, React, NodeJS
 
 ## Future Features
+
+- Users will see their availability in a list view on their profile page.
+
+- Users will see upcoming available study sessions of all users.
 
 - Users will be able to select an available study time of another user and select an overlapping timeframe during which they'd like to study together.
 

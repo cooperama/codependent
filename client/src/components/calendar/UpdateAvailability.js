@@ -112,7 +112,6 @@ export default function UpdateAvailability() {
     });
   };
 
-  // Update User model when done updating avail.
   const updateUserAvailability = () => {
     // Create ObjectIds of availability to update User Model with
     const availObjectIds = userState.available.map((avail) => {
@@ -146,18 +145,11 @@ export default function UpdateAvailability() {
         selectable={true}
         selectMirror={true}
         // render events on calendar
-        // events={userState.available}
         events={availability}
         eventContent={renderEventContent}
-        // datesSet is called when a new DATE RANGE is rendered
-        // datesSet={datesSetHandler} // READ
-        // events set is called after event dat is initialized or changed
-        // eventsSet={eventsSetHandler} // is this the same as datesSet???
-        //
-
         // create new events
         select={dateSelectHandler} // creates with eventAdd
-        eventAdd={eventAddHandler} // CREATE
+        eventAdd={eventAddHandler}
         // delete events
         eventClick={eventClickHandler} // destroys with eventRemove
         eventRemove={eventRemoveHandler}

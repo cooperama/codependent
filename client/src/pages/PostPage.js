@@ -44,7 +44,9 @@ export default function PostPage({ userState, setUserState }) {
     PostModel.getPost(postId).then((data) => {
       setPost(data.post);
       console.log(data.post.author._id);
-      if (!data.post || !data.post.author) {
+      if (!data.post) {
+        history.push("/");
+      } else if (!data.post.author) {
         history.push("/");
       } else if (data.post.author._id === userState._id) {
         console.log("they are the same!");
@@ -198,8 +200,8 @@ export default function PostPage({ userState, setUserState }) {
 
         <div className="postpage-settings">
           <div className="postpage-post-stats">
-            <p> {post.codegory.topic} </p>
-            <p> [{post.author.username}] </p>
+            <p> {post.codegory && post.codegory.topic} </p>
+            <p> [{post.author && post.author.username}] </p>
             <p>
               <Moment fromNow ago>
                 {post.createdAt}

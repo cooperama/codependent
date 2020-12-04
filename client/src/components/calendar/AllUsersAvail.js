@@ -60,8 +60,11 @@ export default function AllUsersAvail({ userState, setUserState }) {
   const eventClickHandler = (eventInfo) => {
     const eventObj = eventInfo.event.toPlainObject().extendedProps;
     console.log(eventObj._id);
-    const userObj = eventInfo.event.toPlainObject().extendedProps.user;
-    console.log(userObj);
+    if (eventObj.user) {
+      const userObj = eventObj.user;
+      // const userObj = eventInfo.event.toPlainObject().extendedProps.user;
+      console.log(userObj);
+    }
     // const username = eventInfo.event.toPlainObject().extendedProps.user
     //   .username;
     // history.push(`/avail/${eventObj._id}`);
@@ -90,9 +93,6 @@ export default function AllUsersAvail({ userState, setUserState }) {
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         }}
         initialView="timeGridWeek"
-        // initialView="timeGridDay"
-        selectable={true}
-        selectMirror={true}
         overlap={true}
         // dayHeaders={false} // gets rid of dates at top...
         // render events on calendar

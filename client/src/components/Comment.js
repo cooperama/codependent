@@ -26,12 +26,16 @@ export default function Comment({
     CommentModel.getComment(commentId).then((data) => {
       setComment(data.comment);
       console.log(data);
-      if (data.comment.author._id === userState._id) {
-        console.log("they are the same!");
-        setSameUser(true);
-      } else {
-        setSameUser(false);
-        console.log("they are not the same!");
+      if (data.comment) {
+        if (data.comment.author) {
+          if (data.comment.author._id === userState._id) {
+            console.log("they are the same!");
+            setSameUser(true);
+          } else {
+            setSameUser(false);
+            console.log("they are not the same!");
+          }
+        }
       }
     });
     console.log();
