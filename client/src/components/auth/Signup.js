@@ -36,15 +36,19 @@ export default function Signup({ userState, setUserState }) {
     UserModel.create(newUser).then((data) => {
       console.log(data);
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      history.push(`/myprofile`);
+      // history.push(`/myprofile`);
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
       // localStorage.setItem("uid", data.signedJwt);
       // console.log("local storage... ", localStorage);
-      // UserModel.getUser().then((data) => {
-      //   console.log(data);
-      //   setUserState(data.user);
-      //   history.push(`/myprofile`);
-      // });
+      UserModel.getUser().then((data) => {
+        ///////////
+        localStorage.setItem("uid", data.signedJwt);
+        console.log("local storage... ", localStorage);
+        ///////////
+        console.log(data);
+        setUserState(data.user);
+        history.push(`/myprofile`);
+      });
       // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     });
   };

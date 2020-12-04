@@ -44,7 +44,9 @@ export default function PostPage({ userState, setUserState }) {
     PostModel.getPost(postId).then((data) => {
       setPost(data.post);
       console.log(data.post.author._id);
-      if (data.post.author._id === userState._id) {
+      if (!data.post || !data.post.author) {
+        history.push("/");
+      } else if (data.post.author._id === userState._id) {
         console.log("they are the same!");
         setSameUser(true);
       } else {

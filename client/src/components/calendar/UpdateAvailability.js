@@ -163,7 +163,7 @@ export default function UpdateAvailability() {
         eventRemove={eventRemoveHandler}
       />
       <button className="update-avail-button" onClick={updateUserAvailability}>
-        Update Availability
+        Done
       </button>
     </>
   );

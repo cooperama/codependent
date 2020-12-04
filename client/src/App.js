@@ -13,6 +13,7 @@ import {
   UpdateAvail,
   PostPage,
   Codegories,
+  CollabLab,
   Settings,
   NerdRoom,
   Profile,
@@ -91,6 +92,12 @@ function App() {
           // path="/myprofile/:id"
           render={() => (
             <Profile userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          path="/collablab"
+          render={() => (
+            <CollabLab userState={userState} setUserState={setUserState} />
           )}
         />
       </Switch>
