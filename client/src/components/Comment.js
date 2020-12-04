@@ -111,12 +111,12 @@ export default function Comment({
               <button onClick={deleteCommentClick}>delete</button>
             </div>
           </div>
-          <div
+          {/* <div
             ref={editCommentRef}
             className="postpage-editcomment hide-content"
           >
             {renderEditCommentForm()}
-          </div>
+          </div> */}
           <div
             ref={deleteCommentRef}
             className="postpage-deletecomment hide-content"
@@ -144,6 +144,7 @@ export default function Comment({
               ago
             </p>
           </div>
+
           {/* <div className="comment-settings">
             <div className="user-verified">
               <button onClick={editCommentClick}>edit</button>
@@ -163,6 +164,9 @@ export default function Comment({
             {renderDeleteCommentForm()}
           </div> */}
           {renderButtons()}
+        </div>
+        <div ref={editCommentRef} className="postpage-editcomment hide-content">
+          {renderEditCommentForm()}
         </div>
       </>
     );
