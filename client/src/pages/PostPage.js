@@ -42,7 +42,6 @@ export default function PostPage({ userState, setUserState }) {
     console.log(params);
     console.log(editedPost);
     PostModel.getPost(postId).then((data) => {
-      console.log("data from post model: ", data);
       setPost(data.post);
     });
     // Re-render page whenever there are new comments or edited posts
