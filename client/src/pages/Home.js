@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-
-import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
 import PostModel from "../models/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCalendar,
-  faChevronRight,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-import { Post, MyListView } from "../components";
+import { Post } from "../components";
 
 export default function Home({ userState, setUserState }) {
   const [recentPosts, setRecentPosts] = useState();
@@ -82,20 +75,20 @@ export default function Home({ userState, setUserState }) {
             </div>
             <div className="home-post-containers">
               <div className="vertical-text">
-                <p>Recent Code Posts</p>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </div>
-              <div className="recent-code-posts">
-                {recentPosts && renderCodePosts()}
-              </div>
-            </div>
-            <div className="home-post-containers">
-              <div className="vertical-text">
                 <p>Recent Forum Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
               <div className="recent-code-posts">
                 {recentForumPosts && renderForumPosts()}
+              </div>
+            </div>
+            <div className="home-post-containers">
+              <div className="vertical-text">
+                <p>Recent Code Posts</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </div>
+              <div className="recent-code-posts">
+                {recentPosts && renderCodePosts()}
               </div>
             </div>
           </div>

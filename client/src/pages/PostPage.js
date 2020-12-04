@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Loading, AddComment, Comment, EditPost } from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLinkSquareAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faExternalLinkSquareAlt,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 import UserModel from "../models/user";
@@ -19,7 +22,6 @@ export default function PostPage({ userState, setUserState }) {
   const params = useParams();
   const history = useHistory();
   useEffect(() => {
-    //
     if (localStorage.getItem("uid")) {
       console.log(localStorage);
       UserModel.getUser().then((data) => {
@@ -31,7 +33,6 @@ export default function PostPage({ userState, setUserState }) {
         }
       });
     }
-    console.log("params? ", params);
     let postId;
     if (editedPost) {
       postId = editedPost._id;
@@ -39,15 +40,12 @@ export default function PostPage({ userState, setUserState }) {
       postId = params.id;
     }
 
-    console.log(params);
-    console.log(editedPost);
     PostModel.getPost(postId).then((data) => {
       setPost(data.post);
     });
     // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
   const addCommentClick = () => {
-    //
     addCommentRef.current.classList.toggle("hide-content");
   };
   const editPostClick = () => {
@@ -180,7 +178,8 @@ export default function PostPage({ userState, setUserState }) {
             <p>
               <Moment fromNow ago>
                 {post.createdAt}
-              </Moment>
+              </Moment>{" "}
+              ago
             </p>
           </div>
           <div>
@@ -193,7 +192,12 @@ export default function PostPage({ userState, setUserState }) {
               </button>
             </div>
             <div>
-              <button onClick={addCommentClick}>comment</button>
+              <button onClick={addCommentClick}>
+                comment
+                <span className="font-icon">
+                  <FontAwesomeIcon icon={faChevronDown} />
+                </span>
+              </button>
             </div>
           </div>
         </div>

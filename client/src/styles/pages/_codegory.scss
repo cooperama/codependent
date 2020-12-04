@@ -2,18 +2,13 @@
   padding: 20px;
 
   .codegorypage-heading {
-    // text-align: center;
-    // display: flex;
-    // flex-direction: column;
-    // background-color: #283248;
-    // padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70px;
     width: 100%;
     margin-bottom: 40px;
-    border-bottom: 2px solid $main-color;
+
     h1 {
       font-family: "Major Mono Display", monospace;
     }
@@ -22,14 +17,16 @@
     }
   }
   .codegorypage-settings {
+    display: flex;
+    justify-content: flex-end !important;
     margin: 20px 0 0 0;
     width: 100%;
     button {
       width: 100px;
+      height: 30px;
+    }
+    span {
+      padding-left: 10px;
     }
   }
 }
-
-// .codegorypage-posts-container {
-//   border-top: 1px solid $main-color;
-// }

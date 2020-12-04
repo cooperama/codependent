@@ -11,10 +11,7 @@ import AvailModel from "../../models/avail";
 import { useHistory } from "react-router-dom";
 
 export default function UpdateAvailability() {
-  // export default function UpdateAvailability({ userState, setUserState }) {
-  // If I try to set availability for the calendar events from the userState... it gives me an error.
   const [availability, setAvailability] = useState([]);
-  // const [updatedAvail, setUpdatedAvail] = useState([]);
   const [userState, setUserState] = useState({});
   const history = useHistory();
 
@@ -23,13 +20,11 @@ export default function UpdateAvailability() {
     if (localStorage.getItem("uid")) {
       UserModel.getUser().then((data) => {
         setAvailability(data.user.available);
-        // setUpdatedAvail(data.user.available);
         setUserState(data.user);
-        console.log(data.user);
-        console.log(userState);
       });
     } else {
       console.log("no local storage uid thing...", userState);
+      history.push("/register");
     }
   }, []);
 
@@ -97,7 +92,6 @@ export default function UpdateAvailability() {
         ...userState,
         available: newAvail,
       });
-      // setUpdatedAvail(newAvail);
       console.log("user state from event click: ", userState);
     });
 

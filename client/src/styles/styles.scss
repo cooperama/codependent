@@ -127,8 +127,9 @@ $navbar-width: 160px;
   // bottom: 0;
   // right: $navbar-width;
   // left: $navbar-width;
-  margin: calc(30px + #{$navbar-height}) auto;
-  margin-bottom: 200px;
+  margin: auto;
+  // margin: calc(30px + #{$navbar-height}) auto;
+  // margin-bottom: 200px;
   // height: calc(95vh - #{$navbar-height});
   width: calc(95vw - #{$navbar-width * 2});
 }

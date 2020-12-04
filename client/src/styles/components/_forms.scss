@@ -1,10 +1,7 @@
-// form {
-//   background-color: red;
-// }
-
 .add-post-form {
-  width: 90%;
-  margin: 50px auto;
+  margin: auto;
+  padding: 20px;
+  background-color: #283248;
   input,
   textarea {
     width: 100%;
@@ -14,7 +11,7 @@
     height: 200px;
   }
   input[type="submit"] {
-    background-color: $second-color;
+    background-color: $deep-clr;
   }
 }
 
@@ -26,6 +23,10 @@
     width: 90%;
     margin: auto;
   }
+}
+
+.font-icon {
+  font-size: 1.1rem;
 }
 
 .edit-comment-form {

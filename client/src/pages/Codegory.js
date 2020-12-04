@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import Moment from "react-moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { Post, AddPost, Loading } from "../components";
 import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
-import Moment from "react-moment";
-import { Post, AddPost, Loading } from "../components";
 
 export default function Codegory({ userState, setUserState }) {
   const [codegory, setCodegory] = useState({});
-  const [nerdRoom, setNerdRoom] = useState(false);
+  // const [nerdRoom, setNerdRoom] = useState(false);
   const addPostRef = useRef();
   const params = useParams();
-  const history = useHistory();
-  // make api call for Codegory using id from params
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       console.log(localStorage);
@@ -24,20 +25,18 @@ export default function Codegory({ userState, setUserState }) {
         }
       });
     }
-    const codeId = params.id;
-    CodegoryModel.getCodegory(codeId).then((data) => {
+    // const codeId = params.id;
+    CodegoryModel.getCodegory(params.id).then((data) => {
+      // CodegoryModel.getCodegory(codeId).then((data) => {
       console.log(data);
       setCodegory(data.codegory);
-      // If this codegory is the Nerd Room, render differently... maybe?
-      if (data.codegory.topic === "Nerd Room") {
-        setNerdRoom(true);
-      }
+      // if (data.codegory.topic === "Nerd Room") {
+      //   setNerdRoom(true);
+      // }
     });
   }, []);
 
   const addPostClick = () => {
-    //
-    console.log("post click");
     addPostRef.current.classList.toggle("hide-content");
   };
 
@@ -65,11 +64,7 @@ export default function Codegory({ userState, setUserState }) {
       );
     } else {
       return codegory.posts.map((post) => {
-        return (
-          // <div >
-          <Post post={post} key={post._id} />
-          // {/* </div> */}
-        );
+        return <Post post={post} key={post._id} />;
       });
     }
   };
@@ -80,7 +75,12 @@ export default function Codegory({ userState, setUserState }) {
           <h1>{codegory.topic}</h1>
         </div>
         <div className="codegorypage-settings postpage-settings">
-          <button onClick={addPostClick}>post</button>
+          <button onClick={addPostClick}>
+            create post
+            <span className="font-icon" onClick={addPostClick}>
+              <FontAwesomeIcon icon={faChevronDown} />
+            </span>
+          </button>
         </div>
         <div ref={addPostRef} className="codegorypage-addpost hide-content">
           {renderAddPostForm()}
