@@ -38,6 +38,29 @@ export default function Navbar({ userState, setUserState }) {
     localStorage.clear();
     history.push("/register");
   };
+  const renderSignup = () => {
+    if (userState) {
+      return (
+        <li>
+          <Link to="/register">
+            <span>
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </span>
+            <span>sign in</span>
+          </Link>
+        </li>
+      );
+    } else {
+      return (
+        <li onClick={handleSignoutClick}>
+          <span>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+          </span>
+          <span>sign out</span>
+        </li>
+      );
+    }
+  };
   const renderProfileContainer = () => {
     if (userState) {
       return (
@@ -69,12 +92,13 @@ export default function Navbar({ userState, setUserState }) {
                     <span>settings</span>
                   </Link>
                 </li>
-                <li onClick={handleSignoutClick}>
+                {renderSignup()}
+                {/* <li onClick={handleSignoutClick}>
                   <span>
                     <FontAwesomeIcon icon={faSignOutAlt} />
                   </span>
                   <span>sign out</span>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

@@ -84,7 +84,7 @@ export default function Home({ userState, setUserState }) {
             <FontAwesomeIcon icon={faChevronDown} /> */}
             <div className="home-post-containers">
               <div className="vertical-text">
-                <p>In Codegories</p>
+                <p>Code Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
               <div className="recent-code-posts">
@@ -93,7 +93,7 @@ export default function Home({ userState, setUserState }) {
             </div>
             <div className="home-post-containers">
               <div className="vertical-text">
-                <p>In the Forum</p>
+                <p>Forum Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
               <div className="recent-code-posts">
@@ -103,7 +103,7 @@ export default function Home({ userState, setUserState }) {
           </div>
         </div>
       </div>
-      <div className="calendar-list">
+      {/* <div className="calendar-list">
         <div className="calendar-icon-div">
           <span>
             <FontAwesomeIcon icon={faChevronRight} />
@@ -111,9 +111,9 @@ export default function Home({ userState, setUserState }) {
           <span>
             <FontAwesomeIcon icon={faCalendar} />
           </span>
-        </div>
-        {/* Gonna wanna render calendar list for the week. (MyListView) */}
-      </div>
+        </div> */}
+      {/* Gonna wanna render calendar list for the week. (MyListView) */}
+      {/* </div> */}
     </>
   );
 }

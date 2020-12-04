@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowAltCircleRight,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import PostModel from "../models/post";
 import UserModel from "../models/user";
 
@@ -51,7 +54,7 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
               <Link to={`/post/${postContent._id}`}>
                 {nerdRoom ? "View Thread" : "View Post"}
                 <span>
-                  <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                  <FontAwesomeIcon icon={faChevronRight} />
                 </span>
               </Link>
             </div>
