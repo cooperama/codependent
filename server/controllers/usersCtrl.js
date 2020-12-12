@@ -10,8 +10,9 @@ const token = (req, res) => {
 };
 
 const login = (req, res) => {
-  console.log("logging in... user controller: ", req.body);
-  db.User.findOne({ email: req.body.email })
+  // console.log("logging in... user controller: ", req.body);
+  db.User.findOne({ username: req.body.username })
+    // db.User.findOne({ email: req.body.email })
     .populate("posts comments available paired")
     .then((user) => {
       console.log("logging in... user controller findOne: ", user);
@@ -25,17 +26,16 @@ const login = (req, res) => {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "1h" }
           );
-          console.log("login ctrl, line 30 ", user);
+          console.log("login ctrl isMatch, line 30 ", user);
           res.json({
             status: 200,
             message: "success",
             id: user._id,
             signedJwt,
-            // ???? how i was doing it before...
-            user,
+            // user, //
           });
         } else {
-          console.log(" not is match.....", isMatch);
+          console.log(" not is match.....in bcrypt.compare");
           res.json({ error: "Passwords do not match" });
         }
       });
@@ -44,30 +44,52 @@ const login = (req, res) => {
 };
 
 const signup = (req, res) => {
-  db.User.findOne({ email: req.body.email }, (err, user) => {
+  db.User.findOne({ username: req.body.username }, (err, user) => {
     if (user) {
-      return console.log("user already exists");
+      res.json({ error: "username already exists" });
     }
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) return console.log("error generating salt");
+    db.User.findOne({ email: req.body.email }, (err, user) => {
+      if (user) {
+        res.json({ error: "email already exists" });
+      }
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) return console.log("error generating salt");
 
-      bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-        if (err) return console.log("err hashing password");
+        bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+          if (err) return console.log("err hashing password");
 
-        const newUser = {
-          username: req.body.username,
-          email: req.body.email,
-          password: hashedPassword,
-        };
+          const newUser = {
+            username: req.body.username,
+            email: req.body.email,
+            password: hashedPassword,
+          };
 
-        db.User.create(newUser)
-          .then((newUser) => {
-            res.json({ users: newUser });
-          })
-          .catch((err) => {
-            console.log("Error in users.signup: ", err);
-            res.json({ error: "Unable to get data from signup user.create" });
-          });
+          db.User.create(newUser)
+            .then((newUser) => {
+              ////\\\/\/\/\/\\/
+              const signedJwt = jwt.sign(
+                { _id: newUser._id },
+                // user,
+                process.env.ACCESS_TOKEN_SECRET,
+                { expiresIn: "1h" }
+              );
+              console.log("signup usersctrl, line 72 ", newUser);
+              res.json({
+                status: 200,
+                message: "success",
+                id: newUser._id,
+                signedJwt,
+                // user, //
+              });
+              //^^^^^^^^^^^^^^^^^^^^^^^
+
+              // res.json({ users: newUser });
+            })
+            .catch((err) => {
+              console.log("Error in users.signup: ", err);
+              res.json({ error: "Unable to get data from signup user.create" });
+            });
+        });
       });
     });
   });
@@ -86,8 +108,9 @@ const allUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
+  console.log("req.userId here...??? how???, ", req.userId);
+  // auth.js jwt.verify is being run
   db.User.findById(req.userId)
-    // db.User.findById(req.params.id)
     .populate("posts comments available paired")
     .then((foundUser) => {
       console.log("users controller get user", foundUser);

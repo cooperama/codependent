@@ -1,42 +1,33 @@
 import React, { useState } from "react";
 import UserModel from "../../models/user";
 import { useHistory } from "react-router-dom";
-// import { User } from "../../../../server/models";
 
 export default function Login({ userState, setUserState }) {
   const history = useHistory();
   const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
+  // const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
+  // const handleEmailChange = (e) => {
+  //   setEmail(e.target.value);
+  // };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("log in button clicked....");
-    const user = { email, username, password };
-    console.log("user");
-    console.log(user);
+    const user = { username, password };
+    // const user = { email, username, password };
     UserModel.login(user).then((data) => {
-      setUserState(data.user);
-      console.log(data); // this is coming back right... but below isn't!
       localStorage.setItem("uid", data.signedJwt);
-      console.log("local storage... ", localStorage);
       UserModel.getUser().then((data) => {
-        console.log(data);
         setUserState(data.user);
         history.push(`/`);
-        // history.push(`/myprofile`);
       });
-      // history.push(`/myprofile/${data.user._id}`);
     });
   };
   // const loadState = () => {
@@ -64,7 +55,7 @@ export default function Login({ userState, setUserState }) {
             id="username"
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <input
             placeholder="email"
             onChange={handleEmailChange}
@@ -72,7 +63,7 @@ export default function Login({ userState, setUserState }) {
             name="email"
             id="email"
           />
-        </div>
+        </div> */}
         <div className="form-group">
           <input
             placeholder="password"

@@ -3,11 +3,9 @@ const router = require("express").Router();
 const ctrl = require("../controllers/usersCtrl");
 
 router.post("/login", ctrl.login);
-// router.get("/logout", ctrl.logout);
 router.post("/signup", ctrl.signup);
 router.post("/token", ctrl.token);
 router.get("/", ctrl.allUsers);
-// router.get("/myprofile", ctrl.getUser);
 router.get("/myprofile", authenticateToken, ctrl.getUser);
 // router.get("/myprofile/:id", authenticateToken, ctrl.getUser);
 // router.get("/:id", ctrl.getUser);

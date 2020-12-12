@@ -8,7 +8,7 @@ import PostModel from "../models/post";
 export default function Post({ nerdRoom, post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
-    console.log(post);
+    // console.log(post);
     PostModel.getPost(post._id).then((data) => {
       setPostContent(data.post);
     });

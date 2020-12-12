@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const connectionString =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/codependent";
+  process.env.MONGODB_URI || "mongodb://localhost:27017/codedependent";
+// process.env.MONGODB_URI || "mongodb://localhost:27017/codependent";
 
 const configOptions = {
   useNewUrlParser: true,
