@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import UserModel from "../models/user";
 import PostModel from "../models/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -96,21 +96,27 @@ export default function Home({ userState, setUserState }) {
               <h1>co[de]pendent</h1>
             </div>
             <div className="home-post-containers">
-              <div className="vertical-text">
-                <p>Recent Forum Posts</p>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </div>
               <div className="recent-code-posts">
                 {renderForumPosts && renderForumPosts()}
+
+                <div className="view-posts">
+                  <Link to="/nerdroom">
+                    <p>View Forum</p>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="home-post-containers">
-              <div className="vertical-text">
-                <p>Recent Code Posts</p>
-                <FontAwesomeIcon icon={faChevronRight} />
-              </div>
               <div className="recent-code-posts">
                 {renderCodePosts && renderCodePosts()}
+
+                <div className="view-posts">
+                  <Link to="/codegories">
+                    <p>View Codegories</p>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
