@@ -112,8 +112,6 @@ const allUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  console.log("req.userId here...??? how???, ", req.userId);
-  // auth.js jwt.verify is being run
   db.User.findById(req.userId)
     .populate("posts comments available paired")
     .then((foundUser) => {
@@ -127,19 +125,24 @@ const getUser = (req, res) => {
 };
 
 const updateUser = (req, res) => {
-  console.log("req.params  ", req.params);
+  if (req.body.password2 && req.body.password2 !== req.body.password3) {
+    return res.json({ error: "passwords must match" });
+  }
   db.User.findById(req.params.id).then((user) => {
-    console.log("user in update user users controller: ", user);
     if (req.body.password2) {
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-        if (err) return console.log("error with passwords");
+        if (err) {
+          return res.json({ error: "an error occurred" });
+        }
         if (isMatch) {
           bcrypt.genSalt(10, (err, salt) => {
-            if (err) return console.log("error generating salt");
-
+            if (err) {
+              return res.json({ error: "an error occurred" });
+            }
             bcrypt.hash(req.body.password2, salt, (err, hashedPassword) => {
-              if (err) return console.log("err hashing password");
-
+              if (err) {
+                return res.json({ error: "an error occurred" });
+              }
               const updatedUser = {
                 username: req.body.username,
                 email: req.body.email,
@@ -150,14 +153,11 @@ const updateUser = (req, res) => {
                 new: true,
               })
                 .then((updatedUser) => {
-                  // Send user without the password???
                   const signedJwt = jwt.sign(
                     { _id: updatedUser._id },
-                    // user,
                     process.env.ACCESS_TOKEN_SECRET,
                     { expiresIn: "1h" }
                   );
-                  console.log("login ctrl, line 127 ", updatedUser);
                   res.json({
                     status: 200,
                     message: "success",
@@ -165,55 +165,50 @@ const updateUser = (req, res) => {
                     signedJwt,
                     updatedUser,
                   });
-                  // res.json({ user: updatedUser });
                 })
                 .catch((err) => {
                   console.log("Error in users.updateUser: ", err);
-                  res.json({ error: "Unable to get data" });
+                  return res.json({ error: "an error occurred" });
                 });
             });
           });
         } else {
           console.log(" not is match updatedUser .....", isMatch);
-          res.json({ error: "Passwords do not match" });
+          res.json({ error: "passwords must match" });
         }
       });
     } else {
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-        if (err) return console.log("error with passwords");
+        if (err) return res.json({ error: "an error occurred" });
         if (isMatch) {
           const updatedUser = {
             username: req.body.username,
             email: req.body.email,
             fullname: req.body.fullname,
-            // password,
           };
           db.User.findByIdAndUpdate(req.params.id, updatedUser, { new: true })
             .then((updatedUser) => {
-              // Send user without the password???
               const signedJwt = jwt.sign(
                 { _id: updatedUser._id },
-                // user,
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: "1h" }
               );
-              console.log("login ctrl, line 127 ", updatedUser);
+              console.log("update user ctrl, line 207 ", updatedUser);
               res.json({
                 status: 200,
                 message: "success",
                 id: updatedUser._id,
                 signedJwt,
-                updatedUser,
+                // updatedUser,
               });
-              // res.json({ user: updatedUser });
             })
             .catch((err) => {
               console.log("Error in users.updateUser: ", err);
-              res.json({ error: "Unable to get data" });
+              res.json({ error: "an error occurred" });
             });
         } else {
           console.log(" not is match updatedUser .....", isMatch);
-          res.json({ error: "Passwords do not match" });
+          res.json({ error: "passwords do not match" });
         }
       });
     }

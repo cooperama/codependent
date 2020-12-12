@@ -13,7 +13,6 @@ class UserModel {
   }
 
   static getUser() {
-    // console.log("get user model: ", localStorage.uid);
     return (
       fetch(`${url}/myprofile`, {
         method: "GET",
