@@ -17,14 +17,6 @@ class PostModel {
         return { post: [] };
       });
   }
-  // static all() {
-  //   return fetch(url)
-  //     .then((res) => res.json())
-  //     .catch((err) => {
-  //       console.log("Error fetching data in PostModel.all: ", err);
-  //       return { post: [] };
-  //     });
-  // }
 
   static getPost(id) {
     return fetch(`${url}/${id}`)
@@ -49,6 +41,7 @@ class PostModel {
   }
 
   static update(id, updatedPost) {
+    console.log("in post model client side: ", updatedPost);
     return fetch(`${url}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

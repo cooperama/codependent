@@ -12,18 +12,19 @@ export default function PostPage({ userState, setUserState }) {
   const [sameUser, setSameUser] = useState();
   const [newComment, setNewComment] = useState();
   const [editedPost, setEditedPost] = useState();
+
   const editPostRef = useRef();
-  const deletePostBtnRef = useRef();
   const editPostBtnRef = useRef();
   const deleteConfirmRef = useRef();
   const addCommentRef = useRef();
   const addCommentBtnRef = useRef();
+
   const params = useParams();
   const history = useHistory();
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
@@ -33,14 +34,15 @@ export default function PostPage({ userState, setUserState }) {
     } else {
       history.push("/register");
     }
-    let postId;
-    if (editedPost) {
-      postId = editedPost._id;
-    } else {
-      postId = params.id;
-    }
+    // let postId;
+    // if (editedPost) {
+    //   postId = editedPost._id;
+    // } else {
+    //   postId = params.id;
+    // }
 
-    PostModel.getPost(postId).then((data) => {
+    PostModel.getPost(params.id).then((data) => {
+      // PostModel.getPost(postId).then((data) => {
       setPost(data.post);
       if (!data.post) {
         history.push("/");
@@ -58,11 +60,11 @@ export default function PostPage({ userState, setUserState }) {
     // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
 
-  const addCommentClick = () => {
+  const addCommentClick = (e) => {
     addCommentRef.current.classList.toggle("hide-content");
-    addCommentBtnRef.current.innerText === "add comment"
-      ? (addCommentBtnRef.current.innerText = "cancel")
-      : (addCommentBtnRef.current.innerText = "add comment");
+    e.target.innerText === "add comment"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "add comment");
   };
 
   const renderAddCommentForm = () => {
@@ -98,10 +100,11 @@ export default function PostPage({ userState, setUserState }) {
           setUserState={setUserState}
           post={post}
           setPost={setPost}
-          editPostRef={editPostRef}
-          editPostBtnRef={editPostBtnRef}
-          editedPost={editedPost}
+          // editedPost={editedPost}
           setEditedPost={setEditedPost}
+          editPostRef={editPostRef}
+          // reset inner text of btn on submit
+          editPostBtnRef={editPostBtnRef}
         />
       );
     } else {
@@ -133,17 +136,13 @@ export default function PostPage({ userState, setUserState }) {
       return (
         <>
           <button
+            ref={editPostBtnRef}
             className="btn btn-edit"
-            // ref={editPostBtnRef}
             onClick={editPostClick}
           >
             edit
           </button>
-          <button
-            className="btn btn-delete"
-            // ref={deletePostBtnRef}
-            onClick={deletePostClick}
-          >
+          <button className="btn btn-delete" onClick={deletePostClick}>
             delete
           </button>
           <button

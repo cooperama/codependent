@@ -68,7 +68,6 @@ const createPost = (req, res) => {
 const updatePost = (req, res) => {
   db.Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPost) => {
-      console.log("updated updatedPost in comm ctrl: ", updatedPost);
       res.json({ post: updatedPost });
     })
     .catch((err) => {

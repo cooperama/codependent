@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 
 import PostModel from "../../models/post";
 
 export default function EditPost({
   setPost,
-  editedPost,
+  // editedPost,
   setEditedPost,
   post,
   userState,
@@ -18,9 +17,6 @@ export default function EditPost({
   const [link, setLink] = useState();
   const [newContent, setNewContent] = useState();
 
-  const params = useParams();
-  const history = useHistory();
-
   useEffect(() => {
     setNewContent(post.content);
     setLink(post.link);
@@ -29,34 +25,41 @@ export default function EditPost({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    editPostRef.current.classList.add("hide-content");
+    editPostBtnRef.current.innerText = "edit";
+
     const editedPost = {
       title,
       link,
-      newContent,
+      content: newContent,
       author: userState._id,
     };
     console.log(editedPost);
     console.log(post);
-    // create post in dbf
+    // create post in db
     PostModel.update(post._id, editedPost).then((data) => {
       console.log("post model update: ", data);
       PostModel.getPost(data.post._id).then((data) => {
+        // setPost(data.post);
         setEditedPost(data.post);
-        editPostRef.current.classList.add("hide-content");
         // history.push(`/post/${data.post._id}`);
       });
     });
-    editPostBtnRef.current.innerText = "edit";
   };
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
+
   const handleContentChange = (e) => {
     setNewContent(e.target.value);
   };
+
   const handleLinkChange = (e) => {
     setLink(e.target.value);
   };
+
   return (
     <form onSubmit={handleSubmit} className="add-post-form">
       <div className="form-group">
