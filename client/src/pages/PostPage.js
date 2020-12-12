@@ -17,6 +17,7 @@ export default function PostPage({ userState, setUserState }) {
   const editPostBtnRef = useRef();
   const deleteConfirmRef = useRef();
   const addCommentRef = useRef();
+  const addCommentBtnRef = useRef();
   const params = useParams();
   const history = useHistory();
   useEffect(() => {
@@ -59,6 +60,9 @@ export default function PostPage({ userState, setUserState }) {
 
   const addCommentClick = () => {
     addCommentRef.current.classList.toggle("hide-content");
+    addCommentBtnRef.current.innerText === "add comment"
+      ? (addCommentBtnRef.current.innerText = "cancel")
+      : (addCommentBtnRef.current.innerText = "add comment");
   };
 
   const renderAddCommentForm = () => {
@@ -79,11 +83,11 @@ export default function PostPage({ userState, setUserState }) {
     }
   };
 
-  const editPostClick = () => {
+  const editPostClick = (e) => {
     editPostRef.current.classList.toggle("hide-content");
-    editPostBtnRef.current.innerText === "edit"
-      ? (editPostBtnRef.current.innerText = "cancel")
-      : (editPostBtnRef.current.innerText = "edit");
+    e.target.innerText === "edit"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "edit");
   };
 
   const renderEditPostForm = () => {
@@ -106,14 +110,14 @@ export default function PostPage({ userState, setUserState }) {
     }
   };
 
-  const deletePostClick = () => {
+  const deletePostClick = (e) => {
     deleteConfirmRef.current.classList.toggle("hide-content");
-    if (deletePostBtnRef.current.innerText === "delete") {
-      deletePostBtnRef.current.innerText = "cancel";
-      deletePostBtnRef.current.style.backgroundColor = "#283248";
+    if (e.target.innerText === "delete") {
+      e.target.innerText = "cancel";
+      e.target.style.backgroundColor = "#283248";
     } else {
-      deletePostBtnRef.current.innerText = "delete";
-      deletePostBtnRef.current.style.backgroundColor = "#500";
+      e.target.innerText = "delete";
+      e.target.style.backgroundColor = "#500";
     }
   };
 
@@ -130,14 +134,14 @@ export default function PostPage({ userState, setUserState }) {
         <>
           <button
             className="btn btn-edit"
-            ref={editPostBtnRef}
+            // ref={editPostBtnRef}
             onClick={editPostClick}
           >
             edit
           </button>
           <button
             className="btn btn-delete"
-            ref={deletePostBtnRef}
+            // ref={deletePostBtnRef}
             onClick={deletePostClick}
           >
             delete
@@ -213,7 +217,11 @@ export default function PostPage({ userState, setUserState }) {
             </div>
             <div className="settings-buttons">
               {renderButtons()}
-              <button className="btn" onClick={addCommentClick}>
+              <button
+                ref={addCommentBtnRef}
+                className="btn"
+                onClick={addCommentClick}
+              >
                 add comment
               </button>
             </div>

@@ -47,12 +47,18 @@ export default function Comment({
       : (e.target.innerText = "edit");
     editCommentRef.current.classList.toggle("hide-content");
   };
+
   const deleteCommentClick = (e) => {
-    e.target.innerText === "delete"
-      ? (e.target.innerText = "cancel")
-      : (e.target.innerText = "delete");
     deleteCommentRef.current.classList.toggle("hide-content");
+    if (e.target.innerText === "delete") {
+      e.target.innerText = "cancel";
+      e.target.style.backgroundColor = "#212637";
+    } else {
+      e.target.innerText = "delete";
+      e.target.style.backgroundColor = "#500";
+    }
   };
+
   const handleDelete = () => {
     CommentModel.delete(comment._id).then((data) => {
       console.log("deleted: ", data);
@@ -99,19 +105,19 @@ export default function Comment({
       if (sameUser) {
         return (
           <>
-            <div className="comment-settings">
-              <div className="user-verified">
-                <button onClick={editCommentClick}>edit</button>
-                <button
-                  ref={deleteCommentRef}
-                  className="delete-button-confirm  hide-content"
-                  onClick={handleDelete}
-                >
-                  confirm delete
-                </button>
-                <button onClick={deleteCommentClick}>delete</button>
-              </div>
-            </div>
+            <button className="btn btn-edit" onClick={editCommentClick}>
+              edit
+            </button>
+            <button
+              className="btn btn-delete hide-content"
+              ref={deleteCommentRef}
+              onClick={handleDelete}
+            >
+              confirm delete
+            </button>
+            <button className="btn btn-delete" onClick={deleteCommentClick}>
+              delete
+            </button>
           </>
         );
       }
@@ -134,8 +140,7 @@ export default function Comment({
               ago
             </p>
           </div>
-
-          {renderButtons()}
+          <div className="settings-buttons">{renderButtons()}</div>
         </div>
         <div ref={editCommentRef} className="postpage-editcomment hide-content">
           {renderEditCommentForm()}
@@ -143,6 +148,7 @@ export default function Comment({
       </>
     );
   };
+
   return (
     <div className="each-comment-container">{comment && renderComment()}</div>
   );

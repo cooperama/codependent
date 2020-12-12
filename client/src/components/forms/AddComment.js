@@ -53,7 +53,7 @@ export default function AddComment({
         ></textarea>
       </div>
       <div>
-        <input className="btn" type="submit" value="add comment" />
+        <input className="btn btn-wide" type="submit" value="add comment" />
       </div>
     </form>
   );

@@ -72,7 +72,8 @@
 
 .each-comment-container {
   border-bottom: 3px solid $second-color;
-  background-color: $main-color;
+  background-color: $second-color;
+  // background-color: $main-color;
   padding: 10px;
   margin: 20px 0;
   .comment-body {
@@ -94,16 +95,17 @@
     width: 100%;
     .comment-author-date {
       display: flex;
-      justify-content: space-between;
-      width: 180px;
+      // justify-content: space-between;
+      // width: 180px;
     }
     p {
       font-size: 0.8rem;
+      padding-right: 20px;
     }
-    span {
-      padding-left: 10px;
-      font-size: 0.8rem;
-    }
+    // span {
+    //   padding-left: 10px;
+    //   font-size: 0.8rem;
+    // }
   }
   .comment-settings {
     display: flex;
