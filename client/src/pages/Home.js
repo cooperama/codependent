@@ -45,12 +45,14 @@ export default function Home({ userState, setUserState }) {
         }
         setRecentForumPosts(forumPosts);
         setRecentPosts(codePosts);
+      } else {
+        history.push("/register");
       }
     });
   }, []);
 
   const renderCodePosts = () => {
-    if (recentPosts.length !== 0) {
+    if (recentPosts && recentPosts.length !== 0) {
       return recentPosts.map((post) => {
         return (
           <Post
@@ -67,7 +69,7 @@ export default function Home({ userState, setUserState }) {
   };
 
   const renderForumPosts = () => {
-    if (recentForumPosts.length !== 0) {
+    if (recentForumPosts && recentForumPosts.length !== 0) {
       return recentForumPosts.map((post) => {
         return (
           <Post
@@ -98,14 +100,18 @@ export default function Home({ userState, setUserState }) {
                 <p>Recent Forum Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
-              <div className="recent-code-posts">{renderForumPosts()}</div>
+              <div className="recent-code-posts">
+                {renderForumPosts && renderForumPosts()}
+              </div>
             </div>
             <div className="home-post-containers">
               <div className="vertical-text">
                 <p>Recent Code Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
-              <div className="recent-code-posts">{renderCodePosts()}</div>
+              <div className="recent-code-posts">
+                {renderCodePosts && renderCodePosts()}
+              </div>
             </div>
           </div>
         </div>

@@ -99,8 +99,7 @@ export default function NerdRoom({ userState, setUserState }) {
         <div className="codegorypage-heading nerd-room-heading-div">
           <h1 className="nerd-room-heading">Nerd Room</h1>
         </div>
-        {renderContent()}
-        {/* {codegory && renderContent()} */}
+        {codegory && renderContent()}
       </div>
     </div>
   );

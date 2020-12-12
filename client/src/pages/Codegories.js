@@ -9,19 +9,18 @@ import UserModel from "../models/user";
 export default function Codegories({ userState, setUserState }) {
   const [codegories, setCodegories] = useState([]);
   const history = useHistory();
-  // Make api call for all codegories
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
-          console.log("no user in profile useEffect..");
+          console.log("no user in codegories useEffect..");
           history.push("/register");
         }
       });
+    } else {
+      history.push("/register");
     }
     CodegoryModel.all().then((data) => {
       setCodegories(data.codegories);
@@ -57,6 +56,7 @@ export default function Codegories({ userState, setUserState }) {
       }
     });
   };
+
   return (
     <div className="page-container">
       <h1 className="codegories-heading">Codegories</h1>

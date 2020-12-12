@@ -87,11 +87,11 @@ export default function AllUsersAvail({ userState, setUserState }) {
       {/* {!showModal && renderFullCalendar()} */}
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
+        // headerToolbar={{
+        //   left: "prev,next today",
+        //   center: "title",
+        //   right: "dayGridMonth,timeGridWeek,timeGridDay",
+        // }}
         initialView="timeGridWeek"
         overlap={true}
         // dayHeaders={false} // gets rid of dates at top...

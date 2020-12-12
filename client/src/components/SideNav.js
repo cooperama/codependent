@@ -5,6 +5,7 @@ import {
   faLayerGroup,
   faCode,
   faGlasses,
+  faFilm,
   faHome,
   faPeopleArrows,
 } from "@fortawesome/free-solid-svg-icons";
@@ -12,26 +13,6 @@ import {
 export default function SideNav() {
   return (
     <div className="side-nav">
-      <li className="side-nav-item">
-        <Link to="/codegories">
-          <p>
-            <span>All Codegories</span>
-            <span>
-              <FontAwesomeIcon icon={faLayerGroup} />
-            </span>
-          </p>
-        </Link>
-      </li>
-      <li className="side-nav-item">
-        <Link to="/nerdroom">
-          <p>
-            <span>Nerd Room</span>
-            <span>
-              <FontAwesomeIcon icon={faGlasses} />
-            </span>
-          </p>
-        </Link>
-      </li>
       <li className="side-nav-item">
         <Link to="/findbuddy">
           <p>
@@ -48,6 +29,36 @@ export default function SideNav() {
             <span>Collab Lab</span>
             <span>
               <FontAwesomeIcon icon={faCode} />
+            </span>
+          </p>
+        </Link>
+      </li>
+      <li className="side-nav-item">
+        <Link to="/collablab">
+          <p>
+            <span>Showcase</span>
+            <span>
+              <FontAwesomeIcon icon={faFilm} />
+            </span>
+          </p>
+        </Link>
+      </li>
+      <li className="side-nav-item">
+        <Link to="/nerdroom">
+          <p>
+            <span>Nerd Room</span>
+            <span>
+              <FontAwesomeIcon icon={faGlasses} />
+            </span>
+          </p>
+        </Link>
+      </li>
+      <li className="side-nav-item">
+        <Link to="/codegories">
+          <p>
+            <span>Codegories</span>
+            <span>
+              <FontAwesomeIcon icon={faLayerGroup} />
             </span>
           </p>
         </Link>

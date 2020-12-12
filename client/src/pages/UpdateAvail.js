@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { UpdateAvailability } from "../components";
 import UserModel from "../models/user";
+
 export default function UpdateAvail({ userState, setUserState }) {
+  const history = useHistory();
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
         }
       });
+    } else {
+      history.push("/register");
     }
   }, []);
+
   return (
     <div className="page-container">
       <div className="calendar-container">

@@ -25,7 +25,6 @@ export default function Profile({ userState, setUserState }) {
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {

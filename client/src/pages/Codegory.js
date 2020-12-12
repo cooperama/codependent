@@ -19,7 +19,7 @@ export default function Codegory({ userState, setUserState }) {
         if (data.user) {
           setUserState(data.user);
         } else {
-          console.log("no user in profile useEffect..");
+          console.log("no user in codegory useEffect..");
         }
       });
     } else {

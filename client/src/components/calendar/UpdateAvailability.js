@@ -136,11 +136,14 @@ export default function UpdateAvailability() {
     <>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
+        headerToolbar={
+          {
+            // left: "prev,next today",
+            // center: "title",
+            // right: "dayGridMonth,timeGridWeek,timeGridDay",
+            // right: "timeGridWeek,timeGridDay",
+          }
+        }
         initialView="timeGridWeek"
         selectable={true}
         selectMirror={true}

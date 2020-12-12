@@ -24,7 +24,6 @@ export default function PostPage({ userState, setUserState }) {
   const history = useHistory();
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
         console.log(data);
         if (data.user) {
@@ -33,6 +32,8 @@ export default function PostPage({ userState, setUserState }) {
           console.log("no user in profile useEffect..");
         }
       });
+    } else {
+      history.push("/register");
     }
     let postId;
     if (editedPost) {
@@ -43,11 +44,11 @@ export default function PostPage({ userState, setUserState }) {
 
     PostModel.getPost(postId).then((data) => {
       setPost(data.post);
-      console.log(data.post.author._id);
       if (!data.post) {
         history.push("/");
       } else if (!data.post.author) {
         history.push("/");
+        // Check if user is author of post, if so allow edit/delete
       } else if (data.post.author._id === userState._id) {
         console.log("they are the same!");
         setSameUser(true);
@@ -58,21 +59,11 @@ export default function PostPage({ userState, setUserState }) {
     });
     // Re-render page whenever there are new comments or edited posts
   }, [newComment, editedPost]);
+
   const addCommentClick = () => {
     addCommentRef.current.classList.toggle("hide-content");
   };
-  const editPostClick = () => {
-    editPostRef.current.classList.toggle("hide-content");
-    editPostBtnRef.current.innerText === "edit"
-      ? (editPostBtnRef.current.innerText = "cancel")
-      : (editPostBtnRef.current.innerText = "edit");
-  };
-  const deletePostClick = () => {
-    deletePostRef.current.classList.toggle("hide-content");
-    deletePostBtnRef.current.innerText === "delete"
-      ? (deletePostBtnRef.current.innerText = "cancel")
-      : (deletePostBtnRef.current.innerText = "delete");
-  };
+
   const renderAddCommentForm = () => {
     if (userState) {
       return (
@@ -90,6 +81,14 @@ export default function PostPage({ userState, setUserState }) {
       // history.push("/register");
     }
   };
+
+  const editPostClick = () => {
+    editPostRef.current.classList.toggle("hide-content");
+    editPostBtnRef.current.innerText === "edit"
+      ? (editPostBtnRef.current.innerText = "cancel")
+      : (editPostBtnRef.current.innerText = "edit");
+  };
+
   const renderEditPostForm = () => {
     if (userState) {
       return (
@@ -109,24 +108,16 @@ export default function PostPage({ userState, setUserState }) {
       // history.push("/register");
     }
   };
-  const renderDeletePostForm = () => {
-    if (userState) {
-      return (
-        <>
-          {/* <button className="delete-button-confirm" onClick={handleDelete}>
-            confirm delete
-          </button> */}
-        </>
-      );
-    } else {
-      console.log("log in to add post or comment or whatever");
-      // history.push("/register");
-    }
+
+  const deletePostClick = () => {
+    deletePostRef.current.classList.toggle("hide-content");
+    deletePostBtnRef.current.innerText === "delete"
+      ? (deletePostBtnRef.current.innerText = "cancel")
+      : (deletePostBtnRef.current.innerText = "delete");
   };
 
   const handleDelete = () => {
     PostModel.delete(post._id).then((data) => {
-      console.log("deleted: ", data);
       deletePostRef.current.classList.add("hide-content");
       history.push(`/codegories`);
     });
@@ -155,7 +146,6 @@ export default function PostPage({ userState, setUserState }) {
   };
 
   const renderComments = () => {
-    //
     if (post.comments.length === 0) {
       return (
         <div className="empty-page">
@@ -178,6 +168,7 @@ export default function PostPage({ userState, setUserState }) {
       });
     }
   };
+
   const linkDiv = () => {
     return (
       <div className="visit-link">
@@ -187,6 +178,7 @@ export default function PostPage({ userState, setUserState }) {
       </div>
     );
   };
+
   const renderPost = () => {
     return (
       <div className="postpage-post-container">
@@ -233,6 +225,7 @@ export default function PostPage({ userState, setUserState }) {
       </div>
     );
   };
+
   return (
     <div className="page-container">{post ? renderPost() : <Loading />}</div>
   );
