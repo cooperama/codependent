@@ -1,12 +1,17 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import UserModel from "../../models/user";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
-export default function Signup({ userState, setUserState }) {
-  const errorMessageRef = useRef();
-  const errorBoxRef = useRef();
+export default function Signup({
+  userState,
+  setUserState,
+  errorMessageRef,
+  errorBoxRef,
+}) {
+  // const errorMessageRef = useRef();
+  // const errorBoxRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
   const history = useHistory();
@@ -28,9 +33,13 @@ export default function Signup({ userState, setUserState }) {
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    errorBoxRef.current.style.display = "none";
+    errorMessageRef.current.innerText = "";
   };
   const handlePassword2Change = (e) => {
     setPassword2(e.target.value);
+    errorBoxRef.current.style.display = "none";
+    errorMessageRef.current.innerText = "";
   };
 
   const handleSubmit = (e) => {
@@ -39,6 +48,7 @@ export default function Signup({ userState, setUserState }) {
       username,
       email,
       password,
+      password2,
     };
     UserModel.create(newUser).then((data) => {
       if (data.error) {
@@ -49,8 +59,15 @@ export default function Signup({ userState, setUserState }) {
       } else {
         localStorage.setItem("uid", data.signedJwt);
         UserModel.getUser().then((data) => {
-          setUserState(data.user);
-          history.push(`/myprofile`);
+          if (data.error) {
+            errorBoxRef.current.style.display = "block";
+            errorMessageRef.current.innerText = `${data.error} \n please try again`;
+            passwordRef.current.value = "";
+            password2Ref.current.value = "";
+          } else {
+            setUserState(data.user);
+            history.push(`/myprofile`);
+          }
         });
       }
     });
@@ -98,12 +115,12 @@ export default function Signup({ userState, setUserState }) {
         </div>
         <input placeholder="" type="submit" value="sign up" />
       </form>
-      <div className="error-div" ref={errorBoxRef}>
+      {/* <div className="error-div" ref={errorBoxRef}>
         <span className="error-icon">
           <FontAwesomeIcon icon={faExclamation} />
         </span>
         <p ref={errorMessageRef} className="error-message"></p>
-      </div>
+      </div> */}
     </div>
   );
 }

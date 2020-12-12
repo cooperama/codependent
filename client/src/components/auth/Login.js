@@ -2,47 +2,49 @@ import React, { useState } from "react";
 import UserModel from "../../models/user";
 import { useHistory } from "react-router-dom";
 
-export default function Login({ userState, setUserState }) {
+export default function Login({
+  userState,
+  setUserState,
+  errorMessageRef,
+  errorBoxRef,
+}) {
   const history = useHistory();
   const [username, setUsername] = useState();
-  // const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+    errorBoxRef.current.style.display = "none";
+    errorMessageRef.current.innerText = "";
   };
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    errorBoxRef.current.style.display = "none";
+    errorMessageRef.current.innerText = "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { username, password };
-    // const user = { email, username, password };
     UserModel.login(user).then((data) => {
-      localStorage.setItem("uid", data.signedJwt);
-      UserModel.getUser().then((data) => {
-        setUserState(data.user);
-        history.push(`/`);
-      });
+      if (data.error) {
+        errorBoxRef.current.style.display = "block";
+        errorMessageRef.current.innerText = `${data.error} \n please try again`;
+      } else {
+        localStorage.setItem("uid", data.signedJwt);
+        UserModel.getUser().then((data) => {
+          if (data.error) {
+            errorBoxRef.current.style.display = "block";
+            errorMessageRef.current.innerText = `${data.error} \n please try again`;
+          } else {
+            setUserState(data.user);
+            history.push(`/`);
+          }
+        });
+      }
     });
   };
-  // const loadState = () => {
-  //   const user = { email, username, password };
-  //   UserModel.login(user).then((data) => {
-  //     setUserState(data.user);
-  //     localStorage.setItem("uid", data.signedJwt);
-  //     UserModel.getUser().then((data) => {
-  //       console.log(data);
-  //       setUserState(data.user);
-  //       history.push(`/myprofile`);
-  //     });
-  //     // history.push(`/myprofile/${data.user._id}`);
-  //   });
-  // };
+
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
@@ -55,15 +57,6 @@ export default function Login({ userState, setUserState }) {
             id="username"
           />
         </div>
-        {/* <div className="form-group">
-          <input
-            placeholder="email"
-            onChange={handleEmailChange}
-            type="email"
-            name="email"
-            id="email"
-          />
-        </div> */}
         <div className="form-group">
           <input
             placeholder="password"

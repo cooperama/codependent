@@ -14,8 +14,9 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
-};
+// const generateAccessToken = (user) => {
+//   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+// };
 
-module.exports = { authenticateToken, generateAccessToken };
+module.exports = { authenticateToken };
+// module.exports = { authenticateToken, generateAccessToken };

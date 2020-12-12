@@ -1,62 +1,73 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
-const { generateAccessToken } = require("../auth");
+// const { generateAccessToken } = require("../auth");
 require("dotenv").config();
 
-const token = (req, res) => {
-  //
-  const refreshToken = req.body.token;
-};
+// const token = (req, res) => {
+//   //
+//   const refreshToken = req.body.token;
+// };
 
 const login = (req, res) => {
-  // console.log("logging in... user controller: ", req.body);
   db.User.findOne({ username: req.body.username })
-    // db.User.findOne({ email: req.body.email })
     .populate("posts comments available paired")
     .then((user) => {
-      console.log("logging in... user controller findOne: ", user);
-      if (!user) return console.log("no user found");
+      if (!user) {
+        return res.json({ error: "username not found" });
+      }
       bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
-        if (err) return console.log("error with passwords");
+        if (err) {
+          return res.json({ error: "incorrect password" });
+        }
         if (isMatch) {
           const signedJwt = jwt.sign(
             { _id: user._id },
-            // user,
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "1h" }
           );
-          console.log("login ctrl isMatch, line 30 ", user);
           res.json({
             status: 200,
             message: "success",
             id: user._id,
             signedJwt,
-            // user, //
           });
         } else {
           console.log(" not is match.....in bcrypt.compare");
-          res.json({ error: "Passwords do not match" });
+          return res.json({ error: "incorrect password..." });
         }
       });
     })
-    .catch((err) => console.log("error in user log in: ", err));
+    .catch((err) => {
+      console.log("error in user log in: ", err);
+      return res.json({ error: "an error occurred" });
+    });
 };
 
 const signup = (req, res) => {
+  // Check that passwords match, and username and email are unique
+  if (req.body.password !== req.body.password2) {
+    return res.json({ error: "passwords must match" });
+  }
   db.User.findOne({ username: req.body.username }, (err, user) => {
     if (user) {
-      res.json({ error: "username already exists" });
+      return res.json({ error: "username already exists" });
     }
     db.User.findOne({ email: req.body.email }, (err, user) => {
       if (user) {
-        res.json({ error: "email already exists" });
+        return res.json({ error: "email already exists" });
       }
+      // Encrypt password with bcrypt
       bcrypt.genSalt(10, (err, salt) => {
-        if (err) return console.log("error generating salt");
-
+        if (err) {
+          console.log("error generating salt");
+          return res.json({ error: "an error occurred" });
+        }
         bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-          if (err) return console.log("err hashing password");
+          if (err) {
+            console.log("err hashing password");
+            return res.json({ error: "an error occurred" });
+          }
 
           const newUser = {
             username: req.body.username,
@@ -66,28 +77,21 @@ const signup = (req, res) => {
 
           db.User.create(newUser)
             .then((newUser) => {
-              ////\\\/\/\/\/\\/
               const signedJwt = jwt.sign(
                 { _id: newUser._id },
-                // user,
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: "1h" }
               );
-              console.log("signup usersctrl, line 72 ", newUser);
               res.json({
                 status: 200,
                 message: "success",
                 id: newUser._id,
                 signedJwt,
-                // user, //
               });
-              //^^^^^^^^^^^^^^^^^^^^^^^
-
-              // res.json({ users: newUser });
             })
             .catch((err) => {
               console.log("Error in users.signup: ", err);
-              res.json({ error: "Unable to get data from signup user.create" });
+              return res.json({ error: "an error occurred" });
             });
         });
       });
@@ -118,7 +122,7 @@ const getUser = (req, res) => {
     })
     .catch((err) => {
       console.log("Error in users.getUser: ", err);
-      res.json({ error: "Unable to get data" });
+      res.json({ error: "an error occurred" });
     });
 };
 
@@ -228,23 +232,23 @@ const deleteUser = (req, res) => {
     });
 };
 
-const logout = (req, res) => {
-  // console.log("req.session  ", req.session);
-  console.log("users ctrl");
-  // console.log(req.session);
-  // if (req.session.currentUser) {
-  //   req.session.destroy((err) => {
-  //     if (err) return console.log("error destroying session");
-  //   });
-  // }
-};
+// const logout = (req, res) => {
+//   // console.log("req.session  ", req.session);
+//   console.log("users ctrl");
+//   // console.log(req.session);
+//   // if (req.session.currentUser) {
+//   //   req.session.destroy((err) => {
+//   //     if (err) return console.log("error destroying session");
+//   //   });
+//   // }
+// };
 
 module.exports = {
   login,
-  logout,
+  // logout,
   signup,
   allUsers,
-  token,
+  // token,
   getUser,
   updateUser,
   deleteUser,

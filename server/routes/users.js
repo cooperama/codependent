@@ -4,7 +4,7 @@ const ctrl = require("../controllers/usersCtrl");
 
 router.post("/login", ctrl.login);
 router.post("/signup", ctrl.signup);
-router.post("/token", ctrl.token);
+// router.post("/token", ctrl.token);
 router.get("/", ctrl.allUsers);
 router.get("/myprofile", authenticateToken, ctrl.getUser);
 // router.get("/myprofile/:id", authenticateToken, ctrl.getUser);

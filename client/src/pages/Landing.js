@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Signup, Login } from "../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+
 export default function Landing({ userState, setUserState }) {
+  const errorMessageRef = useRef();
+  const errorBoxRef = useRef();
   return (
     <div className="page-container">
       <div className="welcome-div">
@@ -22,10 +27,26 @@ export default function Landing({ userState, setUserState }) {
           <p>All kinds of good stuff.</p>
         </div>
         <div className="login-div">
-          <Login userState={userState} setUserState={setUserState} />
+          <Login
+            errorMessageRef={errorMessageRef}
+            errorBoxRef={errorBoxRef}
+            userState={userState}
+            setUserState={setUserState}
+          />
         </div>
         <div className="signup-div">
-          <Signup userState={userState} setUserState={setUserState} />
+          <Signup
+            errorMessageRef={errorMessageRef}
+            errorBoxRef={errorBoxRef}
+            userState={userState}
+            setUserState={setUserState}
+          />
+        </div>
+        <div className="error-div" ref={errorBoxRef}>
+          <span className="error-icon">
+            <FontAwesomeIcon icon={faExclamation} />
+          </span>
+          <p ref={errorMessageRef} className="error-message"></p>
         </div>
       </div>
     </div>
