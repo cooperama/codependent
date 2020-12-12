@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -41,30 +41,6 @@ export default function Navbar({ userState, setUserState }) {
     history.push("/register");
   };
 
-  // const renderSignup = () => {
-  //   if (!userState) {
-  //     return (
-  //       <li>
-  //         <Link to="/register">
-  //           <span>
-  //             <FontAwesomeIcon icon={faSignOutAlt} />
-  //           </span>
-  //           <span>sign in</span>
-  //         </Link>
-  //       </li>
-  //     );
-  //   } else {
-  //     return (
-  //       <li onClick={handleSignoutClick}>
-  //         <span>
-  //           <FontAwesomeIcon icon={faSignOutAlt} />
-  //         </span>
-  //         <span>sign out</span>
-  //       </li>
-  //     );
-  //   }
-  // };
-
   const renderProfileContainer = () => {
     if (userState) {
       return (
@@ -72,51 +48,43 @@ export default function Navbar({ userState, setUserState }) {
           <li className="cursor" onClick={handleDropdownClick}>
             <h4>[ {userState.username} ]</h4>
           </li>
-          <div>
-            <span onClick={handleDropdownClick}>
+          {/* <div> */}
+          {/* <span onClick={handleDropdownClick}>
               <FontAwesomeIcon icon={faChevronDown} />
-            </span>
-            <div
-              ref={dropdownRef}
-              className="profile-dropdown hide-profile-dropdown"
-            >
-              <ul>
-                <li>
-                  <Link onClick={handleDropdownClick} to={`/myprofile`}>
-                    <span>{renderPhoto()}</span>
-                    <span>profile</span>
-                  </Link>
-                </li>
+            </span> */}
+          <div
+            ref={dropdownRef}
+            className="profile-dropdown hide-profile-dropdown"
+          >
+            <ul>
+              <li>
+                <Link onClick={handleDropdownClick} to={`/myprofile`}>
+                  <span>{renderPhoto()}</span>
+                  <span>profile</span>
+                </Link>
+              </li>
 
-                <li>
-                  <Link onClick={handleDropdownClick} to="/settings">
-                    <span>
-                      <FontAwesomeIcon icon={faCog} />
-                    </span>
-                    <span>settings</span>
-                  </Link>
-                </li>
-                <li onClick={handleSignoutClick}>
+              <li>
+                <Link onClick={handleDropdownClick} to="/settings">
                   <span>
-                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <FontAwesomeIcon icon={faCog} />
                   </span>
-                  <span>sign out</span>
-                </li>
-                {/* {renderSignup()} */}
-              </ul>
-            </div>
+                  <span>settings</span>
+                </Link>
+              </li>
+              <li onClick={handleSignoutClick}>
+                <span>
+                  <FontAwesomeIcon icon={faSignOutAlt} />
+                </span>
+                <span>sign out</span>
+              </li>
+            </ul>
           </div>
+          {/* </div> */}
         </>
       );
     } else {
       history.push("/register");
-      // return (
-      //   <>
-      //     <li>
-      //       <Link to="/register">Sign In</Link>
-      //     </li>
-      //   </>
-      // );
     }
   };
   return (

@@ -60,7 +60,7 @@ export default function Profile({ userState, setUserState }) {
   };
   const renderComments = () => {
     if (userState) {
-      if (userState.posts.length === 0) {
+      if (userState.comments.length === 0) {
         return (
           <div className="no-posts-div">
             <p>You have no comments yet!</p>

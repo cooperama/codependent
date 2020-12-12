@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import Moment from "react-moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Post, AddPost, Loading } from "../components";
 import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
@@ -23,7 +20,8 @@ export default function Codegory({ userState, setUserState }) {
         }
       });
     } else {
-      history.push("/register");
+      history.push("/");
+      // history.push("/register");
     }
     CodegoryModel.getCodegory(params.id).then((data) => {
       setCodegory(data.codegory);
@@ -70,11 +68,8 @@ export default function Codegory({ userState, setUserState }) {
           <h1>{codegory.topic}</h1>
         </div>
         <div className="codegorypage-settings postpage-settings">
-          <button onClick={addPostClick}>
+          <button className="btn" onClick={addPostClick}>
             create post
-            <span className="font-icon" onClick={addPostClick}>
-              <FontAwesomeIcon icon={faChevronDown} />
-            </span>
           </button>
         </div>
         <div ref={addPostRef} className="codegorypage-addpost hide-content">

@@ -55,7 +55,7 @@ export default function EditComment({
           value={newContent}
         ></textarea>
         <div className="buttons-container">
-          <input type="submit" value="edit" />
+          <input className="btn btn-edit" type="submit" value="edit" />
         </div>
       </form>
     );

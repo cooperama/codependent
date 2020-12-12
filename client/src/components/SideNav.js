@@ -23,7 +23,8 @@ export default function SideNav() {
           </p>
         </Link>
       </li>
-      <li className="side-nav-item">
+      {/* Below two items To Be Added~~ */}
+      {/* <li className="side-nav-item">
         <Link to="/collablab">
           <p>
             <span>Collab Lab</span>
@@ -42,7 +43,7 @@ export default function SideNav() {
             </span>
           </p>
         </Link>
-      </li>
+      </li> */}
       <li className="side-nav-item">
         <Link to="/nerdroom">
           <p>

@@ -67,7 +67,7 @@ export default function Login({
           />
         </div>
 
-        <input type="submit" value="sign in" />
+        <input className="btn" type="submit" value="sign in" />
       </form>
     </div>
   );

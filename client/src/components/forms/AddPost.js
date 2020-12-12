@@ -28,13 +28,13 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
       title,
       link,
       content,
-      codegory: codegoryId,
+      codegory: codegoryId, //
       author: userState._id,
     };
     console.log(newPost);
     // create post in db
     PostModel.create(newPost).then((data) => {
-      console.log("post mode create: ", data);
+      console.log("post model create: ", data);
       history.push(`/post/${data.post._id}`);
     });
   };
@@ -70,7 +70,7 @@ export default function AddPost({ codegoryId, userState, setUserState }) {
         id="content"
         placeholder="be good"
       ></textarea>
-      <input type="submit" value="add post" />
+      <input className="btn" type="submit" value="add post" />
     </form>
   );
 }

@@ -85,7 +85,7 @@ export default function EditPost({
           value={newContent}
         ></textarea>
       </div>
-      <input type="submit" value="edit post" />
+      <input className="btn btn-edit" type="submit" value="edit post" />
     </form>
   );
 }

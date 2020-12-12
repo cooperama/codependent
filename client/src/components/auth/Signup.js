@@ -113,7 +113,7 @@ export default function Signup({
             id="password2"
           />
         </div>
-        <input placeholder="" type="submit" value="sign up" />
+        <input className="btn" type="submit" value="sign up" />
       </form>
       {/* <div className="error-div" ref={errorBoxRef}>
         <span className="error-icon">

@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 import CodegoryModel from "../models/codegory";
 import UserModel from "../models/user";
 
-import { Post, AddPost } from "../components";
+import { Post, AddPost, Loading } from "../components";
 
 export default function NerdRoom({ userState, setUserState }) {
   const [codegory, setCodegory] = useState();
-  const params = useParams();
   const addPostRef = useRef();
   const history = useHistory();
-  // make api call for Codegory using id from params
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       UserModel.getUser().then((data) => {
@@ -25,7 +22,6 @@ export default function NerdRoom({ userState, setUserState }) {
     } else {
       history.push("/register");
     }
-    // const codeId = params.id;
     CodegoryModel.getNerdRoom().then((data) => {
       setCodegory(data.codegory);
     });
@@ -42,7 +38,7 @@ export default function NerdRoom({ userState, setUserState }) {
           <AddPost
             userState={userState}
             setUserState={setUserState}
-            codegory={codegory}
+            codegoryId={codegory._id}
           />
         </>
       );
@@ -78,11 +74,8 @@ export default function NerdRoom({ userState, setUserState }) {
     return (
       <>
         <div className="codegorypage-settings postpage-settings">
-          <button onClick={addPostClick}>
+          <button className="btn" onClick={addPostClick}>
             create post
-            <span className="font-icon" onClick={addPostClick}>
-              <FontAwesomeIcon icon={faChevronDown} />
-            </span>
           </button>
         </div>
         <div ref={addPostRef} className="codegorypage-addpost hide-content">
@@ -99,7 +92,7 @@ export default function NerdRoom({ userState, setUserState }) {
         <div className="codegorypage-heading nerd-room-heading-div">
           <h1 className="nerd-room-heading">Nerd Room</h1>
         </div>
-        {codegory && renderContent()}
+        {codegory ? renderContent() : <Loading />}
       </div>
     </div>
   );

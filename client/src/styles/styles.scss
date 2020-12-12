@@ -5,7 +5,14 @@ $second-color: #283248;
 $accent-color: #0875b3;
 $neutral-color: #6a6d73;
 $lighter-color: #b0c6d9;
-$button-color: rgb(10, 36, 74);
+
+$btn-color: #212637;
+$btn-color-hv: #283248;
+$btn-dark-hv: #151d2e;
+$edit-btn-clr: #364159;
+$edit-btn-clr-hv: #516693;
+$delete-btn-clr: #500;
+$delete-btn-clr-hv: rgb(113, 3, 3);
 
 // matching favicon colors
 $blue-color: #025;
@@ -76,27 +83,6 @@ $navbar-width: 200px;
   textarea {
     white-space: pre-line;
   }
-  input[type="submit"],
-  input[type="button"],
-  button {
-    color: $light-font;
-    outline: none;
-    border: none;
-    background-color: $deep-clr;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 3px;
-    &:focus,
-    &:hover {
-      background-color: $deep-red;
-      transition: all 200ms ease;
-      transition: border 200ms ease;
-    }
-  }
-  .delete-button-confirm {
-    background-color: $deep-red;
-    box-shadow: 0 0 2px solid $main-color;
-  }
 }
 
 .page-container {
@@ -108,6 +94,69 @@ $navbar-width: 200px;
 .hide-content {
   display: none !important;
 }
+
+// buttons
+
+input[type="submit"],
+input[type="button"],
+button {
+  // color: $light-font;
+  // outline: none;
+  // border: none;
+  // background-color: $deep-clr;
+  // cursor: pointer;
+  // padding: 5px 10px;
+  // border-radius: 3px;
+  // &:focus,
+  // &:hover {
+  //   background-color: $deep-red;
+  //   transition: all 200ms ease;
+  //   transition: border 200ms ease;
+  // }
+}
+.delete-button-confirm {
+  background-color: $deep-red;
+  box-shadow: 0 0 2px solid $main-color;
+}
+
+.btn {
+  width: 100px;
+  // height: 30px;
+  color: $light-font !important;
+  outline: none;
+  border: none;
+  background-color: $btn-color;
+  user-select: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: all 120ms ease;
+  &:focus,
+  &:hover {
+    background-color: $btn-dark-hv;
+    transition: all 120ms ease;
+  }
+}
+.btn-edit {
+  // background-color: $edit-btn-clr;
+  transition: all 120ms ease;
+  &:focus,
+  &:hover {
+    background-color: $edit-btn-clr-hv;
+    transition: all 120ms ease;
+  }
+}
+.btn-delete {
+  background-color: $delete-btn-clr;
+  transition: all 120ms ease;
+  &:focus,
+  &:hover {
+    background-color: $delete-btn-clr-hv;
+    transition: all 120ms ease;
+  }
+}
+
+// errors
 
 .error-div {
   display: none;

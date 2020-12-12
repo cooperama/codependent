@@ -127,17 +127,25 @@ export default function PostPage({ userState, setUserState }) {
     if (sameUser) {
       return (
         <div className="user-verified">
-          <button ref={editPostBtnRef} onClick={editPostClick}>
+          <button
+            className="btn btn-edit"
+            ref={editPostBtnRef}
+            onClick={editPostClick}
+          >
             edit
           </button>
           <button
             ref={deletePostRef}
-            className="delete-button-confirm hide-content"
+            className="delete-button-confirm hide-content btn-delete"
             onClick={handleDelete}
           >
             confirm
           </button>
-          <button ref={deletePostBtnRef} onClick={deletePostClick}>
+          <button
+            className="btn btn-delete"
+            ref={deletePostBtnRef}
+            onClick={deletePostClick}
+          >
             delete
           </button>
         </div>
