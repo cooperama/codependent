@@ -20,16 +20,18 @@ export default function Codegory({ userState, setUserState }) {
         }
       });
     } else {
-      history.push("/");
-      // history.push("/register");
+      history.push("/register");
     }
     CodegoryModel.getCodegory(params.id).then((data) => {
       setCodegory(data.codegory);
     });
   }, []);
 
-  const addPostClick = () => {
+  const addPostClick = (e) => {
     addPostRef.current.classList.toggle("hide-content");
+    e.target.innerText === "create post"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "create post");
   };
 
   const renderAddPostForm = () => {
@@ -64,11 +66,12 @@ export default function Codegory({ userState, setUserState }) {
   const renderCodegory = () => {
     return (
       <div className="codegorypage-container postpage-post-container">
-        <div className="codegorypage-heading postpage-post-heading">
+        <div className="page-heading">
+          {/* <div className="codegorypage-heading postpage-post-heading page-heading"> */}
           <h1>{codegory.topic}</h1>
         </div>
-        <div className="codegorypage-settings postpage-settings">
-          <button className="btn" onClick={addPostClick}>
+        <div className="create-post-container">
+          <button className="btn btn-wide" onClick={addPostClick}>
             create post
           </button>
         </div>

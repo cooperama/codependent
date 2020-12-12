@@ -57,7 +57,7 @@ export default function PostPage({ userState, setUserState }) {
         console.log("they are not the same!");
       }
     });
-    // Re-render page whenever there are new comments or edited posts
+    // Re-render page whenever there are new/edited comments or edited posts
   }, [newComment, editedPost]);
 
   const addCommentClick = (e) => {
@@ -97,10 +97,7 @@ export default function PostPage({ userState, setUserState }) {
       return (
         <EditPost
           userState={userState}
-          setUserState={setUserState}
           post={post}
-          setPost={setPost}
-          // editedPost={editedPost}
           setEditedPost={setEditedPost}
           editPostRef={editPostRef}
           // reset inner text of btn on submit

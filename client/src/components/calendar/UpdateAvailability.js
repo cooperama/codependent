@@ -157,7 +157,7 @@ export default function UpdateAvailability() {
         eventClick={eventClickHandler} // destroys with eventRemove
         eventRemove={eventRemoveHandler}
       />
-      <button className="update-avail-button" onClick={updateUserAvailability}>
+      <button className="btn btn-wide" onClick={updateUserAvailability}>
         Done
       </button>
     </>

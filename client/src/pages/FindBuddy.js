@@ -22,8 +22,8 @@ export default function FindBuddy({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="find-buddy-container">
-        {" "}
-        <div className="codegorypage-heading postpage-post-heading">
+        <div className="page-heading">
+          {/* <div className="codegorypage-heading postpage-post-heading"> */}
           <h1>Find a Study Buddy</h1>
         </div>
         <div className="buddy-instructions">

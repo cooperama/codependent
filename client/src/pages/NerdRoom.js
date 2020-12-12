@@ -27,8 +27,11 @@ export default function NerdRoom({ userState, setUserState }) {
     });
   }, []);
 
-  const addPostClick = () => {
+  const addPostClick = (e) => {
     addPostRef.current.classList.toggle("hide-content");
+    e.target.innerText === "create post"
+      ? (e.target.innerText = "cancel")
+      : (e.target.innerText = "create post");
   };
 
   const renderAddPostForm = () => {
@@ -73,8 +76,8 @@ export default function NerdRoom({ userState, setUserState }) {
   const renderContent = () => {
     return (
       <>
-        <div className="codegorypage-settings postpage-settings">
-          <button className="btn" onClick={addPostClick}>
+        <div className="create-post-container">
+          <button className="btn btn-wide" onClick={addPostClick}>
             create post
           </button>
         </div>
@@ -89,7 +92,8 @@ export default function NerdRoom({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="codegorypage-container">
-        <div className="codegorypage-heading nerd-room-heading-div">
+        <div className="page-heading">
+          {/* <div className="codegorypage-heading nerd-room-heading-div page-heading"> */}
           <h1 className="nerd-room-heading">Nerd Room</h1>
         </div>
         {codegory ? renderContent() : <Loading />}

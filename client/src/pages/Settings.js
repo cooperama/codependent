@@ -87,7 +87,8 @@ export default function Settings({ userState, setUserState }) {
 
   return (
     <div className="page-container">
-      <div className="update-heading">
+      <div className="page-heading">
+        {/* <div className="update-heading"> */}
         <h1>Update Profile</h1>
       </div>
       <div className="edit-profile-container">

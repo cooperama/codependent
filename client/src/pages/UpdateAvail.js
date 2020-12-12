@@ -23,7 +23,8 @@ export default function UpdateAvail({ userState, setUserState }) {
   return (
     <div className="page-container">
       <div className="calendar-container">
-        <div className="update-calendar-heading">
+        <div className="page-heading">
+          {/* <div className="update-calendar-heading"> */}
           <h1>My Availability</h1>
         </div>
         <div className="update-instructions">

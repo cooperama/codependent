@@ -3,16 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import PostModel from "../../models/post";
 
 export default function EditPost({
-  setPost,
-  // editedPost,
   setEditedPost,
   post,
   userState,
-  setUserState,
   editPostRef,
   editPostBtnRef,
 }) {
-  // const [post, setPost] = useState({});
   const [title, setTitle] = useState();
   const [link, setLink] = useState();
   const [newContent, setNewContent] = useState();
@@ -35,15 +31,10 @@ export default function EditPost({
       content: newContent,
       author: userState._id,
     };
-    console.log(editedPost);
-    console.log(post);
-    // create post in db
+
     PostModel.update(post._id, editedPost).then((data) => {
-      console.log("post model update: ", data);
       PostModel.getPost(data.post._id).then((data) => {
-        // setPost(data.post);
         setEditedPost(data.post);
-        // history.push(`/post/${data.post._id}`);
       });
     });
   };

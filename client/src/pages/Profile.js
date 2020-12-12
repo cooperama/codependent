@@ -136,7 +136,8 @@ export default function Profile({ userState, setUserState }) {
 
   return (
     <div className="page-container">
-      <div className="profile-heading">
+      <div className="page-heading">
+        {/* <div className="profile-heading "> */}
         {userState && <h1>{userState.username}</h1>}
       </div>
       <div className="profile-content">
@@ -158,7 +159,7 @@ export default function Profile({ userState, setUserState }) {
           </div>
           <div className="avail-button-div">
             <Link to="/updateavail">
-              <button>Update Availability</button>
+              <button className="btn">Update Availability</button>
             </Link>
           </div>
         </div>
