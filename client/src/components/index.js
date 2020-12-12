@@ -23,7 +23,7 @@ import AddComment from "./forms/AddComment";
 import AddPost from "./forms/AddPost";
 import EditComment from "./forms/EditComment";
 import EditPost from "./forms/EditPost";
-import EditProfile from "./forms/EditProfile";
+// import EditProfile from "./forms/EditProfile";
 
 export {
   Navbar,
@@ -43,7 +43,7 @@ export {
   AddPost,
   EditComment,
   EditPost,
-  EditProfile,
+  // EditProfile,
   Login,
   Signup,
 };

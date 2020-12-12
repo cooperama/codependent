@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Signup, Login } from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function Landing({ userState, setUserState }) {
   const errorMessageRef = useRef();
@@ -44,7 +44,7 @@ export default function Landing({ userState, setUserState }) {
         </div>
         <div className="error-div" ref={errorBoxRef}>
           <span className="error-icon">
-            <FontAwesomeIcon icon={faExclamation} />
+            <FontAwesomeIcon icon={faExclamationCircle} />
           </span>
           <p ref={errorMessageRef} className="error-message"></p>
         </div>

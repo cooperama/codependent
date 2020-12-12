@@ -15,11 +15,12 @@ import { SideNav, UserNav } from "../components";
 export default function Navbar({ userState, setUserState }) {
   const dropdownRef = useRef();
   const history = useHistory();
+
   const handleDropdownClick = (e) => {
     dropdownRef.current.classList.toggle("hide-profile-dropdown");
   };
+
   const renderPhoto = () => {
-    console.log(userState);
     if (userState.photo) {
       return (
         <img
@@ -32,35 +33,38 @@ export default function Navbar({ userState, setUserState }) {
       return <FontAwesomeIcon icon={faUser} />;
     }
   };
+
   const handleSignoutClick = () => {
     dropdownRef.current.classList.add("hide-profile-dropdown");
     setUserState(null);
     localStorage.clear();
     history.push("/register");
   };
-  const renderSignup = () => {
-    if (!userState) {
-      return (
-        <li>
-          <Link to="/register">
-            <span>
-              <FontAwesomeIcon icon={faSignOutAlt} />
-            </span>
-            <span>sign in</span>
-          </Link>
-        </li>
-      );
-    } else {
-      return (
-        <li onClick={handleSignoutClick}>
-          <span>
-            <FontAwesomeIcon icon={faSignOutAlt} />
-          </span>
-          <span>sign out</span>
-        </li>
-      );
-    }
-  };
+
+  // const renderSignup = () => {
+  //   if (!userState) {
+  //     return (
+  //       <li>
+  //         <Link to="/register">
+  //           <span>
+  //             <FontAwesomeIcon icon={faSignOutAlt} />
+  //           </span>
+  //           <span>sign in</span>
+  //         </Link>
+  //       </li>
+  //     );
+  //   } else {
+  //     return (
+  //       <li onClick={handleSignoutClick}>
+  //         <span>
+  //           <FontAwesomeIcon icon={faSignOutAlt} />
+  //         </span>
+  //         <span>sign out</span>
+  //       </li>
+  //     );
+  //   }
+  // };
+
   const renderProfileContainer = () => {
     if (userState) {
       return (
@@ -92,26 +96,27 @@ export default function Navbar({ userState, setUserState }) {
                     <span>settings</span>
                   </Link>
                 </li>
-                {renderSignup()}
-                {/* <li onClick={handleSignoutClick}>
+                <li onClick={handleSignoutClick}>
                   <span>
                     <FontAwesomeIcon icon={faSignOutAlt} />
                   </span>
                   <span>sign out</span>
-                </li> */}
+                </li>
+                {/* {renderSignup()} */}
               </ul>
             </div>
           </div>
         </>
       );
     } else {
-      return (
-        <>
-          <li>
-            <Link to="/register">Sign In</Link>
-          </li>
-        </>
-      );
+      history.push("/register");
+      // return (
+      //   <>
+      //     <li>
+      //       <Link to="/register">Sign In</Link>
+      //     </li>
+      //   </>
+      // );
     }
   };
   return (

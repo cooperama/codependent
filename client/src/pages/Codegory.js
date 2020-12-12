@@ -11,6 +11,7 @@ export default function Codegory({ userState, setUserState }) {
   const [codegory, setCodegory] = useState({});
   const addPostRef = useRef();
   const params = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("uid")) {
@@ -21,9 +22,10 @@ export default function Codegory({ userState, setUserState }) {
           console.log("no user in profile useEffect..");
         }
       });
+    } else {
+      history.push("/register");
     }
     CodegoryModel.getCodegory(params.id).then((data) => {
-      console.log(data);
       setCodegory(data.codegory);
     });
   }, []);
@@ -43,9 +45,9 @@ export default function Codegory({ userState, setUserState }) {
       );
     } else {
       console.log("log in to add post or comment or whatever");
-      // history.push("/register");
     }
   };
+
   const renderPosts = () => {
     if (codegory.posts.length === 0) {
       return (
@@ -60,6 +62,7 @@ export default function Codegory({ userState, setUserState }) {
       });
     }
   };
+
   const renderCodegory = () => {
     return (
       <div className="codegorypage-container postpage-post-container">

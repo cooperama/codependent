@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import UserModel from "../models/user";
 import PostModel from "../models/post";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,23 +8,24 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Post } from "../components";
 
 export default function Home({ userState, setUserState }) {
+  const history = useHistory();
   const [recentPosts, setRecentPosts] = useState();
   const [recentForumPosts, setRecentForumPosts] = useState();
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
-        console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
         }
       });
+    } else {
+      history.push("/register");
     }
     // get most recent posts
     PostModel.recentPosts().then((data) => {
-      console.log(data);
       const codePosts = [];
       const forumPosts = [];
       if (codePosts && data.posts) {
@@ -46,31 +48,43 @@ export default function Home({ userState, setUserState }) {
       }
     });
   }, []);
+
   const renderCodePosts = () => {
-    return recentPosts.map((post) => {
-      return (
-        <Post
-          key={post._id}
-          userState={userState}
-          setUserState={setUserState}
-          post={post}
-        />
-      );
-    });
+    if (recentPosts.length !== 0) {
+      return recentPosts.map((post) => {
+        return (
+          <Post
+            key={post._id}
+            userState={userState}
+            setUserState={setUserState}
+            post={post}
+          />
+        );
+      });
+    } else {
+      return <p>No posts here yet!</p>;
+    }
   };
+
   const renderForumPosts = () => {
-    return recentForumPosts.map((post) => {
-      return (
-        <Post
-          key={post._id}
-          userState={userState}
-          setUserState={setUserState}
-          post={post}
-        />
-      );
-    });
+    if (recentForumPosts.length !== 0) {
+      return recentForumPosts.map((post) => {
+        return (
+          <Post
+            key={post._id}
+            userState={userState}
+            setUserState={setUserState}
+            post={post}
+          />
+        );
+      });
+    } else {
+      return <p>No posts here yet!</p>;
+    }
   };
+
   const renderCalendarList = () => {};
+
   return (
     <>
       <div className="page-container">
@@ -84,18 +98,14 @@ export default function Home({ userState, setUserState }) {
                 <p>Recent Forum Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
-              <div className="recent-code-posts">
-                {recentForumPosts && renderForumPosts()}
-              </div>
+              <div className="recent-code-posts">{renderForumPosts()}</div>
             </div>
             <div className="home-post-containers">
               <div className="vertical-text">
                 <p>Recent Code Posts</p>
                 <FontAwesomeIcon icon={faChevronRight} />
               </div>
-              <div className="recent-code-posts">
-                {recentPosts && renderCodePosts()}
-              </div>
+              <div className="recent-code-posts">{renderCodePosts()}</div>
             </div>
           </div>
         </div>

@@ -208,7 +208,7 @@ const updateUser = (req, res) => {
             });
         } else {
           console.log(" not is match updatedUser .....", isMatch);
-          res.json({ error: "passwords do not match" });
+          res.json({ error: "incorrect password" });
         }
       });
     }

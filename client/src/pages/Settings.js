@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory, Link } from "react-router-dom";
 import FileBase from "react-file-base64";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 import UserModel from "../models/user";
 
@@ -20,16 +20,18 @@ export default function Settings({ userState, setUserState }) {
   const history = useHistory();
 
   useEffect(() => {
-    // if (localStorage.getItem("uid")) {
-    //   UserModel.getUser().then((data) => {
-    //     if (data.user) {
-    //       setUserState(data.user);
-    //     } else {
-    //       console.log("no user in profile useEffect..");
-    //       history.push(`/register`);
-    //     }
-    //   });
-    // }
+    if (localStorage.getItem("uid")) {
+      UserModel.getUser().then((data) => {
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+          history.push(`/register`);
+        }
+      });
+    } else {
+      history.push(`/register`);
+    }
     setUsername(userState.username);
     setEmail(userState.email);
     setFullname(userState.fullname);
@@ -71,20 +73,18 @@ export default function Settings({ userState, setUserState }) {
       password,
       password2,
       password3,
-      // password: password2,
     };
-    // console.log(editedUser);
     UserModel.update(userState._id, editedUser).then((data) => {
       if (data.error) {
         errorBoxRef.current.style.display = "block";
         errorMessageRef.current.innerText = `${data.error} \n please try again`;
       } else {
         console.log(data);
-        // setUserState(data.user);
         history.push(`/myprofile`);
       }
     });
   };
+
   return (
     <div className="page-container">
       <div className="update-heading">
@@ -167,7 +167,7 @@ export default function Settings({ userState, setUserState }) {
       </div>
       <div className="error-div" ref={errorBoxRef}>
         <span className="error-icon">
-          <FontAwesomeIcon icon={faExclamation} />
+          <FontAwesomeIcon icon={faExclamationCircle} />
         </span>
         <p ref={errorMessageRef} className="error-message"></p>
       </div>

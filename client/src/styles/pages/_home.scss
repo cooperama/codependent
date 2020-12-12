@@ -17,19 +17,13 @@
 
 .recent-code-posts {
   height: 35%;
+  min-height: 400px;
   width: 650px;
   margin-bottom: 20px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-corner {
-    background-color: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: $red-color;
-    // border-radius: 5px;
-  }
+  border: 30px solid $second-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-banner-div {
@@ -46,7 +40,6 @@
 }
 
 .home-post-containers {
-  // background: red;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -56,46 +49,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // transform: rotate(-90deg);
     width: 160px;
     position: relative;
     top: 150px;
     right: -30px;
     height: 50px;
-    // background: green;
     font-size: 2rem;
-    // &::before {
-    //   content: "";
-    //   position: absolute;
-    //   // height: 100%;
-    //   right: 200px;
-    //   top: 0;
-    //   z-index: -1;
-    //   // width: 100%;
-    //   border-bottom: 30px solid transparent;
-    //   // border-left: 10px solid transparent;
-    //   border-top: 20px solid transparent;
-    //   border-right: 200px solid $accent-color;
-    // }
   }
 }
-
-// .recent-nerd-posts {
-//   background-color: $second-color;
-//   height: 35%;
-//   width: 100%;
-//   overflow: scroll;
-//   &::-webkit-scrollbar {
-//     background-color: transparent;
-//   }
-//   &::-webkit-scrollbar-corner {
-//     background-color: transparent;
-//   }
-//   &::-webkit-scrollbar-thumb {
-//     background-color: $red-color;
-//     // border-radius: 5px;
-//   }
-// }
 
 .calendar-list {
   background-color: $main-color;
