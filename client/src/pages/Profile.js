@@ -21,19 +21,23 @@ export default function Profile({ userState, setUserState }) {
   const postsTabRef = useRef();
   const commentsTabRef = useRef();
   const tabRefs = [profileTabRef, postsTabRef, commentsTabRef];
+
   useEffect(() => {
     if (localStorage.getItem("uid")) {
-      console.log(localStorage);
       UserModel.getUser().then((data) => {
         console.log(data);
         if (data.user) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
+          history.push("/register");
         }
       });
+    } else {
+      history.push("/register");
     }
   }, []);
+
   const renderPosts = () => {
     if (userState) {
       if (userState.posts.length === 0) {
@@ -56,7 +60,6 @@ export default function Profile({ userState, setUserState }) {
     }
   };
   const renderComments = () => {
-    console.log("render comments funciton!");
     if (userState) {
       if (userState.posts.length === 0) {
         return (
@@ -66,13 +69,10 @@ export default function Profile({ userState, setUserState }) {
         );
       }
       return userState.comments.map((comment) => {
-        // not sure what kind of data comment is... populated or id????
         return (
           <Comment
-            // parentPost={comment.parentPost}
             userState={userState}
             setUserState={setUserState}
-            // setPost={}
             profilePage={profilePage}
             commentId={comment._id}
             key={comment._id}
@@ -83,10 +83,6 @@ export default function Profile({ userState, setUserState }) {
   };
   const renderContent = () => {
     if (userState) {
-      console.log(
-        "user state in rener content that's cuasing errors: ",
-        userState
-      );
       return (
         <>
           <div className="profile-names">
@@ -111,12 +107,10 @@ export default function Profile({ userState, setUserState }) {
   };
 
   const handleTabClick = (e) => {
-    //
     tabRefs.forEach((tab) => {
       tab.current.classList.remove("profile-tab-active");
     });
     e.target.classList.add("profile-tab-active");
-    console.log(e.target.innerText);
     switch (e.target.innerText) {
       case "My Profile":
         containerRefs.forEach((container) => {
