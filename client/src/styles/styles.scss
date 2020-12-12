@@ -10,7 +10,7 @@ $btn-color: #212637;
 $btn-color-hv: #283248;
 $btn-dark-hv: #151d2e;
 $edit-btn-clr: #364159;
-$edit-btn-clr-hv: #516693;
+$edit-btn-clr-hv: #444f68;
 $delete-btn-clr: #500;
 $delete-btn-clr-hv: rgb(113, 3, 3);
 
@@ -120,7 +120,11 @@ button {
 }
 
 .btn {
-  width: 100px;
+  // max-width: 120px;
+  // width: 100%;
+
+  width: 120px;
+
   // height: 30px;
   color: $light-font !important;
   outline: none;

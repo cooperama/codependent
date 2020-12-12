@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Loading, AddComment, Comment, EditPost } from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faExternalLinkSquareAlt,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faExternalLinkSquareAlt } from "@fortawesome/free-solid-svg-icons";
 import Moment from "react-moment";
 import PostModel from "../models/post";
 import UserModel from "../models/user";
@@ -18,7 +15,7 @@ export default function PostPage({ userState, setUserState }) {
   const editPostRef = useRef();
   const deletePostBtnRef = useRef();
   const editPostBtnRef = useRef();
-  const deletePostRef = useRef();
+  const deleteConfirmRef = useRef();
   const addCommentRef = useRef();
   const params = useParams();
   const history = useHistory();
@@ -110,15 +107,19 @@ export default function PostPage({ userState, setUserState }) {
   };
 
   const deletePostClick = () => {
-    deletePostRef.current.classList.toggle("hide-content");
-    deletePostBtnRef.current.innerText === "delete"
-      ? (deletePostBtnRef.current.innerText = "cancel")
-      : (deletePostBtnRef.current.innerText = "delete");
+    deleteConfirmRef.current.classList.toggle("hide-content");
+    if (deletePostBtnRef.current.innerText === "delete") {
+      deletePostBtnRef.current.innerText = "cancel";
+      deletePostBtnRef.current.style.backgroundColor = "#283248";
+    } else {
+      deletePostBtnRef.current.innerText = "delete";
+      deletePostBtnRef.current.style.backgroundColor = "#500";
+    }
   };
 
   const handleDelete = () => {
     PostModel.delete(post._id).then((data) => {
-      deletePostRef.current.classList.add("hide-content");
+      deleteConfirmRef.current.classList.add("hide-content");
       history.push(`/codegories`);
     });
   };
@@ -126,7 +127,7 @@ export default function PostPage({ userState, setUserState }) {
   const renderButtons = () => {
     if (sameUser) {
       return (
-        <div className="user-verified">
+        <>
           <button
             className="btn btn-edit"
             ref={editPostBtnRef}
@@ -135,20 +136,20 @@ export default function PostPage({ userState, setUserState }) {
             edit
           </button>
           <button
-            ref={deletePostRef}
-            className="delete-button-confirm hide-content btn-delete"
-            onClick={handleDelete}
-          >
-            confirm
-          </button>
-          <button
             className="btn btn-delete"
             ref={deletePostBtnRef}
             onClick={deletePostClick}
           >
             delete
           </button>
-        </div>
+          <button
+            ref={deleteConfirmRef}
+            className="hide-content btn btn-delete"
+            onClick={handleDelete}
+          >
+            confirm
+          </button>
+        </>
       );
     }
   };
@@ -195,32 +196,30 @@ export default function PostPage({ userState, setUserState }) {
         </div>
         <div className="url-content">{post.link && linkDiv()}</div>
         <div className="postpage-post-content ">
-          <p>{post.content}</p>
-        </div>
-
-        <div className="postpage-settings">
-          <div className="postpage-post-stats">
-            <p> {post.codegory && post.codegory.topic} </p>
-            <p> [{post.author && post.author.username}] </p>
-            <p>
-              <Moment fromNow ago>
-                {post.createdAt}
-              </Moment>{" "}
-              ago
-            </p>
+          <div className="postpage-post-text">
+            <p>{post.content}</p>
           </div>
-          <div>
-            {renderButtons()}
-            <div>
-              <button onClick={addCommentClick}>
-                comment
-                <span className="font-icon">
-                  <FontAwesomeIcon icon={faChevronDown} />
-                </span>
+
+          <div className="postpage-settings">
+            <div className="postpage-post-stats">
+              <p> {post.codegory && post.codegory.topic} </p>
+              <p> [{post.author && post.author.username}] </p>
+              <p>
+                <Moment fromNow ago>
+                  {post.createdAt}
+                </Moment>{" "}
+                ago
+              </p>
+            </div>
+            <div className="settings-buttons">
+              {renderButtons()}
+              <button className="btn" onClick={addCommentClick}>
+                add comment
               </button>
             </div>
           </div>
         </div>
+
         <div ref={addCommentRef} className="postpage-addcomment hide-content">
           {renderAddCommentForm()}
         </div>

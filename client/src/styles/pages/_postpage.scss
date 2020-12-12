@@ -14,47 +14,58 @@
   }
   .postpage-post-stats {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
-    width: 40%;
     font-size: 0.8rem;
   }
   .postpage-post-content {
     border: 5px solid $second-color;
-    padding: 10px;
-  }
-  .postpage-settings {
-    padding: 10px;
     display: flex;
     justify-content: space-between;
-    // border-bottom: 1px solid $main-color;
-    div {
-      display: flex;
-      height: 30px;
-      button {
-        margin-left: 10px;
-        width: 80px;
-      }
-    }
   }
-  .postpage-editcomment {
-    position: relative;
-  }
-  .postpage-deletePost {
-    // background: white;
-    // width: 30%;
-    // position: absolute;
-    // height: 20%;
-  }
-  .postpage-deletePost button {
-    width: 120px;
-    height: 30px;
-    box-shadow: 0 0 5px black;
-    position: absolute;
-    top: 26vh;
-    right: 8vw;
+
+  .postpage-post-text {
+    border-right: 5px solid $second-color;
+    padding: 10px;
+    width: 80%;
   }
 }
+
+.postpage-editcomment {
+  // position: relative;
+}
+.postpage-deletePost {
+  // background: white;
+  // width: 30%;
+  // position: absolute;
+  // height: 20%;
+}
+.postpage-deletePost button {
+  width: 120px;
+  height: 30px;
+  box-shadow: 0 0 5px black;
+  position: absolute;
+  top: 26vh;
+  right: 8vw;
+}
+
+.postpage-settings {
+  width: 20%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .settings-buttons {
+    display: flex;
+    flex-direction: column;
+    button {
+      margin-bottom: 5px;
+    }
+  }
+}
+
 .visit-link {
   text-align: right;
 }
@@ -109,4 +120,9 @@
   right: 50px;
   width: 100px;
   top: -40px;
+}
+
+.empty-page {
+  margin: 20px;
+  user-select: none;
 }
