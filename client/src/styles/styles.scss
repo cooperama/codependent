@@ -180,18 +180,18 @@ button {
 
 .error-div {
   display: none;
-  .error-icon {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-    font-size: 1.3rem;
-    path {
-      color: $red-color;
-    }
+}
+.error-icon {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  font-size: 1.3rem;
+  path {
+    color: $red-color;
   }
-  .error-message {
-    text-align: center;
-  }
+}
+.error-message {
+  text-align: center;
 }
 
 // Imports

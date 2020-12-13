@@ -138,7 +138,7 @@ export default function Profile({ userState, setUserState }) {
     <div className="page-container">
       <div className="page-heading">
         {/* <div className="profile-heading "> */}
-        {userState && <h1>{userState.username}</h1>}
+        {userState && <h1>[{userState.username}]</h1>}
       </div>
       <div className="profile-content">
         <div className="profile-controller">

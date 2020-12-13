@@ -15,7 +15,6 @@ import MyAvailability from "./calendar/MyAvailability";
 import MyFullSchedule from "./calendar/MyFullSchedule";
 import MyListView from "./calendar/MyListView";
 import MyPaired from "./calendar/MyPaired";
-import RequestBuddy from "./calendar/RequestBuddy";
 import UpdateAvailability from "./calendar/UpdateAvailability";
 
 // Form Components
@@ -35,7 +34,6 @@ export {
   MyFullSchedule,
   Loading,
   MyPaired,
-  RequestBuddy,
   UpdateAvailability,
   SideNav,
   Comment,

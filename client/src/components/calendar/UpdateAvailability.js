@@ -61,10 +61,7 @@ export default function UpdateAvailability() {
         ...userState,
         available: [...userState.available, data.avail],
       });
-      console.log(" avail created! ", userState);
     });
-
-    // setUpdatedAvail([...updatedAvail, e.event.toPlainObject()]);
   };
 
   // Click event to remove it
@@ -74,13 +71,12 @@ export default function UpdateAvailability() {
     if (availIdToDelete._id) {
       availIdToDelete = availIdToDelete._id;
     } else if (availIdToDelete.eventId) {
-      // After clicking the update avail button, this causes an error because foundAvail does't exist...
       const foundAvail = userState.available.filter((avail) => {
         return avail.eventId === availIdToDelete.eventId;
       });
       availIdToDelete = foundAvail[0]._id;
     } else {
-      console.log("event click handler ~ no idssss ");
+      console.log("event click handler ~ no ids ");
     }
 
     AvailModel.delete(availIdToDelete).then((data) => {
@@ -108,7 +104,6 @@ export default function UpdateAvailability() {
     });
     UserModel.update(userState._id, userState).then((data) => {
       console.log("in event remove handler... ", data);
-      // not working....
     });
   };
 
@@ -122,8 +117,6 @@ export default function UpdateAvailability() {
       available: availObjectIds,
     });
     UserModel.update(userState._id, userState).then((data) => {
-      // history.push(`/myprofile`);
-      console.log("in user update handler... ", data);
       setUserState({
         ...userState,
         available: availObjectIds,
@@ -136,14 +129,6 @@ export default function UpdateAvailability() {
     <>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        headerToolbar={
-          {
-            // left: "prev,next today",
-            // center: "title",
-            // right: "dayGridMonth,timeGridWeek,timeGridDay",
-            // right: "timeGridWeek,timeGridDay",
-          }
-        }
         initialView="timeGridWeek"
         selectable={true}
         selectMirror={true}

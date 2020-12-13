@@ -22,16 +22,22 @@
   background-color: $main-color;
 }
 
-.update-calendar-heading,
-.postpage-post-heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-  width: 100%;
-  margin-bottom: 40px;
-  border-bottom: 2px solid $main-color;
-  h1 {
-    font-family: "Major Mono Display", monospace;
-  }
+// .update-calendar-heading,
+// .postpage-post-heading {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 70px;
+//   width: 100%;
+//   margin-bottom: 40px;
+//   border-bottom: 2px solid $main-color;
+//   h1 {
+//     font-family: "Major Mono Display", monospace;
+//   }
+// }
+
+.study-times-div {
+  width: 50%;
+  margin: auto;
+  min-width: 300px;
 }

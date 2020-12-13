@@ -9,11 +9,13 @@ import UpdateAvail from "./UpdateAvail";
 import NerdRoom from "./NerdRoom";
 import CollabLab from "./CollabLab";
 import Settings from "./Settings";
+import RequestBuddy from "./RequestBuddy";
 
 export {
   Home,
   Codegory,
   FindBuddy,
+  RequestBuddy,
   Landing,
   Codegories,
   Profile,

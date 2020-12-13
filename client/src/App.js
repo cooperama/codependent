@@ -11,6 +11,7 @@ import {
   Codegories,
   CollabLab,
   Settings,
+  RequestBuddy,
   NerdRoom,
   Profile,
 } from "./pages";
@@ -55,6 +56,13 @@ function App() {
           path="/findbuddy"
           render={() => (
             <FindBuddy userState={userState} setUserState={setUserState} />
+          )}
+        />
+        <Route
+          exact
+          path="/request/:id"
+          render={() => (
+            <RequestBuddy userState={userState} setUserState={setUserState} />
           )}
         />
         <Route
