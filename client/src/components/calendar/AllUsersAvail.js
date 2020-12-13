@@ -13,6 +13,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
   const [allAvailable, setAllAvailable] = useState([]);
 
   const warningRef = useRef();
+  const errorMessage = useRef();
   const history = useHistory();
 
   // Set availability on calendar to all availability
@@ -55,11 +56,14 @@ export default function AllUsersAvail({ userState, setUserState }) {
   const eventClickHandler = (eventInfo) => {
     const eventObj = eventInfo.event.toPlainObject().extendedProps;
     const start = eventInfo.event.toPlainObject().start;
-
     // If the event starts before current time
     if (Date.now() > new Date(start)) {
+      errorMessage.current.innerText = "Too late for this study session...";
       displayWarning();
-      return console.log("too late...");
+      // If the event was created by the user
+    } else if (eventObj.user.username === userState.username) {
+      errorMessage.current.innerText = "You want to study with yourself...?";
+      displayWarning();
     } else {
       history.push(`/request/${eventObj._id}`);
     }
@@ -71,7 +75,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
         <span className="error-icon">
           <FontAwesomeIcon icon={faExclamationCircle} />
         </span>
-        <p className="error-message">Too late for this study session...</p>
+        <p ref={errorMessage} className="error-message"></p>
       </div>
       <FullCalendar
         plugins={[timeGridPlugin, interactionPlugin]}

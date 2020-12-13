@@ -12,8 +12,9 @@ import AvailModel from "../models/avail";
 
 import { useParams, useHistory } from "react-router-dom";
 
-export default function ShowEvent() {
+export default function RequestBuddy({ userState, setUserState }) {
   const [selectedEvent, setSelectedEvent] = useState([]);
+  const [selectedTime, setSelectedTime] = useState([]);
   const [requestedTime, setRequestedTime] = useState([]);
   const [outOfBounds, setOutOfBounds] = useState(false);
 
@@ -66,7 +67,6 @@ export default function ShowEvent() {
     } else {
       setRequestedTime([...requestedTime, e.event.toPlainObject()]);
     }
-    console.log(selectedEvent);
   };
 
   const eventClickHandler = (eventInfo) => {
@@ -75,10 +75,6 @@ export default function ShowEvent() {
     const startTime = new Date(eventInfo.event.toPlainObject().start);
     const availEndTime = new Date(selectedEvent[0].end);
     const availStartTime = new Date(selectedEvent[0].start);
-
-    // const updateRequestedTime = requestedTime.filter((time) => {
-    //   return time.extendedProps.eventId !== eventObj.eventId;
-    // });
 
     if (endTime > availEndTime || startTime < availStartTime) {
       setOutOfBounds(false);
@@ -90,8 +86,6 @@ export default function ShowEvent() {
     }
     eventInfo.event.remove();
   };
-
-  const eventRemoveHandler = (e) => {};
 
   const renderWarning = () => {
     return (
@@ -107,8 +101,33 @@ export default function ShowEvent() {
     );
   };
 
-  const submitStudyRequest = () => {
-    console.log("submit");
+  const submitStudyRequest = (e) => {
+    // Select chosen time & set in state
+    const chosenTime = requestedTime.filter((time) => {
+      return time.extendedProps.eventId === e.target.dataset.eventId;
+    });
+    setSelectedTime(chosenTime);
+  };
+
+  const requestModal = () => {
+    return (
+      <div className="request-modal">
+        <div className="request-modal-content">
+          <p>To: [{selectedEvent[0].user.username}]</p>
+          <p>
+            <Moment format="HH:mm">{selectedTime.start}</Moment> to{" "}
+            <Moment format="HH:mm">{selectedTime.end}</Moment>
+          </p>
+          <button onClick={handleConfirm} className="btn btn-wide">
+            confirm
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const handleConfirm = () => {
+    // {/* // create Paired doc with paired = false */}
   };
 
   const renderTimeBanner = () => {
@@ -117,7 +136,11 @@ export default function ShowEvent() {
       let end = new Date(time.end);
       return (
         <div className="study-times-div" key={time.extendedProps.eventId}>
-          <button className="btn btn-wide" onClick={submitStudyRequest}>
+          <button
+            data-event-id={time.extendedProps.eventId}
+            className="btn btn-wide"
+            onClick={submitStudyRequest}
+          >
             Request Study Sesh for <Moment format="HH:mm">{start}</Moment> to{" "}
             <Moment format="HH:mm">{end}</Moment>
           </button>
@@ -149,9 +172,12 @@ export default function ShowEvent() {
   return (
     <div className="page-container">
       <div className="page-heading">
-        {selectedEvent && (
+        {selectedEvent[0] && (
           <h1>Study With [{selectedEvent[0].user.username}]</h1>
         )}
+      </div>
+      <div className="buddy-instructions">
+        <li>2. Select and drag to choose a time. Click to remove.</li>
       </div>
       {outOfBounds && renderWarning()}
       {requestedTime && renderTimeBanner()}
