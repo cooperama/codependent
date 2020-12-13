@@ -153,7 +153,7 @@ export default function RequestBuddy({ userState, setUserState }) {
   const requestModal = () => {
     return (
       <div className="request-modal">
-        <h3>Send Request?</h3>
+        <h3>3. Send Request</h3>
         <div className="request-modal-content">
           <div>
             <p>To: [{selectedEvent[0].user.username}]</p>
@@ -193,6 +193,9 @@ export default function RequestBuddy({ userState, setUserState }) {
       respondingUser: selectedEvent[0].user._id,
     };
 
+    const start = new Date(selectedTime.start);
+    const end = new Date(selectedTime.end);
+
     PairedModel.create(newPairing).then((data) => {
       if (data.error) {
         console.log(data.error);
@@ -200,10 +203,10 @@ export default function RequestBuddy({ userState, setUserState }) {
         // send email
         const emailBody = `Hello ${selectedEvent[0].user.username}! \n\n${
           userState.username
-        } would like to schedule a study session with you on ${(
-          <Moment format="ddd, MMM D">{selectedTime.start}</Moment>
-        )} from ${(<Moment format="HH:mm">{selectedTime.start}</Moment>)} to ${(
-          <Moment format="HH:mm">{selectedTime.end}</Moment>
+        } would like to schedule a study session with you on ${start.toDateString()} from ${start.toLocaleTimeString(
+          "en-US"
+        )} to ${end.toLocaleTimeString(
+          "en-US"
         )}. \n\nPlease log in to co[de]pendent to respond.\n\nBe good!`;
 
         const email = {
@@ -213,7 +216,7 @@ export default function RequestBuddy({ userState, setUserState }) {
 
         PairedModel.sendRequest(email).then((data) => {
           if (data.error) return console.log(data.error);
-          console.log(data);
+          console.log("profit! ", data);
         });
       }
     });

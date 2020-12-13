@@ -64,7 +64,7 @@ const sendRequest = (req, res) => {
   // app.post("/sendrequest", (req, res) => {
   // const recipient = req.body.recipientEmail;
   // requestPartner(recipient)
-  requestPartner(req.body);
+  requestPartner(req.body.recipientEmail, req.body.emailBody);
   // res.send("request sent");
   // });
   res.json({ paired: "paired?" });
