@@ -29,6 +29,9 @@
     border-right: 5px solid $second-color;
     padding: 10px;
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 

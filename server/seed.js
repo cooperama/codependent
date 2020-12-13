@@ -12,9 +12,18 @@ const data = require("./codegories.json");
 // });
 
 // Remove avail array ~~
-// db.User.find({ username: "traveler" }).then((users) => {
+// db.User.find({}).then((users) => {
 //   users.forEach((user) => {
 //     user.available = [];
+//     user.save();
+//     console.log("user from seed ~ removing available", user);
+//   });
+// });
+
+// // Remove paired array ~~
+// db.User.find({}).then((users) => {
+//   users.forEach((user) => {
+//     user.paired = [];
 //     user.save();
 //     console.log("user from seed ~ removing available", user);
 //   });

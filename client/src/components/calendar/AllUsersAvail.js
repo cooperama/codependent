@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
 import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import Moment from "react-moment";
 
 import AvailModel from "../../models/avail";
 
@@ -18,6 +20,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
 
   // Set availability on calendar to all availability
   useEffect(() => {
+    // if (!userState) history.push("/register");
     AvailModel.all().then((data) => {
       const backgroundEvents = data.avail.map((event) => {
         return {
@@ -29,14 +32,38 @@ export default function AllUsersAvail({ userState, setUserState }) {
     });
   }, []);
 
+  const mouseEnterHandler = (mouseEnterInfo) => {
+    if (
+      mouseEnterInfo.jsEvent.target.children[0].classList.contains(
+        "hide-content"
+      )
+    ) {
+      mouseEnterInfo.jsEvent.target.children[0].classList.remove(
+        "hide-content"
+      );
+    }
+  };
+
+  const mouseLeaveHandler = (mouseLeaveInfo) => {
+    if (
+      !mouseLeaveInfo.jsEvent.target.children[0].classList.contains(
+        "hide-content"
+      )
+    ) {
+      mouseLeaveInfo.jsEvent.target.children[0].classList.add("hide-content");
+    }
+  };
+
   // Show event content on calendar
   const renderEventContent = (eventInfo) => {
     const username = eventInfo.event.toPlainObject().extendedProps.user
       .username;
     return (
-      <div className="event-content">
-        <p>{eventInfo.timeText}</p>
-        <p>[{username}]</p>
+      <div className="event-content hide-content">
+        <div className="event-modal">
+          <p>{eventInfo.timeText}</p>
+          <p>[{username}]</p>
+        </div>
       </div>
     );
   };
@@ -78,13 +105,20 @@ export default function AllUsersAvail({ userState, setUserState }) {
         <p ref={errorMessage} className="error-message"></p>
       </div>
       <FullCalendar
-        plugins={[timeGridPlugin, interactionPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        headerToolbar={{
+          left: "prev,next today",
+          center: "title",
+          right: "timeGridWeek,timeGridDay",
+        }}
         initialView="timeGridWeek"
         overlap={true}
         allDaySlot={false}
         events={allAvailable}
         eventContent={renderEventContent}
         eventClick={eventClickHandler}
+        eventMouseEnter={mouseEnterHandler}
+        eventMouseLeave={mouseLeaveHandler}
       />
     </>
   );

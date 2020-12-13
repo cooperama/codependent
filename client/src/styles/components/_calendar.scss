@@ -51,3 +51,22 @@
     margin: 5px 0;
   }
 }
+
+.fc-timegrid-event .fc-event-main {
+  cursor: pointer;
+}
+
+.event-modal {
+  background-color: white;
+  border-radius: 5px;
+  position: absolute;
+  top: 40%;
+  right: 40px;
+  width: fit-content;
+  padding: 0 10px;
+  min-width: 100px;
+  cursor: pointer;
+  p {
+    color: black;
+  }
+}

@@ -101,8 +101,9 @@ export default function Navbar({ userState, setUserState }) {
         </li>
       </div>
       <div className="profile-nav">
-        <FontAwesomeIcon icon={faUserCircle} />
-        {renderProfileContainer()}
+        {userState && <FontAwesomeIcon icon={faUserCircle} />}
+        {userState && renderProfileContainer()}
+        {/* {renderProfileContainer()} */}
       </div>
       {/* <UserNav /> */}
     </nav>

@@ -194,10 +194,11 @@ export default function PostPage({ userState, setUserState }) {
         <div className="postpage-post-heading">
           <h1>{post.title}</h1>
         </div>
-        <div className="url-content">{post.link && linkDiv()}</div>
+
         <div className="postpage-post-content ">
           <div className="postpage-post-text">
             <p>{post.content}</p>
+            {post.link && linkDiv()}
           </div>
 
           <div className="postpage-settings">

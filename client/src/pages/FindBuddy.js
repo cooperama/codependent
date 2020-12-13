@@ -26,7 +26,7 @@ export default function FindBuddy({ userState, setUserState }) {
           <h1>Find a Study Buddy</h1>
         </div>
         <div className="buddy-instructions">
-          <li>1. Choose an available time</li>
+          <li>1. Choose an available time. Hover to view more info.</li>
         </div>
       </div>
       <div className="all-availability">
