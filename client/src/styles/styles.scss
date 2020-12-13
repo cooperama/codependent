@@ -180,6 +180,18 @@ button {
 
 .error-div {
   display: none;
+  border: 3px solid $red-color;
+  margin: 0 auto 20px;
+  padding: 10px;
+  // width: 50%;
+  // min-width: 300px;
+}
+.error-container {
+  border: 3px solid $red-color;
+  margin: 0 auto 20px;
+  padding: 10px;
+  width: 50%;
+  min-width: 300px;
 }
 .error-icon {
   text-align: center;
@@ -192,6 +204,7 @@ button {
 }
 .error-message {
   text-align: center;
+  user-select: none;
 }
 
 // Imports

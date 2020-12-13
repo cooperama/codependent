@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import UserModel from "../../models/user";
 import { useHistory } from "react-router-dom";
+import UserModel from "../../models/user";
 
 export default function Login({
-  userState,
   setUserState,
   errorMessageRef,
-  errorBoxRef,
+  displayWarning,
 }) {
   const history = useHistory();
   const [username, setUsername] = useState();
@@ -14,13 +13,9 @@ export default function Login({
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
 
   const handleSubmit = (e) => {
@@ -28,13 +23,13 @@ export default function Login({
     const user = { username, password };
     UserModel.login(user).then((data) => {
       if (data.error) {
-        errorBoxRef.current.style.display = "block";
+        displayWarning();
         errorMessageRef.current.innerText = `${data.error} \n please try again`;
       } else {
         localStorage.setItem("uid", data.signedJwt);
         UserModel.getUser().then((data) => {
           if (data.error) {
-            errorBoxRef.current.style.display = "block";
+            displayWarning();
             errorMessageRef.current.innerText = `${data.error} \n please try again`;
           } else {
             setUserState(data.user);

@@ -1,17 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import UserModel from "../../models/user";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faExclamation } from "@fortawesome/free-solid-svg-icons";
 
 export default function Signup({
-  userState,
   setUserState,
   errorMessageRef,
-  errorBoxRef,
+  displayWarning,
 }) {
-  // const errorMessageRef = useRef();
-  // const errorBoxRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
   const history = useHistory();
@@ -23,23 +18,15 @@ export default function Signup({
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
   const handlePassword2Change = (e) => {
     setPassword2(e.target.value);
-    errorBoxRef.current.style.display = "none";
-    errorMessageRef.current.innerText = "";
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +39,7 @@ export default function Signup({
     };
     UserModel.create(newUser).then((data) => {
       if (data.error) {
-        errorBoxRef.current.style.display = "block";
+        displayWarning();
         errorMessageRef.current.innerText = `${data.error} \n please try again`;
         passwordRef.current.value = "";
         password2Ref.current.value = "";
@@ -60,7 +47,7 @@ export default function Signup({
         localStorage.setItem("uid", data.signedJwt);
         UserModel.getUser().then((data) => {
           if (data.error) {
-            errorBoxRef.current.style.display = "block";
+            displayWarning();
             errorMessageRef.current.innerText = `${data.error} \n please try again`;
             passwordRef.current.value = "";
             password2Ref.current.value = "";
@@ -115,12 +102,6 @@ export default function Signup({
         </div>
         <input className="btn" type="submit" value="sign up" />
       </form>
-      {/* <div className="error-div" ref={errorBoxRef}>
-        <span className="error-icon">
-          <FontAwesomeIcon icon={faExclamation} />
-        </span>
-        <p ref={errorMessageRef} className="error-message"></p>
-      </div> */}
     </div>
   );
 }

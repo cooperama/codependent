@@ -5,7 +5,20 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function Landing({ userState, setUserState }) {
   const errorMessageRef = useRef();
-  const errorBoxRef = useRef();
+  const warningRef = useRef();
+
+  const displayWarning = () => {
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    const showWarning = async () => {
+      warningRef.current.classList.remove("hide-content");
+      await sleep(1500);
+      warningRef.current.classList.add("hide-content");
+    };
+    showWarning();
+  };
+
   return (
     <div className="page-container">
       <div className="welcome-div">
@@ -29,20 +42,20 @@ export default function Landing({ userState, setUserState }) {
         <div className="login-div">
           <Login
             errorMessageRef={errorMessageRef}
-            errorBoxRef={errorBoxRef}
             userState={userState}
             setUserState={setUserState}
+            displayWarning={displayWarning}
           />
         </div>
         <div className="signup-div">
           <Signup
             errorMessageRef={errorMessageRef}
-            errorBoxRef={errorBoxRef}
             userState={userState}
             setUserState={setUserState}
+            displayWarning={displayWarning}
           />
         </div>
-        <div className="error-div" ref={errorBoxRef}>
+        <div className="error-container hide-content" ref={warningRef}>
           <span className="error-icon">
             <FontAwesomeIcon icon={faExclamationCircle} />
           </span>

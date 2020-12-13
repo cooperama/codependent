@@ -21,7 +21,7 @@ export default function ShowEvent() {
 
   useEffect(() => {
     AvailModel.getAvail(params.id).then((data) => {
-      // convert data to array (is currently an obj) and map over to add background prop
+      // convert data to array (is currently an obj) and map over to add background prop and display on calendar
       const backgroundEvent = [].concat(data.avail).map((event) => {
         return {
           ...event,
@@ -32,10 +32,10 @@ export default function ShowEvent() {
     });
   }, []);
 
-  // Show event content on calendar
+  // Show selected event content on calendar
   const renderEventContent = (eventInfo) => {
     return (
-      <div>
+      <div className="event-content">
         <p>{eventInfo.timeText}</p>
       </div>
     );
@@ -159,101 +159,3 @@ export default function ShowEvent() {
     </div>
   );
 }
-
-// import React, { useState, useEffect } from "react";
-// import FullCalendar from "@fullcalendar/daygrid";
-// // import dayGridPlugin from "@fullcalendar/daygrid";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-// import interactionPlugin from "@fullcalendar/interaction";
-// import { v4 as uuidv4 } from "uuid";
-
-// import UserModel from "../models/user";
-// import AvailModel from "../models/avail";
-
-// import { useParams, useHistory } from "react-router-dom";
-
-// export default function RequestBuddy({ userState, setUserState }) {
-//   const [selectedEvent, setSelectedEvent] = useState({});
-
-//   const params = useParams();
-//   const history = useHistory();
-
-//   // Set availability
-//   useEffect(() => {
-//     if (localStorage.getItem("uid")) {
-//       UserModel.getUser().then((data) => {
-//         setUserState(data.user);
-//       });
-//     } else {
-//       console.log("no local storage uid thing...", userState);
-//       history.push("/register");
-//     }
-//     AvailModel.getAvail(params.id).then((data) => {
-//       if (data.error) {
-//         console.log(data.error);
-//       }
-//       setSelectedEvent(data.avail);
-//       console.log("data.avail: ", data.avail);
-//     });
-//   }, []);
-
-//   // Show event content on calendar
-//   const renderEventContent = (eventInfo) => {
-//     return <p>{eventInfo.timeText}</p>;
-//   };
-
-//   // Add event to calendar
-//   const dateSelectHandler = (e) => {
-//     const calendarApi = e.view.calendar;
-//     calendarApi.unselect(); // clear date selection
-
-//     calendarApi.addEvent({
-//       eventId: uuidv4(),
-//       start: e.startStr,
-//       startISO: e.start.toISOString(),
-//       end: e.endStr,
-//       endISO: e.end.toISOString(),
-//     });
-//   };
-//   // Add avail to db
-//   const eventAddHandler = (e) => {};
-
-//   // Click event to remove it
-//   const eventClickHandler = (e) => {
-//     // Get avail id - _id if already on User Model, eventId if not added to user yet
-//     e.event.remove();
-//   };
-
-//   const eventRemoveHandler = (e) => {};
-
-//   return (
-//     <div>
-//       <p>Select the time you'd like to study</p>
-//       <FullCalendar
-//         plugins={[timeGridPlugin, interactionPlugin]}
-//         // plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-//         // headerToolbar={{
-//         //   // left: "prev,next today",
-//         //   center: "title",
-//         //   // right: "timeGridDay",
-//         // }}
-//         initialView="timeGridDay"
-//         selectable={true}
-//         selectMirror={true}
-//         events={selectedEvent}
-//         eventContent={renderEventContent}
-//         // slotMinTime={new Date(selectedEvent.start)}
-//         // slotMaxTime={new Date(selectedEvent.end)}
-//         // create new events
-//         select={dateSelectHandler} // creates with eventAdd
-//         eventAdd={eventAddHandler} // CREATE
-//         // update events (called on drag and drop/resize)
-//         // eventChange={eventChangeHandler} // UPDATE
-//         // delete events
-//         eventClick={eventClickHandler} // destroys with eventRemove
-//         eventRemove={eventRemoveHandler}
-//       />
-//       <button>send study request</button>
-//     </div>
-//   );
-// }
