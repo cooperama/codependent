@@ -81,6 +81,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
         overlap={true}
+        allDaySlot={false}
         events={allAvailable}
         eventContent={renderEventContent}
         eventClick={eventClickHandler}

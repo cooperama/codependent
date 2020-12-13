@@ -1,7 +1,7 @@
 const db = require("../models");
 
 // Email Function
-const requestPartner = require("./nodemail");
+const requestPartner = require("../nodemailer");
 
 const index = (req, res) => {
   db.Paired.find({})

@@ -132,6 +132,7 @@ export default function UpdateAvailability() {
         initialView="timeGridWeek"
         selectable={true}
         selectMirror={true}
+        allDaySlot={false}
         // render events on calendar
         events={availability}
         eventContent={renderEventContent}

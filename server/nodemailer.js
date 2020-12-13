@@ -16,8 +16,8 @@ const requestPartner = (recipient, emailComponent) => {
 
   const mailOptions = {
     from: "'co[de]pendent' codedependent2@gmail.com",
-    // to: recipient,
-    to: "coope133@gmail.com", // testing
+    to: recipient,
+    // to: "coope133@gmail.com", // testing
     subject: "Hello!",
     text: emailComponent,
     // text: "Body of email!",

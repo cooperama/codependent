@@ -116,6 +116,7 @@ export default function RequestBuddy({ userState, setUserState }) {
           initialDate={selectedEvent[0].start}
           selectable={true}
           selectMirror={true}
+          allDaySlot={false}
           events={selectedEvent}
           eventContent={renderEventContent}
           // create new events
@@ -192,28 +193,30 @@ export default function RequestBuddy({ userState, setUserState }) {
       respondingUser: selectedEvent[0].user._id,
     };
 
-    // EMAIL TEST
-    const emailBody = `Hello ${selectedEvent[0].user.username}! \n\n${
-      userState.username
-    } would like to schedule a study session with you on ${(
-      <Moment format="ddd, MMM D">{selectedTime.start}</Moment>
-    )} from ${(<Moment format="HH:mm">{selectedTime.start}</Moment>)} to ${(
-      <Moment format="HH:mm">{selectedTime.end}</Moment>
-    )}. \n\nPlease log in to co[de]pendent to respond.\n\nBe good!`;
-    const email = {
-      recipientEmail: selectedEvent[0].user.email,
-      emailBody,
-    };
+    PairedModel.create(newPairing).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        // send email
+        const emailBody = `Hello ${selectedEvent[0].user.username}! \n\n${
+          userState.username
+        } would like to schedule a study session with you on ${(
+          <Moment format="ddd, MMM D">{selectedTime.start}</Moment>
+        )} from ${(<Moment format="HH:mm">{selectedTime.start}</Moment>)} to ${(
+          <Moment format="HH:mm">{selectedTime.end}</Moment>
+        )}. \n\nPlease log in to co[de]pendent to respond.\n\nBe good!`;
 
-    console.log(email);
+        const email = {
+          recipientEmail: selectedEvent[0].user.email,
+          emailBody,
+        };
 
-    // PairedModel.create(newPairing).then((data) => {
-    //   if (data.error) {
-    //     console.log(data.error);
-    //   } else {
-    //     // send email
-    //   }
-    // });
+        PairedModel.sendRequest(email).then((data) => {
+          if (data.error) return console.log(data.error);
+          console.log(data);
+        });
+      }
+    });
   };
 
   return (
