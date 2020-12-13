@@ -5,6 +5,13 @@ const bodyParser = require("body-parser");
 // Email Function
 // const requestPartner = require("./nodemail");
 
+// send email requesting partner
+// app.post("/sendrequest", (req, res) => {
+//   const recipient = req.body.recipientEmail;
+//   requestPartner(recipient)
+//   res.send("request sent");
+// });
+
 const routes = require("./routes");
 
 const app = express();
@@ -37,12 +44,5 @@ app.use("/api/v1/paired", routes.paired);
 app.get("/", (req, res) => {
   res.send("co[de]pendent lol");
 });
-
-// send email requesting partner
-// app.post("/sendrequest", (req, res) => {
-//   const recipient = req.body.recipientEmail;
-//   requestPartner(recipient)
-//   res.send("request sent");
-// });
 
 app.listen(PORT, () => console.log("Listening on port ", PORT));

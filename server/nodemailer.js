@@ -15,9 +15,9 @@ const requestPartner = (recipient, emailComponent) => {
   let transporter = nodemailer.createTransport(nodemailMailgun(auth));
 
   const mailOptions = {
-    from: "'Jia' codedependent2@gmail.com",
-    to: recipient,
-    // to: "coope133@gmail.com",
+    from: "'co[de]pendent' codedependent2@gmail.com",
+    // to: recipient,
+    to: "coope133@gmail.com", // testing
     subject: "Hello!",
     text: emailComponent,
     // text: "Body of email!",

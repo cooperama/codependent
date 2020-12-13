@@ -1,5 +1,8 @@
 const db = require("../models");
 
+// Email Function
+const requestPartner = require("./nodemail");
+
 const index = (req, res) => {
   db.Paired.find({})
     .then((userPaired) => {
@@ -22,6 +25,29 @@ const getPaired = (req, res) => {
     });
 };
 
+// Only the requesting user can create a pairing
+const createPaired = (req, res) => {
+  db.Paired.create(req.body)
+    .then((newPaired) => {
+      // Add paired doc to requester
+      db.User.findById(newPaired.requestingUser).then((foundUser) => {
+        foundUser.paired.push(newPaired._id);
+        foundUser.save();
+        // Add paired doc to requestee
+        db.User.findById(newPaired.respondingUser).then((foundUser) => {
+          foundUser.paired.push(newPaired._id);
+          foundUser.save();
+          res.json({ paired: newPaired });
+        });
+      });
+    })
+    .catch((err) => {
+      console.log("Error in Paired.createPaired: ", err);
+      res.json({ error: "Unable to get data" });
+    });
+};
+
+// Responding user finds paired doc, changes paired prop to true
 const updatePaired = (req, res) => {
   db.Paired.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((updatedPaired) => {
@@ -33,18 +59,14 @@ const updatePaired = (req, res) => {
     });
 };
 
-const createPaired = (req, res) => {
-  db.Paired.create(req.body)
-    .then((newPaired) => {
-      res.json({ Paired: newPaired });
-    })
-    .catch((err) => {
-      console.log("Error in Paired.createPaired: ", err);
-      res.json({ error: "Unable to get data" });
-    });
-};
-
 const sendRequest = (req, res) => {
+  // send email requesting partner
+  // app.post("/sendrequest", (req, res) => {
+  // const recipient = req.body.recipientEmail;
+  // requestPartner(recipient)
+  requestPartner(req.body);
+  // res.send("request sent");
+  // });
   res.json({ paired: "paired?" });
 };
 

@@ -44,7 +44,7 @@ class PairedModel {
         return { Paired: {} };
       });
   }
-  // but will this erase all the other info? or just the info specified?
+
   static update(id, updatedPaired) {
     return fetch(`${url}/${id}`, {
       method: "PUT",

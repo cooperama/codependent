@@ -9,12 +9,13 @@ import { v4 as uuidv4 } from "uuid";
 import Moment from "react-moment";
 
 import AvailModel from "../models/avail";
+import PairedModel from "../models/paired";
 
 import { useParams, useHistory } from "react-router-dom";
 
 export default function RequestBuddy({ userState, setUserState }) {
   const [selectedEvent, setSelectedEvent] = useState([]);
-  const [selectedTime, setSelectedTime] = useState([]);
+  const [selectedTime, setSelectedTime] = useState();
   const [requestedTime, setRequestedTime] = useState([]);
   const [outOfBounds, setOutOfBounds] = useState(false);
 
@@ -87,49 +88,6 @@ export default function RequestBuddy({ userState, setUserState }) {
     eventInfo.event.remove();
   };
 
-  const renderWarning = () => {
-    return (
-      <div className="error-container">
-        <span className="error-icon">
-          <FontAwesomeIcon icon={faExclamationCircle} />
-        </span>
-        <p className="error-message">
-          Can't request a time outside of user's availability.
-        </p>
-        <p className="error-message">Click slot to remove.</p>
-      </div>
-    );
-  };
-
-  const submitStudyRequest = (e) => {
-    // Select chosen time & set in state
-    const chosenTime = requestedTime.filter((time) => {
-      return time.extendedProps.eventId === e.target.dataset.eventId;
-    });
-    setSelectedTime(chosenTime);
-  };
-
-  const requestModal = () => {
-    return (
-      <div className="request-modal">
-        <div className="request-modal-content">
-          <p>To: [{selectedEvent[0].user.username}]</p>
-          <p>
-            <Moment format="HH:mm">{selectedTime.start}</Moment> to{" "}
-            <Moment format="HH:mm">{selectedTime.end}</Moment>
-          </p>
-          <button onClick={handleConfirm} className="btn btn-wide">
-            confirm
-          </button>
-        </div>
-      </div>
-    );
-  };
-
-  const handleConfirm = () => {
-    // {/* // create Paired doc with paired = false */}
-  };
-
   const renderTimeBanner = () => {
     return requestedTime.map((time) => {
       let start = new Date(time.start);
@@ -169,6 +127,95 @@ export default function RequestBuddy({ userState, setUserState }) {
     );
   };
 
+  const renderWarning = () => {
+    return (
+      <div className="error-container">
+        <span className="error-icon">
+          <FontAwesomeIcon icon={faExclamationCircle} />
+        </span>
+        <p className="error-message">
+          Can't request a time outside of user's availability.
+        </p>
+        <p className="error-message">Click slot to remove.</p>
+      </div>
+    );
+  };
+
+  const submitStudyRequest = (e) => {
+    // Select chosen time & set in state
+    const chosenTime = requestedTime.filter((time) => {
+      return time.extendedProps.eventId === e.target.dataset.eventId;
+    });
+    setSelectedTime(chosenTime[0]);
+  };
+
+  const requestModal = () => {
+    return (
+      <div className="request-modal">
+        <h3>Send Request?</h3>
+        <div className="request-modal-content">
+          <div>
+            <p>To: [{selectedEvent[0].user.username}]</p>
+            <p>
+              <Moment format="ddd, MMM D">{selectedTime.start}</Moment>
+            </p>
+            <p>
+              <Moment format="HH:mm">{selectedTime.start}</Moment> to{" "}
+              <Moment format="HH:mm">{selectedTime.end}</Moment>
+            </p>
+          </div>
+          <div>
+            <button onClick={handleConfirm} className="btn btn-wide">
+              confirm
+            </button>
+            <button onClick={handleCancel} className="btn btn-wide">
+              cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const handleCancel = () => {
+    setSelectedTime(null);
+  };
+
+  const handleConfirm = () => {
+    // Create new pairing
+    const newPairing = {
+      start: selectedTime.start,
+      end: selectedTime.end,
+      eventId: selectedTime.extendedProps.eventId,
+      paired: false,
+      requestingUser: userState._id,
+      respondingUser: selectedEvent[0].user._id,
+    };
+
+    // EMAIL TEST
+    const emailBody = `Hello ${selectedEvent[0].user.username}! \n\n${
+      userState.username
+    } would like to schedule a study session with you on ${(
+      <Moment format="ddd, MMM D">{selectedTime.start}</Moment>
+    )} from ${(<Moment format="HH:mm">{selectedTime.start}</Moment>)} to ${(
+      <Moment format="HH:mm">{selectedTime.end}</Moment>
+    )}. \n\nPlease log in to co[de]pendent to respond.\n\nBe good!`;
+    const email = {
+      recipientEmail: selectedEvent[0].user.email,
+      emailBody,
+    };
+
+    console.log(email);
+
+    // PairedModel.create(newPairing).then((data) => {
+    //   if (data.error) {
+    //     console.log(data.error);
+    //   } else {
+    //     // send email
+    //   }
+    // });
+  };
+
   return (
     <div className="page-container">
       <div className="page-heading">
@@ -176,6 +223,7 @@ export default function RequestBuddy({ userState, setUserState }) {
           <h1>Study With [{selectedEvent[0].user.username}]</h1>
         )}
       </div>
+      {selectedTime && requestModal()}
       <div className="buddy-instructions">
         <li>2. Select and drag to choose a time. Click to remove.</li>
       </div>
