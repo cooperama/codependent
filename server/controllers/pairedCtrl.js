@@ -60,14 +60,8 @@ const updatePaired = (req, res) => {
 };
 
 const sendRequest = (req, res) => {
-  // send email requesting partner
-  // app.post("/sendrequest", (req, res) => {
-  // const recipient = req.body.recipientEmail;
-  // requestPartner(recipient)
   requestPartner(req.body.recipientEmail, req.body.emailBody);
-  // res.send("request sent");
-  // });
-  res.json({ paired: "paired?" });
+  res.json({ request: "sent" });
 };
 
 const deletePaired = (req, res) => {

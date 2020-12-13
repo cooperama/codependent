@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faExclamationCircle,
+  faPaperPlane,
+} from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
 import Moment from "react-moment";
 
@@ -20,6 +23,8 @@ export default function RequestBuddy({ userState, setUserState }) {
   const [outOfBounds, setOutOfBounds] = useState(false);
 
   const params = useParams();
+  const history = useHistory();
+  const sentRef = useRef();
 
   useEffect(() => {
     AvailModel.getAvail(params.id).then((data) => {
@@ -182,6 +187,29 @@ export default function RequestBuddy({ userState, setUserState }) {
     setSelectedTime(null);
   };
 
+  const requestSent = () => {
+    return (
+      <div ref={sentRef} className="request-modal hide-content">
+        <h3>4. Wait for [{selectedEvent[0].user.username}]'s response!</h3>
+        <div className="request-modal-content request-sent">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </div>
+      </div>
+    );
+  };
+
+  const displayConfirmation = () => {
+    function sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    const showContent = async () => {
+      sentRef.current.classList.remove("hide-content");
+      await sleep(2000);
+      history.push("/");
+    };
+    showContent();
+  };
+
   const handleConfirm = () => {
     // Create new pairing
     const newPairing = {
@@ -200,7 +228,7 @@ export default function RequestBuddy({ userState, setUserState }) {
       if (data.error) {
         console.log(data.error);
       } else {
-        // send email
+        // Send email request to buddy
         const emailBody = `Hello ${selectedEvent[0].user.username}! \n\n${
           userState.username
         } would like to schedule a study session with you on ${start.toDateString()} from ${start.toLocaleTimeString(
@@ -215,8 +243,9 @@ export default function RequestBuddy({ userState, setUserState }) {
         };
 
         PairedModel.sendRequest(email).then((data) => {
-          if (data.error) return console.log(data.error);
-          console.log("profit! ", data);
+          console.log("profit! ", data.request);
+          setSelectedTime(null);
+          displayConfirmation();
         });
       }
     });
@@ -229,6 +258,7 @@ export default function RequestBuddy({ userState, setUserState }) {
           <h1>Study With [{selectedEvent[0].user.username}]</h1>
         )}
       </div>
+      {selectedEvent[0] && requestSent()}
       {selectedTime && requestModal()}
       <div className="buddy-instructions">
         <li>2. Select and drag to choose a time. Click to remove.</li>
