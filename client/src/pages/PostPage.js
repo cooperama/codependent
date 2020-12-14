@@ -29,6 +29,7 @@ export default function PostPage({ userState, setUserState }) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
+          history.push("/register");
         }
       });
     } else {

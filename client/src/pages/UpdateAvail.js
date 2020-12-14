@@ -13,6 +13,7 @@ export default function UpdateAvail({ userState, setUserState }) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
+          history.push("/register");
         }
       });
     } else {
@@ -24,7 +25,6 @@ export default function UpdateAvail({ userState, setUserState }) {
     <div className="page-container">
       <div className="calendar-container">
         <div className="page-heading">
-          {/* <div className="update-calendar-heading"> */}
           <h1>My Availability</h1>
         </div>
         <div className="update-instructions">

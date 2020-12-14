@@ -20,7 +20,6 @@ export default function AllUsersAvail({ userState, setUserState }) {
 
   // Set availability on calendar to all availability
   useEffect(() => {
-    // if (!userState) history.push("/register");
     AvailModel.all().then((data) => {
       const backgroundEvents = data.avail.map((event) => {
         return {
@@ -33,7 +32,10 @@ export default function AllUsersAvail({ userState, setUserState }) {
   }, []);
 
   const mouseEnterHandler = (mouseEnterInfo) => {
+    // console.log(mouseEnterInfo.event.toPlainObject());
+    // console.log(mouseEnterInfo.view.type === "timeGridDay");
     if (
+      mouseEnterInfo.view.type !== "timeGridDay" &&
       mouseEnterInfo.jsEvent.target.children[0].classList.contains(
         "hide-content"
       )
@@ -46,6 +48,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
 
   const mouseLeaveHandler = (mouseLeaveInfo) => {
     if (
+      mouseLeaveInfo.view.type !== "timeGridDay" &&
       !mouseLeaveInfo.jsEvent.target.children[0].classList.contains(
         "hide-content"
       )
@@ -58,14 +61,29 @@ export default function AllUsersAvail({ userState, setUserState }) {
   const renderEventContent = (eventInfo) => {
     const username = eventInfo.event.toPlainObject().extendedProps.user
       .username;
-    return (
-      <div className="event-content hide-content">
-        <div className="event-modal">
-          <p>{eventInfo.timeText}</p>
-          <p>[{username}]</p>
-        </div>
-      </div>
-    );
+    if (eventInfo.view.type === "timeGridDay") {
+      return (
+        <>
+          <div className="event-content-day-view">
+            <div>
+              <p>{eventInfo.timeText}</p>
+              <p>[{username}]</p>
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="event-content hide-content">
+            <div className="event-modal">
+              <p>{eventInfo.timeText}</p>
+              <p>[{username}]</p>
+            </div>
+          </div>
+        </>
+      );
+    }
   };
 
   const displayWarning = () => {

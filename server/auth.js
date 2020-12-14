@@ -7,7 +7,11 @@ const authenticateToken = (req, res, next) => {
   console.log("token from auth.js : ", token);
   if (token === null) return res.sendStatus(401);
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      console.log("error in auth.js: ", err);
+      // return res.sendStatus(403);
+      return res.json({ error: "expired" });
+    }
     req.userId = user._id;
     console.log("jwt.verify, req.userId in auth.js: ", req.userId);
     next();

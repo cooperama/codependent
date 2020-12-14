@@ -51,6 +51,13 @@
     margin: 5px 0;
   }
 }
+.event-content-day-view {
+  padding: 10px;
+  cursor: pointer;
+  p {
+    margin: 5px 0;
+  }
+}
 
 .fc-timegrid-event .fc-event-main {
   cursor: pointer;
@@ -59,9 +66,10 @@
 .event-modal {
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0 0 3px $main-color;
   position: absolute;
   top: 40%;
-  right: 40px;
+  left: -60px;
   width: fit-content;
   padding: 0 10px;
   min-width: 100px;

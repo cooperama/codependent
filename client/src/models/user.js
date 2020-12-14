@@ -20,7 +20,7 @@ class UserModel {
       .then((res) => res.json())
       .catch((err) => {
         console.log("Error fetching data in UserModel.get: ", err);
-        return { user: {} };
+        return { error: err };
       });
   }
 

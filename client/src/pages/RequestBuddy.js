@@ -13,6 +13,7 @@ import Moment from "react-moment";
 
 import AvailModel from "../models/avail";
 import PairedModel from "../models/paired";
+import UserModel from "../models/user";
 
 import { useParams, useHistory } from "react-router-dom";
 
@@ -27,6 +28,19 @@ export default function RequestBuddy({ userState, setUserState }) {
   const sentRef = useRef();
 
   useEffect(() => {
+    if (localStorage.getItem("uid")) {
+      UserModel.getUser().then((data) => {
+        if (data.user) {
+          setUserState(data.user);
+        } else {
+          console.log("no user in profile useEffect..");
+          history.push("/register");
+        }
+      });
+    } else {
+      history.push("/register");
+    }
+
     AvailModel.getAvail(params.id).then((data) => {
       // convert data to array (is currently an obj) and map over to add background prop and display on calendar
       const backgroundEvent = [].concat(data.avail).map((event) => {

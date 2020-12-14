@@ -8,7 +8,6 @@ import PostModel from "../models/post";
 export default function Post({ nerdRoom, post, userState, setUserState }) {
   const [postContent, setPostContent] = useState();
   useEffect(() => {
-    // console.log(post);
     PostModel.getPost(post._id).then((data) => {
       setPostContent(data.post);
     });
@@ -30,9 +29,13 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
     if (postContent.codegory) {
       return (
         <p>
-          {postContent.codegory.topic === "Nerd Room"
-            ? postContent.author.username
-            : postContent.codegory.topic}
+          {postContent.codegory.topic === "Nerd Room" ? (
+            postContent.author.username
+          ) : (
+            <Link to={`codegories/${postContent.codegory._id}`}>
+              {postContent.codegory.topic}
+            </Link>
+          )}
         </p>
       );
     }
@@ -44,20 +47,10 @@ export default function Post({ nerdRoom, post, userState, setUserState }) {
         <>
           <div className="post-content ">
             <h3 className="truncated-title">{postContent.title}</h3>
-            {/* <p>
-              {postContent.codegory.topic === "Nerd Room"
-                ? ""
-                : postContent.author.username}
-              </p> */}
             {renderNerdPosts()}
             <p className="truncated-content">{postContent.content}</p>
           </div>
           <div className="post-content-second">
-            {/* <p>
-              {postContent.codegory.topic === "Nerd Room"
-                ? postContent.author.username
-                : postContent.codegory.topic}
-            </p> */}
             {renderCodePosts()}
             <p>
               <Moment fromNow ago>

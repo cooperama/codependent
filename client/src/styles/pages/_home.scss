@@ -36,8 +36,8 @@
     width: 100%;
     max-width: 800px;
     margin-bottom: 20px;
-    border: 10px solid $second-color;
-    border-top: 40px solid $second-color;
+    // border: 10px solid $second-color;
+    // border-top: 40px solid $second-color;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -48,7 +48,7 @@
     .view-posts {
       display: flex;
       justify-content: flex-end;
-      background-color: $second-color;
+      // background-color: $second-color;
       width: 100%;
       height: 40px;
       padding: 10px;

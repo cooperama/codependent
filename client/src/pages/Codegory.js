@@ -17,6 +17,7 @@ export default function Codegory({ userState, setUserState }) {
           setUserState(data.user);
         } else {
           console.log("no user in codegory useEffect..");
+          history.push("/register");
         }
       });
     } else {

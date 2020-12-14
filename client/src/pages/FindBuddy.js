@@ -13,6 +13,7 @@ export default function FindBuddy({ userState, setUserState }) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
+          history.push("/register");
         }
       });
     } else {
@@ -27,6 +28,7 @@ export default function FindBuddy({ userState, setUserState }) {
         </div>
         <div className="buddy-instructions">
           <li>1. Choose an available time. Hover to view more info.</li>
+          <li>Click the day tab on the right for a close-up view.</li>
         </div>
       </div>
       <div className="all-availability">

@@ -14,11 +14,13 @@ export default function Home({ userState, setUserState }) {
 
   useEffect(() => {
     if (localStorage.getItem("uid")) {
+      console.log(localStorage);
       UserModel.getUser().then((data) => {
         if (data.user) {
           setUserState(data.user);
         } else {
           console.log("no user in profile useEffect..");
+          history.push("/register");
         }
       });
     } else {
