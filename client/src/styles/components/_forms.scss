@@ -10,9 +10,6 @@
   textarea {
     height: 200px;
   }
-  // input[type="submit"] {
-  //   background-color: $deep-clr;
-  // }
 }
 
 .add-comment-form {
@@ -30,28 +27,18 @@
 }
 
 .edit-comment-form {
-  // width: 500px;
-  // height: 200px;
-  // position: absolute;
-  // right: 0;
-  // z-index: 2;
-  // top: 40px;
   .edit-textarea {
     height: 80%;
   }
 }
 .buttons-container {
   width: 100% !important;
-  input {
-    // margin: 0 30px;
-  }
 }
 
 .edit-profile-container {
   max-width: 300px;
   margin: 100px auto;
-
-  background-color: $main-color;
+  background-color: $second-color;
   .edit-profile-form {
     margin: auto;
     padding: 20px;

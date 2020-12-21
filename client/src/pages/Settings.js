@@ -163,7 +163,7 @@ export default function Settings({ userState, setUserState }) {
             multiple={false}
             onDone={({ base64 }) => setPhoto(base64)}
           /> */}
-          <input placeholder="" type="submit" value="edit" />
+          <input className="btn btn-wide" type="submit" value="edit" />
         </form>
       </div>
       <div className="error-div" ref={errorBoxRef}>

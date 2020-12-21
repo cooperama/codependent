@@ -1,11 +1,20 @@
 const db = require("./models");
-const data = require("./codegories.json");
+const codegoryData = require("./codegories.json");
+const userData = require("./users.json");
 
 // db.Codegory.deleteMany({}, (err, deletedCodegories) => {
-//   db.Codegory.create(data.codegories, (err, seededCodegories) => {
+//   db.Codegory.create(codegoryData.codegories, (err, seededCodegories) => {
 //     if (err) console.log(err);
 
-//     console.log(data.codegories.length, "Codegories created successfully");
+// db.User.deleteMany({}, (err, deletedUsers) => {
+//   db.User.create(data.userData, (err, seededUsers) => {
+//     if (err) console.log(err);
+
+// db.Codegory.deleteMany({}, (err, deletedCodegories) => {
+//   db.Codegory.create(codegoryData.codegories, (err, seededCodegories) => {
+//     if (err) console.log(err);
+
+//     console.log(codegoryData.codegories.length, "Codegories created successfully");
 
 //     process.exit();
 //   });
