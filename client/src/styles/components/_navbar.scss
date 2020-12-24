@@ -31,7 +31,8 @@ nav {
   justify-content: center;
   align-items: center;
   position: relative;
-  min-width: 160px;
+  min-width: 200px;
+  // min-width: 160px;
   padding-right: 30px;
   background-color: $main-color;
   span {
@@ -52,7 +53,7 @@ nav {
   position: absolute;
   top: $navbar-height;
   left: 0;
-  z-index: -3;
+  z-index: -1;
   transition: all 0.3s ease;
   li {
     width: 100%;
@@ -60,7 +61,11 @@ nav {
     margin: 0;
     height: 50px;
     padding-top: 10px;
-    border-bottom: 1px solid $accent-color;
+    // border-bottom: 1px solid $accent-color;
+    border-bottom: 1px solid $neutral-color;
+    &:hover {
+      background-color: $second-color;
+    }
   }
 }
 
