@@ -16,6 +16,7 @@
     margin: 0 0 10px 0;
     padding: 20px 30px;
     width: 100%;
+    border-bottom: 1px solid $neutral-color;
     // width: 140px;
     // background-color: $second-color;
     p {
@@ -28,21 +29,32 @@
   }
 }
 
-// .user-nav {
-//   background-color: $main-color;
-//   height: 100vh;
-//   position: fixed;
-//   right: 0;
-//   width: $navbar-width;
-//   padding-top: 100px;
-//   z-index: -1;
-
-//   li {
-//     display: inline-block;
-//     margin: 0 0 30px 20px;
-//     padding: 5px;
-//     &:hover {
-//       border-bottom: 1px solid $accent-color;
-//     }
-//   }
-// }
+.user-nav {
+  background-color: $main-color;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  right: -115px;
+  width: $navbar-width;
+  // padding-top: 100px;
+  padding-top: 70px;
+  z-index: -2;
+  transition: all 0.3s ease;
+  &:hover {
+    right: 0;
+    transition: all 0.3s ease;
+  }
+  li {
+    display: inline-block;
+    margin: 0 0 30px 20px;
+    padding: 5px;
+    &:hover {
+      border-bottom: 1px solid $accent-color;
+    }
+  }
+  span {
+    display: block;
+    padding: 30px;
+    font-size: 1.3rem;
+  }
+}

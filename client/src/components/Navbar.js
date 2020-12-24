@@ -45,9 +45,11 @@ export default function Navbar({ userState, setUserState }) {
     if (userState) {
       return (
         <>
-          <li className="cursor" onClick={handleDropdownClick}>
-            <h4>[ {userState.username} ]</h4>
-          </li>
+          <Link onClick={handleDropdownClick} to={`/myprofile`}>
+            <li className="cursor" onClick={handleDropdownClick}>
+              <h4>[ {userState.username} ]</h4>
+            </li>
+          </Link>
           {/* <div> */}
           {/* <span onClick={handleDropdownClick}>
               <FontAwesomeIcon icon={faChevronDown} />
@@ -105,7 +107,7 @@ export default function Navbar({ userState, setUserState }) {
         {userState && renderProfileContainer()}
         {/* {renderProfileContainer()} */}
       </div>
-      {/* <UserNav /> */}
+      <UserNav userState={userState} setUserState={setUserState} />
     </nav>
   );
 }
