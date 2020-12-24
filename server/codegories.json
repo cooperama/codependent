@@ -1,31 +1,29 @@
-{
-  "codegories": [
-    {
-      "topic": "Nerd Room"
-    },
-    {
-      "topic": "Algorithms"
-    },
-    {
-      "topic": "Data Structures"
-    },
-    {
-      "topic": "Regular Expressions"
-    },
-    {
-      "topic": "React/Redux"
-    },
-    {
-      "topic": "JavaScript"
-    },
-    {
-      "topic": "Python"
-    },
-    {
-      "topic": "Machine Learning"
-    },
-    {
-      "topic": "Interview Prep"
-    }
-  ]
-}
+[
+  {
+    "topic": "Nerd Room"
+  },
+  {
+    "topic": "Algorithms"
+  },
+  {
+    "topic": "Data Structures"
+  },
+  {
+    "topic": "Regular Expressions"
+  },
+  {
+    "topic": "React/Redux"
+  },
+  {
+    "topic": "JavaScript"
+  },
+  {
+    "topic": "Python"
+  },
+  {
+    "topic": "Machine Learning"
+  },
+  {
+    "topic": "Interview Prep"
+  }
+]

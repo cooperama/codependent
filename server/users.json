@@ -1,24 +1,22 @@
-{
-  "users": [
-    {
+[
+  {
     "username": "groovyBear",
     "email": "groovyBear@gmail.com",
     "password": "groovy123!@#"
-    },
-    {
+  },
+  {
     "username": "captainCode",
     "email": "captainCode@gmail.com",
     "password": "captain123!@#"
-    },
-    {
+  },
+  {
     "username": "hunkyDory",
     "email": "hunkyDory@gmail.com",
     "password": "hunky123!@#"
-    },
-    {
+  },
+  {
     "username": "underoos",
     "email": "underoos@gmail.com",
     "password": "underoos123!@#"
-    },
-  ]
-}
+  }
+]

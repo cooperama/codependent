@@ -30,13 +30,15 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-// set up routes
-// MVP
+if (process.env.NODE_ENV === "production") {
+  //
+}
+
+// API
 app.use("/api/v1/users", routes.users);
 app.use("/api/v1/codegories", routes.codegories);
 app.use("/api/v1/comments", routes.comments);
 app.use("/api/v1/posts", routes.posts);
-// Stretchy
 app.use("/api/v1/avail", routes.avail);
 app.use("/api/v1/paired", routes.paired);
 

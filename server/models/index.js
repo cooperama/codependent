@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const connectionString =
   process.env.MONGODB_URI || "mongodb://localhost:27017/codedependent";
-// process.env.MONGODB_URI || "mongodb://localhost:27017/codependent";
 
 const configOptions = {
   useNewUrlParser: true,
@@ -17,12 +16,10 @@ mongoose
   .catch((err) => console.log("MongoDB connection error: ", err));
 
 module.exports = {
-  // MVP
   User: require("./User"),
   Codegory: require("./Codegory"),
   Comment: require("./Comment"),
   Post: require("./Post"),
-  // Stretchy
   Availability: require("./Availability"),
   Paired: require("./Paired"),
 };

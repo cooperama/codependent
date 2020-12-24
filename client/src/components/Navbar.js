@@ -105,7 +105,7 @@ export default function Navbar({ userState, setUserState }) {
         {userState && renderProfileContainer()}
         {/* {renderProfileContainer()} */}
       </div>
-      {/* <UserNav /> */}
+      <UserNav userState={userState} setUserState={setUserState} />
     </nav>
   );
 }
