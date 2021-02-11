@@ -209,6 +209,8 @@ button {
 }
 
 // Imports
+@import "./mixins";
+
 @import "pages/codegory";
 @import "pages/findbuddy";
 @import "pages/requestbuddy";
