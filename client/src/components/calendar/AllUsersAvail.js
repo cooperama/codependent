@@ -7,7 +7,6 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import Moment from "react-moment";
 
 import AvailModel from "../../models/avail";
 
@@ -31,9 +30,8 @@ export default function AllUsersAvail({ userState, setUserState }) {
     });
   }, []);
 
+  // Display Event info on hover
   const mouseEnterHandler = (mouseEnterInfo) => {
-    // console.log(mouseEnterInfo.event.toPlainObject());
-    // console.log(mouseEnterInfo.view.type === "timeGridDay");
     if (
       mouseEnterInfo.view.type !== "timeGridDay" &&
       mouseEnterInfo.jsEvent.target.children[0].classList.contains(
@@ -86,6 +84,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
     }
   };
 
+  // Error message helper
   const displayWarning = () => {
     function sleep(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
@@ -98,6 +97,7 @@ export default function AllUsersAvail({ userState, setUserState }) {
     showWarning();
   };
 
+  // Handle event click
   const eventClickHandler = (eventInfo) => {
     const eventObj = eventInfo.event.toPlainObject().extendedProps;
     const start = eventInfo.event.toPlainObject().start;
@@ -116,12 +116,14 @@ export default function AllUsersAvail({ userState, setUserState }) {
 
   return (
     <>
+      {/* Error message container */}
       <div ref={warningRef} className="error-container hide-content">
         <span className="error-icon">
           <FontAwesomeIcon icon={faExclamationCircle} />
         </span>
         <p ref={errorMessage} className="error-message"></p>
       </div>
+      {/* Calendar component */}
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{

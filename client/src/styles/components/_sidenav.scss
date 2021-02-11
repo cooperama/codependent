@@ -36,14 +36,15 @@
   right: 0;
   right: -115px;
   width: $navbar-width;
+  // width: 500px;
   // padding-top: 100px;
   padding-top: 70px;
   z-index: -2;
   transition: all 0.3s ease;
-  &:hover {
-    right: 0;
-    transition: all 0.3s ease;
-  }
+  // &:hover {
+  //   right: 0;
+  //   transition: all 0.3s ease;
+  // }
   li {
     display: inline-block;
     margin: 0 0 30px 20px;
